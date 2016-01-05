@@ -1,0 +1,36 @@
+{
+  "name": "gembly-boilerplate",
+  "author": "Gembly",
+  "version": "1.0.0",
+  "description": "This is a boiler plate version for Gembly HTML5 games, use it at your discression to make awesome games :D",
+  "contributors": [
+    {
+      "name": "Ale Bles",
+      "email": "a.bles@keesing.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.gembly.local/team-bacon/fivedice"
+  },
+  "private": true,
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-contrib-clean": "0.6.0",
+    "grunt-contrib-connect": "0.10.0",
+    "grunt-contrib-copy": "0.7.0",
+    "grunt-contrib-uglify": "0.7.0",
+    "grunt-contrib-watch": "0.6.x",
+    "grunt-env": "0.4.4",
+    "grunt-preprocess": "4.1.0",
+    "grunt-typescript": "0.8.0",
+    "ga-javascript-sdk": "2.0.4",
+    "quartz": "3.3.2",
+    "quartz-socket": "3.0.12",
+    "quartz-storage": "2.0.1",
+    "typescript": "1.6.x"
+  },
+  "engines": {
+    "node": "2.5.x"
+  }
+}

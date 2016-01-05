@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+
+    <title>Gembly Boilerplate Game</title>
+
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css" />
+
+    <script src="node_modules/quartz/bin/quartz.js"></script>
+    <script src="node_modules/quartz-socket/bin/quartz-socket.js"></script>
+    <script src="node_modules/quartz-storage/bin/quartz-storage.js"></script>
+    <script src="node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js"></script>
+
+    <script type="text/javascript">
+        function triggerRedirect() {
+            window.location.reload();
+        }
+
+        var config = {
+            baseUrl: '',
+            uuId: (function (){
+                var hay = '0123456789abcdefghijklmnopqrstuvwxyz', uuid = '';
+                for (var i = 0; i < 40; i++) { uuid += hay[Math.random() * hay.length | 0];}
+                return uuid;
+            }()),
+            practice: true,
+            server: 'game.ale.dev',
+            port: 5678,
+            mobile: (window.location.hash.substring(1) === 'mobile') ? true : false,
+            useCanvasSize: true,
+            language: 'en',
+            user: window.location.host
+        };
+
+        var ieSocket = {};
+
+        var analyticsUser = new GA.User(config.user, undefined, 'Male', 1970);
+
+        if (window.location.host !== 'demo.orangegames.com') {
+            (function(d, script) {
+                script = d.createElement('script');
+                script.type = 'text/javascript';
+                script.async = true;
+                script.onload = function(){
+                    // remote script has loaded
+                };
+                script.src = '//' + window.location.hostname + ':35729/livereload.js';
+                d.getElementsByTagName('head')[0].appendChild(script);
+            }(document));
+        }
+    </script>
+
+
+    <script src="_build/dev/gembly-boilerplate.js"></script>
+</head>
+<body onload="javascript:init();">
+<div class="game-wrapper-boilerplate">
+    <div id="js-wrapper">
+        <canvas id="canvas" width="800" height="485" style="width:800px; height:485px;"></canvas>
+    </div>
+</div>
+</body>
+</html>
