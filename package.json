@@ -1,8 +1,8 @@
 {
-  "name": "gembly-boilerplate",
-  "author": "Gembly",
+  "name": "og-fabrique-boilerplate",
+  "author": "OrangeGames",
   "version": "1.0.0",
-  "description": "This is a boiler plate version for Gembly HTML5 games, use it at your discression to make awesome games :D",
+  "description": "This is a boiler plate version for OrangeGames HTML5 games, use it at your discression to make awesome games :D",
   "contributors": [
     {
       "name": "Ale Bles",
@@ -11,10 +11,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitlab.gembly.local/team-bacon/fivedice"
+    "url": "https://gitlab.ds.orangegames.com/fabrique/boilerplate.git"
   },
   "private": true,
   "devDependencies": {
+    "ga-javascript-sdk": "2.0.4",
     "grunt": "0.4.x",
     "grunt-contrib-clean": "0.6.0",
     "grunt-contrib-connect": "0.10.0",
@@ -24,9 +25,7 @@
     "grunt-env": "0.4.4",
     "grunt-preprocess": "4.1.0",
     "grunt-typescript": "0.8.0",
-    "ga-javascript-sdk": "2.0.4",
-    "quartz": "3.3.2",
-    "quartz-socket": "3.0.12",
+    "phaser": "2.4.4",
     "quartz-storage": "2.0.1",
     "typescript": "1.6.x"
   },

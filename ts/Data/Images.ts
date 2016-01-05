@@ -9,7 +9,7 @@ class Images
     public static BtnOrangePress = 'btn_orange_onpress';
 
     //Generic assets
-    public static Logo: string = 'logo_replace';
+    public static Logo: string = 'OG_logo_fullcolor';
     public static Background: string = 'background_replace';
     public static Button: string = 'button_replace';
 

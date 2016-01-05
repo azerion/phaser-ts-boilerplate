@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         //Setup the environments
         env: {
             dev: { ENV: 'dev'  },
-            gembly: { ENV: 'gembly' },
+            dist: { ENV: 'dist' },
             partner: { ENV: 'partner' },
             app: { ENV: 'app' }
         },
@@ -27,8 +27,9 @@ module.exports = function (grunt) {
                 sourceMap: false,
                 declaration: false,
                 references: [
-                    'node_modules/quartz/bin/quartz.d.ts',
-                    'node_modules/quartz-socket/bin/quartz-socket.d.ts',
+                    'vendor/*.d.ts',
+                    'node_modules/phaser/typescript/pixi.d.ts',
+                    'node_modules/phaser/typescript/phaser.d.ts',
                     'node_modules/quartz-storage/bin/quartz-storage.d.ts',
                     'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.d.ts'
                 ]
@@ -45,15 +46,15 @@ module.exports = function (grunt) {
                 src: ['tmp/**/*.ts'],
                 dest: '_build/app/<%= game.name %>-<%= game.version %>.js'
             },
-            gembly: {
+            dist: {
                 src: ['tmp/**/*.ts'],
-                dest: '_build/gembly/<%= game.name %>-<%= game.version %>.js'
+                dest: '_build/dist/<%= game.name %>-<%= game.version %>.js'
             },
             node: {
                 src: [
                     'tmp/Backend/*.ts',
                 ],
-                dest: '_build/gembly/node',
+                dest: '_build/dist/node',
                 options: {
                     module: 'commonjs'
                 }
@@ -73,12 +74,12 @@ module.exports = function (grunt) {
                     {expand: true, cwd: 'ts', dest: 'tmp', src: ['**/*']}
                 ]
             },
-            gembly: {
+            dist: {
                 files: [
-                    {expand: true, cwd: 'assets/images', dest: '_build/gembly/assets/images', src: ['**/*']},
-                    {expand: true, cwd: 'assets/sound', dest: '_build/gembly/assets/sound', src: ['**/*']},
-                    {expand: true, cwd: 'assets/css', dest: '_build/gembly/assets/css', src: ['**/*']},
-                    {expand: true, cwd: 'assets/fonts', dest: '_build/gembly/assets/fonts', src: ['**/*']}
+                    {expand: true, cwd: 'assets/images', dest: '_build/dist/assets/images', src: ['**/*']},
+                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*']},
+                    {expand: true, cwd: 'assets/css', dest: '_build/dist/assets/css', src: ['**/*']},
+                    {expand: true, cwd: 'assets/fonts', dest: '_build/dist/assets/fonts', src: ['**/*']}
                 ]
             },
             partner: {
@@ -107,14 +108,14 @@ module.exports = function (grunt) {
                 mangle: true,
                 beautify: false
             },
-            gembly: {
+            dist: {
                 files: {
-                    '_build/gembly/<%= game.name %>.min.js': [
+                    '_build/dist/<%= game.name %>.min.js': [
                         'node_modules/quartz/bin/quartz.js',
                         'node_modules/quartz-socket/bin/quartz-socket.js',
                         'node_modules/quartz-storage/bin/quartz-storage.js',
                         'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js',
-                        '_build/gembly/<%= game.name %>-<%= game.version %>.js'
+                        '_build/dist/<%= game.name %>-<%= game.version %>.js'
                     ]
                 },
                 options: {
@@ -133,7 +134,7 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            gembly: ['_build/gembly/*'],
+            dist: ['_build/dist/*'],
             partner: ['_build/partner/*'],
             app: ['_build/app/*'],
             temp: ['tmp']
@@ -149,39 +150,27 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-env');
     grunt.loadNpmTasks('grunt-preprocess');
 
-    //Gembly Build
-    grunt.registerTask('gembly', [
-        'env:gembly',       //Set the gembly environment
+    //dist Build
+    grunt.registerTask('dist', [
+        'env:dist',       //Set the dist environment
         'copy:preprocess',  //Setup the preprcoess folder
         'preprocess:all',   //Scan all files and modify according to preprocess
-        'clean:gembly',     //Clean the gembly folder
-        'copy:gembly',      //Copy the gembly assets over
-        'typescript:gembly',//Run typescript on the preprocessed files, for gembly (client)
+        'clean:dist',     //Clean the dist folder
+        'copy:dist',      //Copy the dist assets over
+        'typescript:dist',//Run typescript on the preprocessed files, for dist (client)
         'typescript:node',  //Run typescript on the preprocessed files, for node (server)
-        'uglify:gembly',    //Minify everything
+        'uglify:dist',    //Minify everything
         'clean:temp'        //Cleanup the preprocess folder
     ]);
 
     //Partner Build
-    grunt.registerTask('partner', [
-        'env:partner',          //Set the gembly environment
-        'copy:preprocess',      //Setup the preprcoess folder
-        'preprocess:all',       //Scan all files and modify according to preprocess
-        'clean:partner',        //Clean the gembly folder
-        'copy:partner',         //Copy the gembly assets over
-        'typescript:partner',   //Run typescript on the preprocessed files, for gembly (client)
-        'uglify:partner',       //Minify everything
-        'clean:temp'            //Cleanup the preprocess folder
-    ]);
-
-    //Partner Build
     grunt.registerTask('app', [
-        'env:app',          //Set the gembly environment
+        'env:app',          //Set the dist environment
         'copy:preprocess',  //Setup the preprcoess folder
         'preprocess:all',   //Scan all files and modify according to preprocess
-        'clean:app',        //Clean the gembly folder
-        'copy:app',         //Copy the gembly assets over
-        'typescript:app',   //Run typescript on the preprocessed files, for gembly (client)
+        'clean:app',        //Clean the dist folder
+        'copy:app',         //Copy the dist assets over
+        'typescript:app',   //Run typescript on the preprocessed files, for dist (client)
         'uglify:app',       //Minify everything
         'clean:temp'        //Cleanup the preprocess folder
     ]);

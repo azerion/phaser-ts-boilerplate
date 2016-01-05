@@ -1,4 +1,4 @@
-class Game implements NodeGame
+class Game
 {
     public gameover: boolean = false;
 

@@ -1,85 +1,75 @@
-/// <reference path="references.ts" />
+module BoilerPlate
+{
+    export class Game extends Phaser.Game
+    {
+        constructor()
+        {
+            super(Constants.GAME_WIDTH, Constants.GAME_HEIGHT, Phaser.AUTO, 'og-fabrique-boilerplate', null, false, true);
 
-function init() {
+            this.state.add(Boot.Name, Boot, false);
+            this.state.add(Loader.Name, Loader, false);
+        }
+
+        public start(): void
+        {
+            this.state.start(Boot.Name);
+        }
+    }
+}
+
+function startGame() {
     var started: boolean = false;
     var triggeredErrors: string[] = [];
-    var startGame = () => {
-        if (started) {
+
+    window.addEventListener('error', (event:ErrorEvent) => {
+        if (triggeredErrors.indexOf(event.message) !== -1) {
             return;
         }
-        started = true;
 
-        //set the languages
-        Quartz.i18n.getInstance(config.language, translations);
+        triggeredErrors.push(event.message);
 
-        //Set mute state based on value from localStorage
-        var QS = Quartz.Storage.getInstance().setNamespace(Constants.GAME_ID.toString());
-        Quartz.Sound.mute = (QS.get('quartz-mute') === '1') ? true : false;
+        var message = "Error: " + event.message;
+        if (event.filename) {
+            message += "\nurl: " + event.filename;
+        }
+        if (event.lineno) {
+            message += "\nline: " + event.lineno;
+        }
+        if (event.colno) {
+            message  += "\ncolumn:" + event.colno;
+        }
+        if (event.error) {
+            message +=  '\nDetails' + event.error;
+        }
 
-        QS.set('session-start', Date.now() / 1000 | 0);
-        //Init GameAnalytics
         GA.getInstance()
-            .init(Constants.GAME_KEY, Constants.SECRET_KEY, Constants.BUILD, analyticsUser)
-            .addEvent(new GA.Events.User());
+            .addEvent(new GA.Events.Exception(GA.Events.ErrorSeverity.critical, message))
+            .sendData();
+    });
 
-        //Initialize the session
-        Quartz.Session.getInstance(Constants.GAME_ID, config.uuId, config.practice, config.loggedIn);
+    window.addEventListener('error', (event:ErrorEvent) => {
+        var stack = event.message;
 
-        window.addEventListener('error', (event:ErrorEvent) => {
-            if (triggeredErrors.indexOf(event.message) !== -1) {
-                return;
-            }
+        if (event.hasOwnProperty('error') && event.error.hasOwnProperty('stack')) {
+            stack = event.error.stack;
+        }
 
-            triggeredErrors.push(event.message);
+        GA.getInstance()
+            .addEvent(new GA.Events.Exception(GA.Events.ErrorSeverity.critical, stack))
+            .sendData();
+    });
 
-            var message = "Error: " + event.message;
-            if (event.filename) {
-                message += "\nurl: " + event.filename;
-            }
-            if (event.lineno) {
-                message += "\nline: " + event.lineno;
-            }
-            if (event.colno) {
-                message  += "\ncolumn:" + event.colno;
-            }
-            if (event.error) {
-                message +=  '\nDetails' + event.error;
-            }
-
-            GA.getInstance()
-                .addEvent(new GA.Events.Exception(GA.Events.ErrorSeverity.critical, message))
-                .sendData();
-        });
-
-        //Initialize the session
-        Quartz.Session.getInstance(Constants.GAME_ID, config.uuId, config.practice, config.loggedIn);
-
-        window.addEventListener('error', (event:ErrorEvent) => {
-            var stack = event.message;
-
-            if (event.hasOwnProperty('error') && event.error.hasOwnProperty('stack')) {
-                stack = event.error.stack;
-            }
-
-            GA.getInstance()
-                .addEvent(new GA.Events.Exception(GA.Events.ErrorSeverity.critical, stack))
-                .sendData();
-        });
-
-        //Start the statemanager and add a state
-        Quartz.StateManager.getInstance(30, false)
-            .playState(Splash.STATE_NAME, new Splash());
-    };
+    var game = new BoilerPlate.Game();
 
     //Load the font
     WebFont.load(<WebFont.Config>{
         custom: <WebFont.Custom>{
             families: ['Aller Display', 'Lobster'],
             urls: [
-                config.baseUrl + 'assets/css/AllerDisplay.css',
-                config.baseUrl + 'assets/css/Lobster.css'
+                'assets/css/AllerDisplay.css',
+                'assets/css/Lobster.css'
             ]
         },
-        active: startGame
+        active: () => game.start()//start the game here!
     });
 };
