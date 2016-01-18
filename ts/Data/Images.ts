@@ -17,11 +17,6 @@ class Images
      * A list of all images we want preloaded
      */
     public static list:Array<string> = [
-        Images.BtnBlue,
-        Images.BtnBluePress,
-        Images.BtnOrange,
-        Images.BtnOrangePress,
-        Images.Button
     ];
 
     /**
@@ -30,6 +25,11 @@ class Images
      * These should be loaded in the splash screen
      */
     public static preloadList:Array<string> = [
+        Images.BtnBlue,
+        Images.BtnBluePress,
+        Images.BtnOrange,
+        Images.BtnOrangePress,
+        Images.Button,
         Images.Logo,
         Images.Background
     ];

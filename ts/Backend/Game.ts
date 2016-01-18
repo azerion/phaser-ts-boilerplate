@@ -1,36 +1,7 @@
-class Game
-{
-    public gameover: boolean = false;
-
-    public shortGame: boolean = false;
-
-    public score: number = 0;
-
-    public success: boolean = false;
-
-    public gameDataObject: Math;
-
-    private call: string = 'init';
-
-    constructor(gameDataObject:Math)
+/// <reference path="../Fabrique/Objects/Game.ts" />
+module BoilerPlate {
+    export class Backend extends Fabrique.BackendGame
     {
-        this.gameDataObject = gameDataObject;
-    }
 
-    public handleGameMove(command: any)
-    {
-        return this.generateResponse();
-    }
-
-    public generateResponse()
-    {
-        var response = {
-            score: this.score,
-            gameover: this.gameover,
-            succes: this.success,
-            config: null
-        };
-
-        return response;
     }
 }

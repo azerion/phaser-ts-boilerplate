@@ -1,8 +1,10 @@
 module BoilerPlate
 {
-    export class Boot extends Phaser.State
+    export class Menu extends Phaser.State
     {
-        public static Name: string = 'booter';
+        public static Name: string = 'menu';
+
+        public name: string = Menu.Name;
 
         constructor()
         {

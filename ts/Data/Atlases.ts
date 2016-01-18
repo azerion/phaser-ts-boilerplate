@@ -1,6 +1,6 @@
 /// <reference path="../references.ts" />
 
-class Sounds
+class Atlases
 {
     public static Click = 'click';
 
@@ -8,6 +8,6 @@ class Sounds
      * A list of all audio we want preloaded
      */
     public static preloadList:Array<string> = [
-        Sounds.Click
+        Atlases.Click
     ];
 }

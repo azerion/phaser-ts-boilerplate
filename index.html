@@ -5,20 +5,21 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
 
-    <title>Gembly Boilerplate Game</title>
+    <title>Boilerplate</title>
 
     <link rel="stylesheet" href="assets/css/app.css" type="text/css" />
 
     <script src="node_modules/phaser/dist/phaser.js"></script>
     <script src="vendor/webfontloader.js"></script>
-    <script src="node_modules/quartz-storage/bin/quartz-storage.js"></script>
     <script src="node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js"></script>
 
+    <script src="_build/dev/og-fabrique-boilerplate.js"></script>
+
     <script type="text/javascript">
-        var user = window.location.host;
-
-        var analyticsUser = new GA.User(user, undefined, 'Male', 1970);
-
+        /**
+         * Script used for live reloading on development environments
+         * Not used for production!!!!
+         */
         if (window.location.host !== 'generic.tc.ds.orangegames.com') {
             (function(d, script) {
                 script = d.createElement('script');
@@ -33,10 +34,38 @@
         }
     </script>
 
+    <script type="text/javascript">
+        /**
+         * Here we create the game and define the user for game analytics, this has to be done/implemented by every portal!
+         *
+         * @type {GA.User}
+         */
+        var analyticsUser = new GA.User(window.location.host, undefined, 'Male', 1970);
+        var game = new BoilerPlate.Game.getInstance();
 
-    <script src="_build/dev/og-fabrique-boilerplate.js"></script>
+        /**
+         * Below here are all the events that are fired by the game.\
+         * Use these events to show ads or implement highscore
+         *
+         * The events can only be added when the document is done loading (ready), so we have to wait for this
+         */
+        game.device.whenReady(function () {
+            game.events.onGameStart.add(function () {
+                //Fired when the game starts
+            });
+            game.events.onGameEnd.add(function () {
+                //Fired when the game ends
+            });
+            game.events.onLevelStart.add(function () {
+                //Fired when the game starts
+            });
+            game.events.onLevelEnd.add(function (score) {
+                //Fired when the game starts
+            });
+        });
+    </script>
 </head>
-<body onload="javascript:startGame();">
-    <div id="og-fabrique-boilerplate"></div>
+<body onload="javascript:game.start(analyticsUser);">
+    <div id="boilerplate"></div>
 </body>
 </html>

@@ -30,17 +30,13 @@ module.exports = function (grunt) {
                     'vendor/*.d.ts',
                     'node_modules/phaser/typescript/pixi.d.ts',
                     'node_modules/phaser/typescript/phaser.d.ts',
-                    'node_modules/quartz-storage/bin/quartz-storage.d.ts',
                     'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.d.ts'
-                ]
+                ],
+                noImplicitAny:true
             },
             dev: {
                 src: ['ts/**/*.ts'],
                 dest: '_build/dev/<%= game.name %>.js'
-            },
-            partner: {
-                src: ['tmp/**/*.ts'],
-                dest: '_build/partner/<%= game.name %>-<%= game.version %>.js'
             },
             app: {
                 src: ['tmp/**/*.ts'],
@@ -49,15 +45,6 @@ module.exports = function (grunt) {
             dist: {
                 src: ['tmp/**/*.ts'],
                 dest: '_build/dist/<%= game.name %>-<%= game.version %>.js'
-            },
-            node: {
-                src: [
-                    'tmp/Backend/*.ts',
-                ],
-                dest: '_build/dist/node',
-                options: {
-                    module: 'commonjs'
-                }
             }
         },
         preprocess: {
@@ -77,15 +64,11 @@ module.exports = function (grunt) {
             dist: {
                 files: [
                     {expand: true, cwd: 'assets/images', dest: '_build/dist/assets/images', src: ['**/*']},
-                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*']},
+                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*', '!**/*.wav']},
                     {expand: true, cwd: 'assets/css', dest: '_build/dist/assets/css', src: ['**/*']},
-                    {expand: true, cwd: 'assets/fonts', dest: '_build/dist/assets/fonts', src: ['**/*']}
-                ]
-            },
-            partner: {
-                files: [
-                    {expand: true, cwd: 'assets/images', dest: '_build/partner/assets/images', src: ['**/*']},
-                    {expand: true, cwd: 'assets/sound', dest: '_build/partner/assets/sound', src: ['**/*']}
+                    {expand: true, cwd: 'assets/fonts', dest: '_build/dist/assets/fonts', src: ['**/*']},
+                    {expand: true, cwd: 'assets/atlas', dest: '_build/dist/assets/atlas', src: ['**/*']},
+                    {cwd: '', dest: '_build/dist/index.html', src: 'dist.html'}
                 ]
             },
             app: {
@@ -111,10 +94,9 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '_build/dist/<%= game.name %>.min.js': [
-                        'node_modules/quartz/bin/quartz.js',
-                        'node_modules/quartz-socket/bin/quartz-socket.js',
-                        'node_modules/quartz-storage/bin/quartz-storage.js',
+                        'node_modules/phaser/dist/phaser.min.js',
                         'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js',
+                        'vendor/*.js',
                         '_build/dist/<%= game.name %>-<%= game.version %>.js'
                     ]
                 },
@@ -123,21 +105,12 @@ module.exports = function (grunt) {
                     mangle: false,
                     beautify: true
                 }
-            },
-            partner: {
-                files: {
-                    '_build/partner/<%= game.name %>-<%= game.version %>min.js': [
-                        'node_modules/<%= quartz.name %>/bin/<%= quartz.name %>.min.js',
-                        '_build/partner/<%= game.name %>-<%= game.version %>.js'
-                    ]
-                }
             }
         },
         clean: {
             dist: ['_build/dist/*'],
-            partner: ['_build/partner/*'],
             app: ['_build/app/*'],
-            temp: ['tmp']
+            temp: ['tmp', '_build/dist/*.js', '!_build/dist/*.min.js']
         }
     });
 
@@ -158,7 +131,6 @@ module.exports = function (grunt) {
         'clean:dist',     //Clean the dist folder
         'copy:dist',      //Copy the dist assets over
         'typescript:dist',//Run typescript on the preprocessed files, for dist (client)
-        'typescript:node',  //Run typescript on the preprocessed files, for node (server)
         'uglify:dist',    //Minify everything
         'clean:temp'        //Cleanup the preprocess folder
     ]);

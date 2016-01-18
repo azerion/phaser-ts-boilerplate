@@ -2,74 +2,80 @@ module BoilerPlate
 {
     export class Game extends Phaser.Game
     {
+        private static instance: Game = null;
+
         constructor()
         {
-            super(Constants.GAME_WIDTH, Constants.GAME_HEIGHT, Phaser.AUTO, 'og-fabrique-boilerplate', null, false, true);
+            super({
+                enableDebug: false,
+                width: Constants.GAME_WIDTH,
+                height: Constants.GAME_HEIGHT,
+                renderer: Phaser.AUTO,
+                parent: 'boilerplate',
+                transparent: true,
+                antialias: true,
+                preserveDrawingBuffer: false,
+                physicsConfig: null,
+                seed: '',
+                state: null
+            });
 
-            this.state.add(Boot.Name, Boot, false);
-            this.state.add(Loader.Name, Loader, false);
+            //We run Boot immediatly because it will configure the game accordingly, this does not start the game!
+            this.state.add(Fabrique.Boot.Name, Fabrique.Boot, true);
+
+            //Here we load all the states, but they shouldn't start automaticly
+            this.state.add(Fabrique.Splash.Name, Fabrique.Splash, false);
+            this.state.add(Menu.Name, Menu, false);
+
+            /**
+             * Load plugin when Game is initialized, this gets added to the ready Queue of which Engine initialisation is the first
+             */
+            Phaser.Device.whenReady(() => {
+                this.plugins.add(Fabrique.Plugins.GameEvents);
+                this.plugins.add(Fabrique.Plugins.GoogleAnalytics);
+                this.plugins.add(Fabrique.Plugins.GameAnalytics);
+            });
         }
 
-        public start(): void
+        /**
+         * We make
+         *
+         * @returns {Game}
+         */
+        public static getInstance(): Game
         {
-            this.state.start(Boot.Name);
+            if (null === Game.instance) {
+                Game.instance = new Game();
+            }
+
+            return Game.instance;
+        }
+
+        public start(analyticsUser:GA.User):void
+        {
+            //Load the fonts
+            WebFont.load(<WebFont.Config>{
+                custom: <WebFont.Custom>{
+                    families: ['Aller Display'],
+                    urls: [
+                        'assets/css/AllerDisplay.css'
+                    ]
+                },
+                active: () => {
+                    //start the game
+                    this.state.start(
+                        Fabrique.Splash.Name,
+                        true,
+                        false,
+                        <Fabrique.ISplashConfic> {
+                            bgColor: Constants.SPLASH_BACKGROUND,
+                            image: Constants.SPLASH_IMAGE,
+                            clickUrl: Constants.SPLASH_URL,
+                            nextState: Menu.Name
+                        }
+                    );
+                }
+            });
         }
     }
 }
-
-function startGame() {
-    var started: boolean = false;
-    var triggeredErrors: string[] = [];
-
-    window.addEventListener('error', (event:ErrorEvent) => {
-        if (triggeredErrors.indexOf(event.message) !== -1) {
-            return;
-        }
-
-        triggeredErrors.push(event.message);
-
-        var message = "Error: " + event.message;
-        if (event.filename) {
-            message += "\nurl: " + event.filename;
-        }
-        if (event.lineno) {
-            message += "\nline: " + event.lineno;
-        }
-        if (event.colno) {
-            message  += "\ncolumn:" + event.colno;
-        }
-        if (event.error) {
-            message +=  '\nDetails' + event.error;
-        }
-
-        GA.getInstance()
-            .addEvent(new GA.Events.Exception(GA.Events.ErrorSeverity.critical, message))
-            .sendData();
-    });
-
-    window.addEventListener('error', (event:ErrorEvent) => {
-        var stack = event.message;
-
-        if (event.hasOwnProperty('error') && event.error.hasOwnProperty('stack')) {
-            stack = event.error.stack;
-        }
-
-        GA.getInstance()
-            .addEvent(new GA.Events.Exception(GA.Events.ErrorSeverity.critical, stack))
-            .sendData();
-    });
-
-    var game = new BoilerPlate.Game();
-
-    //Load the font
-    WebFont.load(<WebFont.Config>{
-        custom: <WebFont.Custom>{
-            families: ['Aller Display', 'Lobster'],
-            urls: [
-                'assets/css/AllerDisplay.css',
-                'assets/css/Lobster.css'
-            ]
-        },
-        active: () => game.start()//start the game here!
-    });
-};
