@@ -30,7 +30,8 @@ module.exports = function (grunt) {
                     'vendor/*.d.ts',
                     'node_modules/phaser/typescript/pixi.d.ts',
                     'node_modules/phaser/typescript/phaser.d.ts',
-                    'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.d.ts'
+                    'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.d.ts',
+                    'node_modules/phaser-responsive/build/phaser-responsive.d.ts'
                 ],
                 noImplicitAny:true
             },
@@ -64,7 +65,7 @@ module.exports = function (grunt) {
             dist: {
                 files: [
                     {expand: true, cwd: 'assets/images', dest: '_build/dist/assets/images', src: ['**/*']},
-                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*', '!**/*.wav']},
+                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*']},
                     {expand: true, cwd: 'assets/css', dest: '_build/dist/assets/css', src: ['**/*']},
                     {expand: true, cwd: 'assets/fonts', dest: '_build/dist/assets/fonts', src: ['**/*']},
                     {expand: true, cwd: 'assets/atlas', dest: '_build/dist/assets/atlas', src: ['**/*']},
@@ -96,6 +97,7 @@ module.exports = function (grunt) {
                     '_build/dist/<%= game.name %>.min.js': [
                         'node_modules/phaser/dist/phaser.min.js',
                         'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js',
+                        'node_modules/phaser-responsive/build/phaser-responsive.min.js',
                         'vendor/*.js',
                         '_build/dist/<%= game.name %>-<%= game.version %>.js'
                     ]
@@ -105,6 +107,19 @@ module.exports = function (grunt) {
                     mangle: false,
                     beautify: true
                 }
+            }
+        },
+        aws_s3: {
+            options: {
+                region: 'eu-west-1'
+            },
+            production: {
+                options: {
+                    bucket: 'fbrq.io'
+                },
+                files: [
+                    {expand: true, cwd: '_build/dist', src: ['**'], dest: '<%= game.name %>/'}
+                ]
             }
         },
         clean: {
@@ -122,6 +137,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-env');
     grunt.loadNpmTasks('grunt-preprocess');
+    grunt.loadNpmTasks('grunt-aws-s3');
 
     //dist Build
     grunt.registerTask('dist', [
@@ -154,4 +170,24 @@ module.exports = function (grunt) {
         'connect:server',   //Start the server with live reloading
         'watch'             //Enable the file change watcher
     ]);
+
+    //This is for deployments
+    grunt.registerTask('deploy', "Upload the game to Amazon s3 bucket", function () {
+        var key = grunt.option('key'),
+            secret = grunt.option('secret');
+
+        if (undefined === key) {
+            grunt.fail.warn('Can not deploy without an aws key id');
+        }
+
+        if (undefined === secret) {
+            grunt.fail.warn('Can not deploy without an aws secret key');
+        }
+
+        grunt.config.set('aws_s3.options.accessKeyId', key);
+        grunt.config.set('aws_s3.options.secretAccessKey', secret);
+
+        grunt.task.run('aws_s3:production')
+    });
+
 };
