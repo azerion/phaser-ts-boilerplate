@@ -34,6 +34,7 @@ module BoilerPlate
                 this.plugins.add(Fabrique.Plugins.GameEvents);
                 this.plugins.add(Fabrique.Plugins.GoogleAnalytics);
                 this.plugins.add(Fabrique.Plugins.GameAnalytics);
+                this.plugins.add(Fabrique.Plugins.CacheBuster);
             });
         }
 

@@ -37,5 +37,10 @@ module Fabrique {
             }
 
         }
+
+        public preload() {
+            this.game.load.cacheBuster = (typeof version === 'undefined')? null : version;
+         //   this.game.load.image(this.config.image, 'assets/images/' + this.config.image + '.png');
+        }
     }
 }

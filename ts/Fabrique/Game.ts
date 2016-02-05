@@ -4,6 +4,7 @@ module Fabrique {
         analytics: {
             google: Fabrique.Plugins.GoogleAnalytics,
             game: Fabrique.Plugins.GameAnalytics,
-        }
+        };
+        load: Fabrique.Plugins.CacheBustedLoader;
     }
 }
