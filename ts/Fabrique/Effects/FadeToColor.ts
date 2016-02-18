@@ -5,7 +5,7 @@ module Fabrique {
                 super(game);
                 this.alpha = 0;
                 this.beginFill(color, 1);
-                this.drawRect(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
+                this.drawRect(0, 0, this.game.width, this.game.height);
 
                 game.add.existing(this);
                 var t:Phaser.Tween = this.game.add.tween(this);

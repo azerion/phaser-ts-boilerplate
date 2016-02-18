@@ -9,12 +9,14 @@
 
     <link rel="stylesheet" href="assets/css/app.css" type="text/css" />
 
-    <script src="node_modules/phaser/dist/phaser.js"></script>
-    <script src="vendor/webfontloader.js"></script>
-    <script src="node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js"></script>
-    <script src="node_modules/phaser-cachebuster/build/phaser-cachebuster.min.js"></script>
-
-    <script src="_build/dev/og-fabrique-boilerplate.js"></script>
+    <script src="phaser/dist/phaser.js"></script>
+    <script src="phaser-responsive/build/phaser-responsive.min.js"></script>
+    <script src="webfontloader/webfontloader.js"></script>
+    <script src="ga-javascript-sdk/dist/GaJavaScriptSdk.js"></script>
+    <script src="phaser-cachebuster/build/phaser-cachebuster.min.js"></script>
+    <script src="phaser-spine/build/phaser-spine.min.js"></script>
+    <script src="og-fabrique-boilerplate.js"></script>
+    <script src="funny-games-splash/build/funny-games-splash.js"></script>
 
     <script type="text/javascript">
         /**
@@ -37,12 +39,10 @@
 
     <script type="text/javascript">
         /**
-         * Here we create the game and define the user for game analytics, this has to be done/implemented by every portal!
-         *
-         * @type {GA.User}
+         * Here we create the game
          */
-        var analyticsUser = new GA.User(window.location.host, undefined, 'Male', 1970);
-        var game = new BoilerPlate.Game.getInstance();
+        var game = new BoilerPlate.Game.getInstance()
+            version = 'dev';
 
         /**
          * Below here are all the events that are fired by the game.\
@@ -54,19 +54,21 @@
             game.events.onGameStart.add(function () {
                 //Fired when the game starts
             });
-            game.events.onGameEnd.add(function () {
+            game.events.onGameEnd.add(function (score) {
                 //Fired when the game ends
             });
             game.events.onLevelStart.add(function () {
                 //Fired when the game starts
             });
-            game.events.onLevelEnd.add(function (score) {
+            game.events.onLevelEnd.add(function () {
                 //Fired when the game starts
             });
         });
     </script>
 </head>
-<body onload="javascript:game.start(analyticsUser);">
-    <div id="boilerplate"></div>
+<body onload="javascript:game.start();">
+    <div id="content"></div>
+    <div id="dummy" style="position:fixed;right:0;bottom:0"></div>
+    <div id="orientation"></div>
 </body>
 </html>

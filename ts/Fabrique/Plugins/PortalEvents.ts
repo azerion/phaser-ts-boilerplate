@@ -45,7 +45,6 @@ module Fabrique {
                 } else {
                     console.warn('Events property already exists on game');
                 }
-
             }
         }
     }

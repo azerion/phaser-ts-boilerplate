@@ -4,7 +4,7 @@ module Fabrique {
             constructor(game:Phaser.Game, color:number, callback:() => void = null) {
                 super(game);
                 this.beginFill(color, 1);
-                this.drawRect(0, 0, Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
+                this.drawRect(0, 0, this.game.width, this.game.height);
 
                 //game.add.existing(this);
                 var group:Phaser.Group = game.add.group(this, 'white', true);

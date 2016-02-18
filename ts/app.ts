@@ -11,7 +11,7 @@ module BoilerPlate
                 width: Constants.GAME_WIDTH,
                 height: Constants.GAME_HEIGHT,
                 renderer: Phaser.AUTO,
-                parent: 'boilerplate',
+                parent: 'content',
                 transparent: true,
                 antialias: true,
                 preserveDrawingBuffer: false,
@@ -20,13 +20,10 @@ module BoilerPlate
                 state: null
             });
 
-            //We run Boot immediatly because it will configure the game accordingly, this does not start the game!
-            this.state.add(Fabrique.Boot.Name, Fabrique.Boot, true);
-
             //Here we load all the states, but they shouldn't start automaticly
-            this.state.add(Fabrique.Splash.Name, Fabrique.Splash, false);
+            this.state.add(Fabrique.Boot.Name, Fabrique.Boot, false);
+            this.state.add(Fabrique.FunnyGamesSplash.Name, Fabrique.FunnyGamesSplash, false);
             this.state.add(Menu.Name, Menu, false);
-
             /**
              * Load plugin when Game is initialized, this gets added to the ready Queue of which Engine initialisation is the first
              */
@@ -34,7 +31,9 @@ module BoilerPlate
                 this.plugins.add(Fabrique.Plugins.GameEvents);
                 this.plugins.add(Fabrique.Plugins.GoogleAnalytics);
                 this.plugins.add(Fabrique.Plugins.GameAnalytics);
+                this.plugins.add(Fabrique.Plugins.Responsiveness);
                 this.plugins.add(Fabrique.Plugins.CacheBuster);
+                this.plugins.add(Fabrique.Plugins.Spine);
             });
         }
 
@@ -52,7 +51,7 @@ module BoilerPlate
             return Game.instance;
         }
 
-        public start(analyticsUser:GA.User):void
+        public start():void
         {
             //Load the fonts
             WebFont.load(<WebFont.Config>{
@@ -65,13 +64,11 @@ module BoilerPlate
                 active: () => {
                     //start the game
                     this.state.start(
-                        Fabrique.Splash.Name,
+                        Fabrique.Boot.Name,
                         true,
                         false,
-                        <Fabrique.ISplashConfic> {
-                            bgColor: Constants.SPLASH_BACKGROUND,
-                            image: Constants.SPLASH_IMAGE,
-                            clickUrl: Constants.SPLASH_URL,
+                        <Fabrique.FunnyGamesSplashConfig> {
+                            link: Fabrique.Utils.getUtmCampaignLink(Fabrique.UtmTargets.splashscreen),
                             nextState: Menu.Name
                         }
                     );

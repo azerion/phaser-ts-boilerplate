@@ -5,6 +5,12 @@ module Fabrique {
             google: Fabrique.Plugins.GoogleAnalytics,
             game: Fabrique.Plugins.GameAnalytics,
         };
-        load: Fabrique.Plugins.CacheBustedLoader;
+        add: Fabrique.Plugins.ResponsiveObjectFactory
+            & Fabrique.Plugins.SpineObjectFactory;
+
+        make: Fabrique.Plugins.ResponsiveObjectCreator;
+
+        load: Fabrique.Plugins.CacheBustedLoader
+            & Fabrique.Plugins.SpineLoader;
     }
 }

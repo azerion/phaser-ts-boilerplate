@@ -1,5 +1,4 @@
 var crypto = require('crypto');
-
 module.exports = function (grunt) {
     'use strict';
 
@@ -10,16 +9,10 @@ module.exports = function (grunt) {
         connect: {
             server: {
                 options: {
-                    port: 8080
+                    port: 8080,
+                    base: ['_build/dev', 'node_modules']
                 }
             }
-        },
-        //Setup the environments
-        env: {
-            dev: { ENV: 'dev'  },
-            dist: { ENV: 'dist' },
-            partner: { ENV: 'partner' },
-            app: { ENV: 'app' }
         },
         //Typescript settings per build
         typescript: {
@@ -33,7 +26,10 @@ module.exports = function (grunt) {
                     'node_modules/phaser/typescript/pixi.d.ts',
                     'node_modules/phaser/typescript/phaser.d.ts',
                     'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.d.ts',
-                    'node_modules/phaser-cachebuster/build/phaser-cachebuster.d.ts'
+                    'node_modules/phaser-responsive/build/phaser-responsive.d.ts',
+                    'node_modules/phaser-spine/build/phaser-spine.d.ts',
+                    'node_modules/phaser-cachebuster/build/phaser-cachebuster.d.ts',
+                    'node_modules/funny-games-splash/build/funny-games-splash.d.ts'
                 ],
                 noImplicitAny:true
             },
@@ -47,21 +43,36 @@ module.exports = function (grunt) {
             }
         },
         copy: {
+            dev: {
+                files: [
+                    {expand: true, cwd: 'node_modules/funny-games-splash/build/assets', dest: '_build/dev/assets', src: ['**/*']},
+                    {expand: true, cwd: 'assets', dest: '_build/dev/assets', src: ['**/*']},
+                    {expand: true, cwd: 'templates', dest: '_build/dev', src: ['index.html']}
+                ]
+            },
             dist: {
                 files: [
+                    {expand: true, cwd: 'node_modules/funny-games-splash/build/assets', dest: '_build/dist/assets', src: ['**/*']},
                     {expand: true, cwd: 'assets/images', dest: '_build/dist/assets/images', src: ['**/*']},
-                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*']},
+                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*', '!**/*.wav']},
                     {expand: true, cwd: 'assets/css', dest: '_build/dist/assets/css', src: ['**/*']},
                     {expand: true, cwd: 'assets/fonts', dest: '_build/dist/assets/fonts', src: ['**/*']},
+                    {expand: true, cwd: 'assets/spine', dest: '_build/dist/assets/spine', src: ['**/*']},
                     {expand: true, cwd: 'assets/atlas', dest: '_build/dist/assets/atlas', src: ['**/*']}
                 ]
             }
         },
         watch: {
-            files: ['ts/**/*.ts', 'vendor/**/*.d.ts'],
-            tasks: ['typescript:dev'],
             options: {
                 livereload: true
+            },
+            typescript: {
+                files: ['ts/**/*.ts', 'vendor/**/*.d.ts'],
+                tasks: ['typescript:dev']
+            },
+            assets: {
+                files: ['assets/**/*.*', 'templates/index.html'],
+                tasks: ['copy:dev']
             }
         },
         uglify: {
@@ -75,9 +86,13 @@ module.exports = function (grunt) {
                     '_build/dist/<%= game.name %>.min.js': [
                         'node_modules/phaser/dist/phaser.min.js',
                         'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js',
+                        'node_modules/phaser-responsive/build/phaser-responsive.min.js',
+                        'node_modules/phaser-spine/build/phaser-spine.min.js',
                         'node_modules/phaser-cachebuster/build/phaser-cachebuster.min.js',
-                        'vendor/*.js',
-                        '_build/dist/<%= game.name %>-<%= game.version %>.js'
+                        'node_modules/webfontloader/webfontloader.js',
+                        '_build/dist/<%= game.name %>-<%= game.version %>.js',
+                        'node_modules/funny-games-splash/build/funny-games-splash.min.js'
+
                     ]
                 },
                 options: {
@@ -111,7 +126,7 @@ module.exports = function (grunt) {
                     }
                 }
             }
-        }
+        },
     });
 
     var buildNumber = grunt.option("buildNumber");
@@ -270,6 +285,7 @@ module.exports = function (grunt) {
 
         //First we get check if the CNAME already exists
         grunt.task.run('http:getCname');
+
     });
 
     //production build, we deploy this
@@ -284,6 +300,7 @@ module.exports = function (grunt) {
 
     //Development build, used for testing. Starts filewatcher and webserver
     grunt.registerTask('dev', [
+        'copy:dev',
         'typescript:dev',
         'connect:server',
         'watch'
@@ -295,8 +312,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-typescript');
-    grunt.loadNpmTasks('grunt-env');
-    grunt.loadNpmTasks('grunt-preprocess');
     grunt.loadNpmTasks('grunt-aws-s3');
     grunt.loadNpmTasks('grunt-http');
     grunt.loadNpmTasks('grunt-html-build');
