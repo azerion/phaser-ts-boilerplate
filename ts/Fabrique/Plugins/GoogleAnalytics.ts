@@ -2,7 +2,7 @@ module Fabrique {
     /**
      * We overwrite the default Phaser.Game to expose the events to the game object, this is purely for typescript
      */
-    interface GoogleAnalyticsGame extends Phaser.Game {
+    interface IGoogleAnalyticsGame extends Phaser.Game {
         analytics: {
             google: Fabrique.Plugins.GoogleAnalytics
         };
@@ -10,7 +10,7 @@ module Fabrique {
 
     export module Plugins {
         export class GoogleAnalytics extends Phaser.Plugin {
-            constructor(game:GoogleAnalyticsGame, parent:PIXI.DisplayObject) {
+            constructor(game: IGoogleAnalyticsGame, parent: PIXI.DisplayObject) {
                 super(game, parent);
 
                 if (!game.hasOwnProperty('analytics')) {
@@ -18,26 +18,25 @@ module Fabrique {
                         google: this
                     };
                 } else {
-                    Object.defineProperty(game.analytics, 'google', {
-                        value: this
-                    });
+                    Object.defineProperty(game.analytics, 'google', {value: this});
                 }
 
-                (function (i:any, s:any, o:any, g:any, r:any, a?:any, m?:any) {
+                (function (i: any, s: any, o: any, g: any, r: any, a?: any, m?: any): void {
                     i['GoogleAnalyticsObject'] = r;
-                    i[r] = i[r] || function () {
-                            (i[r].q = i[r].q || []).push(arguments)
-                        }, i[r].l = Date.now();
-                    a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
+                    i[r] = (i[r]) ? i[r] : function (): void {
+                        (i[r].q = i[r].q || []).push(arguments);
+                    };
+                    i[r].l = Date.now();
+                    a = s.createElement(o);
+                    m = s.getElementsByTagName(o)[0];
                     a.async = 1;
                     a.src = g;
-                    m.parentNode.insertBefore(a, m)
+                    m.parentNode.insertBefore(a, m);
                 })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
             }
 
-            public setup(analyticsId:string, appName?:string, appVersion?:string) {
+            public setup(analyticsId: string, appName?: string, appVersion?: string): void {
                 ga('create', analyticsId, 'auto');
 
                 if (undefined !== appName) {
@@ -49,7 +48,7 @@ module Fabrique {
                 ga('send', 'pageview');
             }
 
-            public sendScreenView(screenName:string) {
+            public sendScreenView(screenName: string): void {
                 ga('send', 'screenview', {
                     'screenName': screenName
                 });

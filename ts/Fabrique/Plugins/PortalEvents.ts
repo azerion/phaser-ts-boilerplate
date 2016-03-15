@@ -2,7 +2,7 @@ module Fabrique {
     /**
      * We overwrite the default Phaser.Game to expose the events to the game object, this is purely for typescript
      */
-    export interface EventedGame extends Phaser.Game {
+    export interface IEventedGame extends Phaser.Game {
         events: Fabrique.Plugins.IPortalEvents;
     }
 
@@ -30,7 +30,7 @@ module Fabrique {
          * These are all Phaser.Signals
          */
         export class GameEvents extends Phaser.Plugin {
-            constructor(game:Fabrique.EventedGame, parent:PIXI.DisplayObject) {
+            constructor(game: Fabrique.IEventedGame, parent: PIXI.DisplayObject) {
                 super(game, parent);
 
                 if (!game.hasOwnProperty('events')) {

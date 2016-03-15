@@ -1,11 +1,8 @@
-module BoilerPlate
-{
-    export class Game extends Phaser.Game
-    {
+module BoilerPlate {
+    export class Game extends Phaser.Game {
         private static instance: Game = null;
 
-        constructor()
-        {
+        constructor() {
             super({
                 enableDebug: false,
                 width: Constants.GAME_WIDTH,
@@ -21,7 +18,8 @@ module BoilerPlate
             });
 
             //Here we load all the states, but they shouldn't start automaticly
-            this.state.add(Fabrique.Boot.Name, Fabrique.Boot, false);
+            this.state.add(Boot.Name, Boot, false);
+            this.state.add(Fabrique.PreSplash.Name, Fabrique.PreSplash, false);
             this.state.add(Fabrique.FunnyGamesSplash.Name, Fabrique.FunnyGamesSplash, false);
             this.state.add(Menu.Name, Menu, false);
             /**
@@ -42,8 +40,7 @@ module BoilerPlate
          *
          * @returns {Game}
          */
-        public static getInstance(): Game
-        {
+        public static getInstance(): Game {
             if (null === Game.instance) {
                 Game.instance = new Game();
             }
@@ -51,27 +48,18 @@ module BoilerPlate
             return Game.instance;
         }
 
-        public start():void
-        {
+        public start(): void {
             //Load the fonts
             WebFont.load(<WebFont.Config>{
                 custom: <WebFont.Custom>{
-                    families: ['Aller Display'],
+                    families: ['oxygen', 'MonospaceTypewriter'],
                     urls: [
-                        'assets/css/AllerDisplay.css'
+                        'assets/css/oxygen.css', 'assets/css/MonospaceTypewriter.css'
                     ]
                 },
-                active: () => {
+                active: (): void => {
                     //start the game
-                    this.state.start(
-                        Fabrique.Boot.Name,
-                        true,
-                        false,
-                        <Fabrique.FunnyGamesSplashConfig> {
-                            link: Fabrique.Utils.getUtmCampaignLink(Fabrique.UtmTargets.splashscreen),
-                            nextState: Menu.Name
-                        }
-                    );
+                    this.state.start(Boot.Name);
                 }
             });
         }

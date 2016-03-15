@@ -1,12 +1,12 @@
 module Fabrique {
     export class State extends Phaser.State {
-        public game:Fabrique.Game;
+        public static Name: string = 'default';
 
-        public static Name:string = 'default';
+        public game: Fabrique.IGame;
 
-        public name:string = State.Name;
+        public name: string = State.Name;
 
-        public create() {
+        public create(): void {
             this.game.analytics.google.sendScreenView(this.name);
         }
     }

@@ -1,5 +1,5 @@
 module Fabrique {
-    export interface Game extends Phaser.Game {
+    export interface IGame extends Phaser.Game {
         events: Fabrique.Plugins.IPortalEvents;
         analytics: {
             google: Fabrique.Plugins.GoogleAnalytics,

@@ -10,7 +10,7 @@ module.exports = function (grunt) {
             server: {
                 options: {
                     port: 8080,
-                    base: ['_build/dev', 'node_modules']
+                    base: ['_build/dev', 'node_modules', '../../tools/phaser/dist']
                 }
             }
         },
@@ -23,12 +23,14 @@ module.exports = function (grunt) {
                 declaration: false,
                 references: [
                     'vendor/*.d.ts',
-                    'node_modules/phaser/typescript/pixi.d.ts',
-                    'node_modules/phaser/typescript/phaser.d.ts',
+                    'node_modules/phaser-multires/typescript/pixi.d.ts',
+                    'node_modules/phaser-multires/typescript/phaser.d.ts',
                     'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.d.ts',
                     'node_modules/phaser-responsive/build/phaser-responsive.d.ts',
                     'node_modules/phaser-spine/build/phaser-spine.d.ts',
                     'node_modules/phaser-cachebuster/build/phaser-cachebuster.d.ts',
+                    'node_modules/phaser-input/build/phaser-input.d.ts',
+                    'node_modules/quartz-storage/bin/quartz-storage.d.ts',
                     'node_modules/funny-games-splash/build/funny-games-splash.d.ts'
                 ],
                 noImplicitAny:true
@@ -77,28 +79,33 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
-                compress: {},
-                mangle: true,
-                beautify: false
+                compress: {
+                    sequences: true,
+                    dead_code: true,
+                    conditionals: true,
+                    booleans: true,
+                    unused: true,
+                    if_return: true,
+                    join_vars: true,
+                    drop_console: true
+                },
+                mangle: true
             },
             dist: {
                 files: {
                     '_build/dist/<%= game.name %>.min.js': [
-                        'node_modules/phaser/dist/phaser.min.js',
+                        'node_modules/phaser-multires/build/custom/phaser-tiny.min.js',
                         'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js',
                         'node_modules/phaser-responsive/build/phaser-responsive.min.js',
                         'node_modules/phaser-spine/build/phaser-spine.min.js',
                         'node_modules/phaser-cachebuster/build/phaser-cachebuster.min.js',
+                        'node_modules/phaser-input/build/phaser-input.min.js',
                         'node_modules/webfontloader/webfontloader.js',
-                        '_build/dist/<%= game.name %>-<%= game.version %>.js',
-                        'node_modules/funny-games-splash/build/funny-games-splash.min.js'
+                        'node_modules/quartz-storage/bin/quartz-storage.js',
+                        'node_modules/funny-games-splash/build/funny-games-splash.min.js',
+                        '_build/dist/<%= game.name %>-<%= game.version %>.js'
 
                     ]
-                },
-                options: {
-                    compress: {},
-                    mangle: false,
-                    beautify: true
                 }
             }
         },
@@ -127,6 +134,17 @@ module.exports = function (grunt) {
                 }
             }
         },
+        tslint: {
+            options: {
+                // can be a configuration object or a filepath to tslint.json
+                configuration: "./tslint.json"
+            },
+            dist: {
+                src: [
+                    'ts/**/*.ts'
+                ]
+            }
+        }
     });
 
     var buildNumber = grunt.option("buildNumber");
@@ -261,7 +279,7 @@ module.exports = function (grunt) {
                             'X-Auth-Key': decryptedData.cloudflare.pass,
                             'Content-Type': 'application/json'
                         },
-                        body: '{"type":"CNAME","name":"<%= game.name %>.fbrq.io","content":"' + location + '","ttl":120}'
+                        body: '{"type":"CNAME","name":"<%= game.name %>.fbrq.io","content":"' + location + '","ttl":120,"proxied":true‌}'
                     }
                 }
             }
@@ -290,6 +308,7 @@ module.exports = function (grunt) {
 
     //production build, we deploy this
     grunt.registerTask('dist', [
+        'tslint:dist',
         'clean:dist',
         'copy:dist',
         'typescript:dist',
@@ -315,4 +334,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-aws-s3');
     grunt.loadNpmTasks('grunt-http');
     grunt.loadNpmTasks('grunt-html-build');
+    grunt.loadNpmTasks('grunt-tslint');
 };
