@@ -1,5 +1,4 @@
 module BoilerPlate {
-    import FunnyGamesSplashConfig = Fabrique.FunnyGamesSplashConfig;
     export class Boot extends Fabrique.State {
         public static Name: string = 'booter';
 
@@ -68,42 +67,7 @@ module BoilerPlate {
         }
 
         public create(): void {
-            this.game.state.start(Fabrique.PreSplash.Name, true, false, <FunnyGamesSplashConfig>{
-                link: Fabrique.Utils.getUtmCampaignLink(Fabrique.UtmTargets.splashscreen),
-                nextState: Menu.Name,
-                preloadTexts: [
-                    'Calculating puzzles',
-                    'Drawing fields',
-                    'Setting up numbers'
-                ],
-                preloadHandler: (): void => {
-                    let textureResolution: string = '1';
-
-                    //Choose 750 because than iPad will still get bigger assets
-                    if (!this.game.device.desktop && window.innerWidth < 750) {
-                        textureResolution = '0.5';
-                    }
-
-                    Images.preloadList.forEach((assetName: string) => {
-                        this.game.load.image(assetName, 'assets/images/' + assetName + '@' + textureResolution + 'x.png');
-                    });
-
-                    Atlases.preloadList.forEach((assetName: string) => {
-                        this.game.load.atlas(
-                            assetName,
-                            'assets/atlas/' + assetName + '@' + textureResolution + 'x.png',
-                            'assets/atlas/' + assetName + '@' + textureResolution + 'x.json'
-                        );
-                    });
-
-                    Sounds.preloadList.forEach((assetName: string) => {
-                        if (this.game.device.iOS) {
-                            this.game.load.audio(assetName, ['assets/sound/' + assetName + '.m4a']);
-                        }
-                        this.game.load.audio(assetName, ['assets/sound/' + assetName + '.ogg', 'assets/sound/' + assetName + '.mp3']);
-                    });
-                }
-            });
+            this.game.state.start(Preload.Name);
         }
 
         private checkOrientation(): void {

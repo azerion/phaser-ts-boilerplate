@@ -24,7 +24,12 @@ module BoilerPlate {
         public create(): void {
             //this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             let logo: Phaser.Image = this.game.add.image(Constants.GAME_WIDTH / 2, Constants.GAME_HEIGHT / 2, Images.Logo);
-            logo.anchor.set(0.5, 0.5);
+            logo.anchor.set(0.5);
+
+            let button: Phaser.Button = this.game.add.button(Constants.GAME_WIDTH / 2, Constants.GAME_HEIGHT - 50, Images.BtnBlue, ():  void => {
+                //Start the game state
+            });
+            button.anchor.set(0.5);
         }
     }
 }

@@ -37,10 +37,6 @@ module Fabrique {
             }
 
             public createUser(userId?: string, facebookId?: string, gender?: GA.Gender, birthYear?: number): GA.User {
-                if (undefined === userId || null === userId) {
-                    userId = (Date.now() + Math.random() * 100 | 0).toString();
-                }
-
                 return new GA.User(userId, facebookId, gender, birthYear);
             }
 

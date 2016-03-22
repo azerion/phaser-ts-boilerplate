@@ -19,8 +19,7 @@ module BoilerPlate {
 
             //Here we load all the states, but they shouldn't start automaticly
             this.state.add(Boot.Name, Boot, false);
-            this.state.add(Fabrique.PreSplash.Name, Fabrique.PreSplash, false);
-            this.state.add(Fabrique.FunnyGamesSplash.Name, Fabrique.FunnyGamesSplash, false);
+            this.state.add(Preload.Name, Preload, false);
             this.state.add(Menu.Name, Menu, false);
             /**
              * Load plugin when Game is initialized, this gets added to the ready Queue of which Engine initialisation is the first
@@ -52,9 +51,9 @@ module BoilerPlate {
             //Load the fonts
             WebFont.load(<WebFont.Config>{
                 custom: <WebFont.Custom>{
-                    families: ['oxygen', 'MonospaceTypewriter'],
+                    families: ['Aller Display'],
                     urls: [
-                        'assets/css/oxygen.css', 'assets/css/MonospaceTypewriter.css'
+                        'assets/css/AllerDisplay.css'
                     ]
                 },
                 active: (): void => {
