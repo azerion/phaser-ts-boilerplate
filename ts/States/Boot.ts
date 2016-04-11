@@ -90,9 +90,9 @@ module BoilerPlate {
         private trackOrientation(isPortrait: boolean): void {
             if (this.orientationTracked) {
                 let orientation: string = isPortrait ? 'toPortrait' : 'toLandscape';
-                ga('send', 'event', 'Game Orientation Switched', orientation, 'Times Switched: ' + this.orientationSwitchCounter.toString());
-
                 this.orientationSwitchCounter++;
+
+                ga('send', 'event', 'Game Orientation Switched', orientation, 'Times Switched: ' + this.orientationSwitchCounter.toString());
             } else {
                 let orientation: string = isPortrait ? 'Portrait' : 'Landscape';
                 ga('send', 'event', 'Game Orientation', orientation);
