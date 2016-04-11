@@ -4,6 +4,10 @@ module BoilerPlate {
 
         public name: string = Boot.Name;
 
+        private orientationTracked: boolean = false;
+
+        private orientationSwitchCounter: number = 0;
+
         constructor() {
             super();
         }
@@ -78,6 +82,22 @@ module BoilerPlate {
                 this.enterIncorrectOrientation();
             } else {
                 this.leaveIncorrectOrientation();
+            }
+
+            this.trackOrientation(h > w);
+        }
+
+        private trackOrientation(isPortrait: boolean): void {
+            if (this.orientationTracked) {
+                let orientation: string = isPortrait ? 'toPortrait' : 'toLandscape';
+                ga('send', 'event', 'Game Orientation Switched', orientation, 'Times Switched: ' + this.orientationSwitchCounter.toString());
+
+                this.orientationSwitchCounter++;
+            } else {
+                let orientation: string = isPortrait ? 'Portrait' : 'Landscape';
+                ga('send', 'event', 'Game Orientation', orientation);
+
+                this.orientationTracked = true;
             }
         }
 
