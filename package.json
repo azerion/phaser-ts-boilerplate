@@ -30,12 +30,13 @@
     "grunt-http": "^2.0.0",
     "grunt-tslint": "^3.0.3",
     "grunt-typescript": "0.8.0",
+    "multi-pass": "0.1.2",
     "phaser-cachebuster": "^1.0.0",
     "phaser-multires": "^2.4.8-alpha1",
     "phaser-responsive": "^1.0.0",
     "phaser-spine": "^2.0.0",
     "tslint": "^3.6.0",
-    "typescript": "1.6.x",
+    "typescript": "1.8.x",
     "webfontloader": "^1.6.21"
   },
   "engines": {
