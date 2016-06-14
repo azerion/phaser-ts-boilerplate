@@ -31,7 +31,8 @@ module.exports = function (grunt) {
                     'node_modules/phaser-cachebuster/build/phaser-cachebuster.d.ts',
                     'node_modules/phaser-input/build/phaser-input.d.ts',
                     'node_modules/quartz-storage/bin/quartz-storage.d.ts',
-                    'node_modules/funny-games-splash/build/funny-games-splash.d.ts'
+                    'node_modules/orange-games-splash/build/orange-games-splash.d.ts',
+                    'node_modules/orange-games-branding/build/orange-games-branding.d.ts'
                 ],
                 noImplicitAny:true
             },
@@ -102,7 +103,8 @@ module.exports = function (grunt) {
                         'node_modules/phaser-input/build/phaser-input.min.js',
                         'node_modules/webfontloader/webfontloader.js',
                         'node_modules/quartz-storage/bin/quartz-storage.js',
-                        'node_modules/funny-games-splash/build/funny-games-splash.min.js',
+                        'node_modules/orange-games-splash/build/orange-games-splash.min.js',
+                        'node_modules/orange-games-branding/build/orange-games-branding.min.js',
                         '_build/dist/<%= game.name %>-<%= game.version %>.js'
 
                     ]

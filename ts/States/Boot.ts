@@ -71,7 +71,42 @@ module BoilerPlate {
         }
 
         public create(): void {
-            this.game.state.start(Preload.Name);
+            this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
+                link: Fabrique.Branding.getCampaignLink(Constants.GAME_TITLE, Fabrique.UtmTargets.splashscreen),
+                nextState: Menu.Name,
+                preloadTexts: [
+                    'Calculating puzzles',
+                    'Drawing fields',
+                    'Setting up numbers'
+                ],
+                preloadHandler: (): void => {
+                    let i: number;
+                    for (i = 1; i < 7; i++) {
+                        // let userRatio: number = 1;
+                        // if (this.game.device.pixelRatio > 1) {
+                        //     //If you are finding you game is lagging on high density displays then change the value to a low number (0.75 for example)
+                        //     userRatio = this.game.device.pixelRatio * 0.2;
+                        // }
+                        // userRatio /= Math.round(window.innerWidth / Constants.GAME_WIDTH * 10) / 10;
+                        this.game.load.spritesheet('popp' + i, 'assets/images/pop' + i + '.png', 86, 84, 4);
+                    }
+                    for (i = 0; i < Images.preloadList.length; i++) {
+                        this.game.load.image(Images.preloadList[i], 'assets/images/' + Images.preloadList[i] + '.png');
+                    }
+                    for (i = 0; i < Atlases.preloadList.length; i++) {
+                        this.game.load.atlas(Atlases.preloadList[i], 'assets/atlases/' + Atlases.preloadList[i] + '.png', 'assets/atlases/' + Atlases.preloadList[i] + '.json');
+                    }
+
+                    Sounds.preloadList.forEach((assetName: string) => {
+                        if ( this.game.device.iOS ) {
+                            this.game.load.audio(assetName, ['assets/sound/' + assetName + '.m4a']);
+                        }
+                        this.game.load.audio(assetName, ['assets/sound/' + assetName + '.ogg', 'assets/sound/' + assetName + '.mp3']);
+                    });
+
+                    Fabrique.Branding.preloadImages(this.game);
+                }
+            });
         }
 
         private checkOrientation(): void {

@@ -19,7 +19,7 @@ module BoilerPlate {
 
             //Here we load all the states, but they shouldn't start automaticly
             this.state.add(Boot.Name, Boot, false);
-            this.state.add(Preload.Name, Preload, false);
+            this.state.add(Fabrique.SplashScreen.Preloader.Name, Fabrique.SplashScreen.Preloader, false);
             this.state.add(Menu.Name, Menu, false);
             /**
              * Load plugin when Game is initialized, this gets added to the ready Queue of which Engine initialisation is the first
