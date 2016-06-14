@@ -16,6 +16,8 @@
   },
   "private": true,
   "devDependencies": {
+    "orange-games-branding": "git+ssh://git@gitlab.ds.orangegames.com:fabrique/orange-games-branding.git#v0.2.3",
+    "orange-games-splash": "git+ssh://git@gitlab.ds.orangegames.com:fabrique/orange-games-splash.git#v2.1.3",
     "ga-javascript-sdk": "2.1.0",
     "grunt": "0.4.x",
     "grunt-aws-s3": "^0.14.4",
@@ -28,17 +30,15 @@
     "grunt-http": "^2.0.0",
     "grunt-tslint": "^3.0.3",
     "grunt-typescript": "0.8.0",
-    "multi-pass": "0.1.2",
     "phaser-cachebuster": "^1.0.0",
-    "phaser-multires": "^2.4.6-alpha4",
-    "phaser-responsive": "1.3.2",
-    "phaser-spine": "^1.2.2",
-    "quartz-storage": "^2.0.2",
+    "phaser-multires": "^2.4.8-alpha1",
+    "phaser-responsive": "^1.0.0",
+    "phaser-spine": "^2.0.0",
     "tslint": "^3.6.0",
-    "typescript": "1.8.x",
+    "typescript": "1.6.x",
     "webfontloader": "^1.6.21"
   },
   "engines": {
-    "node": "2.5.x"
+    "node": "5.x.x"
   }
 }
