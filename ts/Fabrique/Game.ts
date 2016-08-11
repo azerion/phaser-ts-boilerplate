@@ -5,10 +5,7 @@ module Fabrique {
             google: Fabrique.Plugins.GoogleAnalytics,
             game: Fabrique.Plugins.GameAnalytics,
         };
-        add: Fabrique.Plugins.ResponsiveObjectFactory
-            & Fabrique.Plugins.SpineObjectFactory;
-
-        make: Fabrique.Plugins.ResponsiveObjectCreator;
+        add: Fabrique.Plugins.SpineObjectFactory;
 
         load: Fabrique.Plugins.CacheBustedLoader
             & Fabrique.Plugins.SpineLoader;

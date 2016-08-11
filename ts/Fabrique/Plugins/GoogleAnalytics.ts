@@ -10,7 +10,7 @@ module Fabrique {
 
     export module Plugins {
         export class GoogleAnalytics extends Phaser.Plugin {
-            constructor(game: IGoogleAnalyticsGame, parent: PIXI.DisplayObject) {
+            constructor(game: IGoogleAnalyticsGame, parent: Phaser.PluginManager) {
                 super(game, parent);
 
                 if (!game.hasOwnProperty('analytics')) {

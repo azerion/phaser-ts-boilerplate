@@ -22,16 +22,13 @@ module.exports = function (grunt) {
                 declaration: false,
                 references: [
                     'vendor/*.d.ts',
-                    'node_modules/phaser-multires/typescript/pixi.d.ts',
-                    'node_modules/phaser-multires/typescript/phaser.d.ts',
-                    'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.d.ts',
-                    'node_modules/phaser-responsive/build/phaser-responsive.d.ts',
+                    'node_modules/phaser/typescript/phaser.d.ts',                    
+                    'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.d.ts',                    
                     'node_modules/phaser-spine/build/phaser-spine.d.ts',
                     'node_modules/phaser-cachebuster/build/phaser-cachebuster.d.ts',
                     'node_modules/phaser-input/build/phaser-input.d.ts',
                     'node_modules/quartz-storage/bin/quartz-storage.d.ts',
-                    'node_modules/orange-games-splash/build/orange-games-splash.d.ts',
-                    'node_modules/orange-games-branding/build/orange-games-branding.d.ts'
+                    'node_modules/orange-games-splash/build/orange-games-splash.d.ts'                    
                 ],
                 noImplicitAny:true
             },
@@ -94,16 +91,15 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '_build/dist/<%= game.name %>.min.js': [
+                        'node_modules/phaser/build/phaser.min.js',
                         'node_modules/phaser-multires/build/custom/phaser-tiny.min.js',
-                        'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js',
-                        'node_modules/phaser-responsive/build/phaser-responsive.min.js',
+                        'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js',                        
                         'node_modules/phaser-spine/build/phaser-spine.min.js',
                         'node_modules/phaser-cachebuster/build/phaser-cachebuster.min.js',
                         'node_modules/phaser-input/build/phaser-input.min.js',
                         'node_modules/webfontloader/webfontloader.js',
                         'node_modules/quartz-storage/bin/quartz-storage.js',
-                        'node_modules/orange-games-splash/build/orange-games-splash.min.js',
-                        'node_modules/orange-games-branding/build/orange-games-branding.min.js',
+                        'node_modules/orange-games-splash/build/orange-games-splash.min.js',                        
                         '_build/dist/<%= game.name %>-<%= game.version %>.js'
 
                     ]

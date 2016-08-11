@@ -30,7 +30,7 @@ module Fabrique {
          * These are all Phaser.Signals
          */
         export class GameEvents extends Phaser.Plugin {
-            constructor(game: Fabrique.IEventedGame, parent: PIXI.DisplayObject) {
+            constructor(game: Fabrique.IEventedGame, parent: Phaser.PluginManager) {
                 super(game, parent);
 
                 if (!game.hasOwnProperty('events')) {

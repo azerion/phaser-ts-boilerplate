@@ -72,7 +72,6 @@ module BoilerPlate {
 
         public create(): void {
             this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
-                link: Fabrique.Branding.getCampaignLink(Constants.GAME_TITLE, Fabrique.UtmTargets.splashscreen),
                 nextState: Menu.Name,
                 preloadTexts: [
                     'Calculating puzzles',
@@ -81,15 +80,6 @@ module BoilerPlate {
                 ],
                 preloadHandler: (): void => {
                     let i: number;
-                    for (i = 1; i < 7; i++) {
-                        // let userRatio: number = 1;
-                        // if (this.game.device.pixelRatio > 1) {
-                        //     //If you are finding you game is lagging on high density displays then change the value to a low number (0.75 for example)
-                        //     userRatio = this.game.device.pixelRatio * 0.2;
-                        // }
-                        // userRatio /= Math.round(window.innerWidth / Constants.GAME_WIDTH * 10) / 10;
-                        this.game.load.spritesheet('popp' + i, 'assets/images/pop' + i + '.png', 86, 84, 4);
-                    }
                     for (i = 0; i < Images.preloadList.length; i++) {
                         this.game.load.image(Images.preloadList[i], 'assets/images/' + Images.preloadList[i] + '.png');
                     }
