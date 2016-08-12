@@ -1,11 +1,17 @@
 module Fabrique {
-    export class BackendGame {
+    export interface IBackendGame {
+        gameover: boolean;
+        score: number;
+        success: boolean;        
+    }
+
+    export class BackendGame implements Fabrique.IBackendGame {
         public gameover: boolean = false;
         public score: number = 0;
         public success: boolean = false;
 
-        public generateResponse(): any {
-            let response: any = {
+        public generateResponse(): Fabrique.IBackendGame {
+            let response: Fabrique.IBackendGame = {
                 score: this.score,
                 gameover: this.gameover,
                 success: this.success,
