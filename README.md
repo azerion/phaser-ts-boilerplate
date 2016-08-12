@@ -60,13 +60,13 @@ Done, without errors.
 ```
 
 Development
------------
+------------
 
 It's time to start developing!
 Keep the following guidelines in mind when developing a game.
 
-#####Code
-
+Code
+====
 
 ### Game logic
 
@@ -115,7 +115,7 @@ Like Fabrique.State or Fabrique.Game
 
 
 Assets
--------
+======
 
 ### Images
 First, add the images to this folder:
