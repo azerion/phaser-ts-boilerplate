@@ -52,11 +52,11 @@ module BoilerPlate {
          *  If loaded, it updates and uses the loaded font
          */
 
-        public start(): void {            
+        public start(): void {
             let updateText: () => void = (): void => {
                 this.recursiveUpdateText(this.stage);
             };
-            
+
             //Load the fonts
             WebFont.load(<WebFont.Config>{
                 custom: <WebFont.Custom>{
@@ -68,16 +68,16 @@ module BoilerPlate {
                 active: updateText,
                 inactive: updateText
             });
-            
+
             this.state.start(Boot.Name);
         }
 
         public recursiveUpdateText(obj: Phaser.Text | PIXI.DisplayObjectContainer): void {
-            if (obj instanceof Phaser.Text) {
+            if ( obj instanceof Phaser.Text ) {
                 (<any>obj).dirty = true;
             }
 
-            if (obj.children && obj.children.length > 0) {
+            if ( obj.children && obj.children.length > 0 ) {
                 obj.children.forEach((child: PIXI.DisplayObjectContainer) => {
                     this.recursiveUpdateText(child);
                 });

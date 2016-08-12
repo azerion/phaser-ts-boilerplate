@@ -6,8 +6,17 @@
   "description": "This is a boiler plate version for OrangeGames HTML5 games, use it at your discression to make awesome games :D",
   "contributors": [
     {
-      "name": "Ale Bles, Illona, Amy, Nico",
+      "name": "Ale Bles",
       "email": "a.bles@orangegames.com"
+    },
+    {
+      "name": "Illona"
+    },
+    {
+      "name": "Amy"
+    },
+    {
+      "name": "Nico"
     }
   ],
   "repository": {

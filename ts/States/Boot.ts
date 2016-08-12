@@ -17,7 +17,7 @@ module BoilerPlate {
         /**
          * Init, this is where game and google analytics are set up.
          * Small tweaks such as limiting input pointers, disabling right click context menu are placed here
-         **/
+         */
 
         public init(): void {
             //Setup analytics
@@ -44,7 +44,7 @@ module BoilerPlate {
             this.stage.disableVisibilityChange = true;
 
             //Enable scaling
-            if (this.game.device.desktop) {
+            if ( this.game.device.desktop ) {
                 this.stage.disableVisibilityChange = true;
                 this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                 this.scale.pageAlignHorizontally = true;
@@ -65,12 +65,12 @@ module BoilerPlate {
 
         public mobileResizeCallback(manager: Phaser.ScaleManager): void {
             let userRatio: number = 1;
-            if (this.game.device.pixelRatio > 1) {
+            if ( this.game.device.pixelRatio > 1 ) {
                 //If you are finding you game is lagging on high density displays then change the value to a low number (0.75 for example)
                 userRatio = this.game.device.pixelRatio * 0.2;
             }
             userRatio /= Math.round(window.innerWidth / Constants.GAME_WIDTH * 10) / 10;
-            if (manager.width !== window.innerWidth * userRatio || manager.height !== window.innerHeight * userRatio) {
+            if ( manager.width !== window.innerWidth * userRatio || manager.height !== window.innerHeight * userRatio ) {
                 manager.setGameSize(window.innerWidth * userRatio, window.innerHeight * userRatio);
                 manager.setUserScale(1 / userRatio, 1 / userRatio);
             }
@@ -82,8 +82,7 @@ module BoilerPlate {
          * Preload, loads all the assets before starting the game
          * First load cachebuster before running Splashscreen preloader
          * The preloader will load all the assets while displaying portal specific splashscreen
-         **/
-
+         */
 
         public preload(): void {
             this.game.load.cacheBuster = (typeof version === 'undefined') ? null : version;
@@ -117,14 +116,14 @@ module BoilerPlate {
         }
 
         /**
-         * Checks orientation, if game is being played on a mobile device, checks if it is portrati or landscape mode         * 
-         **/
+         * Checks orientation, if game is being played on a mobile device, checks if it is portrati or landscape mode         *
+         */
 
         private checkOrientation(): void {
             let w: number = document.getElementById('dummy').getBoundingClientRect().left;
             let h: number = document.getElementById('dummy').getBoundingClientRect().top;
 
-            if (w > h && h < 300) {
+            if ( w > h && h < 300 ) {
                 this.enterIncorrectOrientation();
             } else {
                 this.leaveIncorrectOrientation();
@@ -135,11 +134,12 @@ module BoilerPlate {
 
         /**
          * Checks orientation changes
-         * Send google analytics to track number of times user switches between landscape and portrait         
-         **/
+         * Send google analytics to track number of times user switches between landscape and portrait
+         * @param isPortrait
+         */
 
         private trackOrientation(isPortrait: boolean): void {
-            if (this.orientationTracked) {
+            if ( this.orientationTracked ) {
                 let orientation: string = isPortrait ? 'toPortrait' : 'toLandscape';
                 this.orientationSwitchCounter++;
 
@@ -154,8 +154,8 @@ module BoilerPlate {
 
         /**
          * Hides game and shows an image asking to rotate device to landscape mode
-         **/
-        
+         */
+
         private enterIncorrectOrientation(): void {
             document.getElementById('orientation').style.display = 'block';
             document.getElementById('content').style.display = 'none';
@@ -163,8 +163,8 @@ module BoilerPlate {
 
         /**
          * Hides rotate deivce image and shows game
-         **/
-        
+         */
+
         private leaveIncorrectOrientation(): void {
             document.getElementById('orientation').style.display = 'none';
             document.getElementById('content').style.display = 'block';

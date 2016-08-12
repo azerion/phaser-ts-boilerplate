@@ -1,5 +1,5 @@
 module Fabrique {
-    export module Effects {      
+    export module Effects {
         export class SlideState {
             public static SlideTime: number = 250;
 
@@ -10,13 +10,13 @@ module Fabrique {
             private static boundsSet: boolean = false;
 
             public static fromTop(game: Phaser.Game, cb?: () => void): void {
-                if (!SlideState.boundsSet) {
+                if ( !SlideState.boundsSet ) {
                     SlideState.setBounds(game);
                 }
 
                 game.world.cacheAsBitmap = true;
                 game.add.tween(game.camera).from({y: game.height}, SlideState.SlideTime, SlideState.EaseIn, true).onComplete.add(() => {
-                    if (cb !== undefined) {
+                    if ( cb !== undefined ) {
                         cb();
                     }
 
@@ -25,13 +25,13 @@ module Fabrique {
             }
 
             public static toRight(game: Phaser.Game, cb?: () => void): void {
-                if (!SlideState.boundsSet) {
+                if ( !SlideState.boundsSet ) {
                     SlideState.setBounds(game);
                 }
 
                 game.world.cacheAsBitmap = true;
                 game.add.tween(game.camera).to({x: -game.width}, SlideState.SlideTime, SlideState.EaseOut, true).onComplete.add(() => {
-                    if (cb !== undefined) {
+                    if ( cb !== undefined ) {
                         cb();
                     }
 
@@ -40,13 +40,13 @@ module Fabrique {
             }
 
             public static fromRight(game: Phaser.Game, cb?: () => void): void {
-                if (!SlideState.boundsSet) {
+                if ( !SlideState.boundsSet ) {
                     SlideState.setBounds(game);
                 }
 
                 game.world.cacheAsBitmap = true;
                 game.add.tween(game.camera).from({x: -game.width}, SlideState.SlideTime, SlideState.EaseIn, true).onComplete.add(() => {
-                    if (cb !== undefined) {
+                    if ( cb !== undefined ) {
                         cb();
                     }
 
@@ -55,13 +55,13 @@ module Fabrique {
             }
 
             public static toLeft(game: Phaser.Game, cb?: () => void): void {
-                if (!SlideState.boundsSet) {
+                if ( !SlideState.boundsSet ) {
                     SlideState.setBounds(game);
                 }
 
                 game.world.cacheAsBitmap = true;
                 game.add.tween(game.camera).to({x: game.width}, SlideState.SlideTime, SlideState.EaseOut, true).onComplete.add(() => {
-                    if (cb !== undefined) {
+                    if ( cb !== undefined ) {
                         cb();
                     }
 
@@ -70,13 +70,13 @@ module Fabrique {
             }
 
             public static fromLeft(game: Phaser.Game, cb?: () => void): void {
-                if (!SlideState.boundsSet) {
+                if ( !SlideState.boundsSet ) {
                     SlideState.setBounds(game);
                 }
 
                 game.world.cacheAsBitmap = true;
                 game.add.tween(game.camera).from({x: game.width}, SlideState.SlideTime, SlideState.EaseIn, true).onComplete.add(() => {
-                    if (cb !== undefined) {
+                    if ( cb !== undefined ) {
                         cb();
                     }
 
