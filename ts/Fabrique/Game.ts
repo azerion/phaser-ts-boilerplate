@@ -1,4 +1,8 @@
 module Fabrique {
+    /**
+     * Add any other OG plugins here after loading them in app.ts
+     * e.g. phaser-nineslice
+     */
     export interface IGame extends Phaser.Game {
         events: Fabrique.Plugins.IPortalEvents;
         analytics: {
