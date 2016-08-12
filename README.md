@@ -208,3 +208,18 @@ Atlases are images that contain multiple assets in a game. Every atlas image has
 Our atlases are generated with TexturePacker, and we store the .tps config file also in assets/atlas folder.
 
 Other than that atlases are treated and loaded the same as images and audio.
+
+
+
+Handy Sources / Links
+=====================
+Here you find a list of libraries used by the games in general. They link to the lib's respective docs
+
+- [phaser-cachebuster](https://github.com/orange-games/phaser-cachebuster) A Phaser plugin that allows for assets to be cachebusted by queryparameters
+- [phaser-super-storage](https://github.com/orange-games/phaser-super-storage) A cross platform pluggable storage plugin for Phaser.
+- [phaser-multires](https://github.com/orange-games/phaser-multires) Special version of [Phaser](http://phaser.io) that allows multi resolution textures
+- [quartz-socket](https://github.com/gembly/quartz-socket) Library used for settings up a WebSocket connection
+- [webfontloader](https://github.com/typekit/webfontloader) A library that allows for 'good' loading of multiple fonts
+- [phaser-nineslice](https://github.com/orange-games/phaser-nineslice) A plugin that adds 9 slice scaling support
+- [phaser-input](https://github.com/orange-games/phaser-input) An input library that works on canvas and WebGL. Also has mobile support.
+- [phaser-advanced-debug](https://github.com/orange-games/phaser-advanced-debug) A library that is built on phaser-debug(https://github.com/englercj/phaser-debug) plugin.
