@@ -1,5 +1,5 @@
 module Fabrique {
-    export module Effects {
+    export module Effects {      
         export class SlideState {
             public static SlideTime: number = 250;
 

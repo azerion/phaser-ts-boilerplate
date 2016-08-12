@@ -1,4 +1,7 @@
 /// <reference path="../references.ts" />
+/**
+ * All the global variables which will be used throughout the game
+ */
 class Constants {
     public static GAME_WIDTH: number = 750;
     public static GAME_HEIGHT: number = 550;

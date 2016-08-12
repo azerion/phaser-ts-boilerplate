@@ -116,6 +116,10 @@ module BoilerPlate {
             });
         }
 
+        /**
+         * Checks orientation, if game is being played on a mobile device, checks if it is portrati or landscape mode         * 
+         **/
+
         private checkOrientation(): void {
             let w: number = document.getElementById('dummy').getBoundingClientRect().left;
             let h: number = document.getElementById('dummy').getBoundingClientRect().top;
@@ -128,6 +132,11 @@ module BoilerPlate {
 
             this.trackOrientation(h > w);
         }
+
+        /**
+         * Checks orientation changes
+         * Send google analytics to track number of times user switches between landscape and portrait         
+         **/
 
         private trackOrientation(isPortrait: boolean): void {
             if (this.orientationTracked) {
@@ -143,11 +152,19 @@ module BoilerPlate {
             }
         }
 
+        /**
+         * Hides game and shows an image asking to rotate device to landscape mode
+         **/
+        
         private enterIncorrectOrientation(): void {
             document.getElementById('orientation').style.display = 'block';
             document.getElementById('content').style.display = 'none';
         }
 
+        /**
+         * Hides rotate deivce image and shows game
+         **/
+        
         private leaveIncorrectOrientation(): void {
             document.getElementById('orientation').style.display = 'none';
             document.getElementById('content').style.display = 'block';
