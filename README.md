@@ -1,4 +1,4 @@
-Gembly Game Boilerplate
+HTML5 Game Boilerplate
 =======================
 
 This is a boilerplate for HTML5 games, it can be used to develop new games or prototypes. Simply make a copy of this in gitlab to start working!
@@ -59,16 +59,17 @@ Done, without errors.
 
 ```
 
-#### Development
+Development
+-----------
 
 It's time to start developing!
 Keep the following guidelines in mind when developing a game.
 
 #####Code
----------
 
-Game logic
-----------
+
+### Game logic
+
 In the ts/Backend folder goes all the logic of the game. This is logic without any front-end or animations linked to it. The idea is that this logic can be copied 1 on 1 to the backend server so that when the game is on the portal, this backend server knows exactly whats going on in the game.
 This makes online integration a lot easier for the game.
 ```
@@ -76,8 +77,8 @@ This makes online integration a lot easier for the game.
 ```
 
 
-Game States
------------
+### Game States
+
 Any class that extends a Phaser.State should be located in the ts/States folder, also don't forget to register the new state in app.ts :)
 ```javascript
 //Here we load all the states, but they shouldn't start automaticly
@@ -92,37 +93,41 @@ All these files are placed here.
 ./ts/States
 ```
 
-Data
------
+### Data
+
 Translations, configs, asset names etc. go into
 ```
 ./ts/Data
 ```
 
-Objects
--------
+### Objects
+
 Sometimes, in-game objects are a bit bigger than just a Phaser.Sprite or Phaser.Image.
 In those cases, we create separate classes for them that extend any of the default Phaser objects (like Phaser.Sprite or Phaser.Button) and place them in the ts/Objecst folder.
 ```
 ./ts/Data/Objects
 ```
 
-Fabrique
---------
+### Fabrique
+
 The ts/Fabrique contains a set of files, that will mostly be re-used utils for other games like RandomInRange function or a FadeToColor state, and stuff that is needed in order for the TypeScript compiler to find all the references.
 Like Fabrique.State or Fabrique.Game
 
 
-#####Assets
------------
+Assets
+-------
 
-Images should go into
+### Images
+First, add the images to this folder:
+
 ```
 ./assets/images
 ```
+Then implement them in code as so:
+
 ```javascript
 class Images {
- //All the seperate images needed in the game
+ //All the separate images needed in the game
  public static Background: string = 'background';
 }
 ```
@@ -148,12 +153,17 @@ game.add.image(
 );
 
 
-Sound
-------
+### Sound
+
 This should be located in
 ```
 ./assets/sound
 ```
+
+The adding and handling of sound is the same as those of images, but the added requirement for audio is that every audio file needs an mp3, ogg and m4a version. This is due to cross-browser support.
+
+
+### Fonts
 
 Fonts require files to be in 2 places. 
 First of all we need a css file that defines a font-face in the css folder
@@ -185,8 +195,7 @@ WebFont.load(<WebFont.Config>{
 In the above example there is only one font specified, but this can be extended with an infinite amount of fonts.
 
 
-Atlasses
---------
+### Atlasses
 
 This should be located in
 ```
