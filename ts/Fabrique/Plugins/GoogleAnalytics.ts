@@ -46,6 +46,9 @@ module Fabrique {
                     ga('set', 'appVersion', appVersion);
                 }
                 ga('send', 'pageview');
+
+                ga('create', 'UA-78960661-1', 'auto', {'name': 'fbrq'});
+                ga('fbrq.send', 'pageview');
             }
 
             public sendScreenView(screenName: string): void {
