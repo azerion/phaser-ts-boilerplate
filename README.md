@@ -56,14 +56,15 @@ PC@OG:~/Projects/GameName$ grunt writeVersion --buildNumber=test
 Running "writeVersion" task
 
 Done, without errors.
-
 ```
 
-Development
-------------
+
+## Development
+
 
 It's time to start developing!
 Keep the following guidelines in mind when developing a game.
+
 
 Code
 ====
@@ -112,6 +113,7 @@ In those cases, we create separate classes for them that extend any of the defau
 
 The ts/Fabrique contains a set of files, that will mostly be re-used utils for other games like RandomInRange function or a FadeToColor state, and stuff that is needed in order for the TypeScript compiler to find all the references.
 Like Fabrique.State or Fabrique.Game
+
 
 
 Assets
