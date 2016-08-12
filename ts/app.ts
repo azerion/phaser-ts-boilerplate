@@ -17,7 +17,7 @@ module BoilerPlate {
                 state: null
             });
 
-            //Here we load all the states, but they shouldn't start automaticly
+            //Here we load all the states, but they shouldn't start automatically
             this.state.add(Boot.Name, Boot, false);
             this.state.add(Fabrique.SplashScreen.Preloader.Name, Fabrique.SplashScreen.Preloader, false);
             this.state.add(Menu.Name, Menu, false);
@@ -39,14 +39,24 @@ module BoilerPlate {
          * @returns {Game}
          */
         public static getInstance(): Game {
-            if (null === Game.instance) {
+            if ( null === Game.instance ) {
                 Game.instance = new Game();
             }
 
             return Game.instance;
         }
 
-        public start(): void {
+        /**
+         * Starts loading the fonts and starts Boot State
+         * The function checks if font is loaded, if not uses substitute font
+         *  If loaded, it updates and uses the loaded font
+         */
+
+        public start(): void {            
+            let updateText: () => void = (): void => {
+                this.recursiveUpdateText(this.stage);
+            };
+            
             //Load the fonts
             WebFont.load(<WebFont.Config>{
                 custom: <WebFont.Custom>{
@@ -55,11 +65,23 @@ module BoilerPlate {
                         'assets/css/AllerDisplay.css'
                     ]
                 },
-                active: (): void => {
-                    //start the game
-                    this.state.start(Boot.Name);
-                }
+                active: updateText,
+                inactive: updateText
             });
+            
+            this.state.start(Boot.Name);
+        }
+
+        public recursiveUpdateText(obj: Phaser.Text | PIXI.DisplayObjectContainer): void {
+            if (obj instanceof Phaser.Text) {
+                (<any>obj).dirty = true;
+            }
+
+            if (obj.children && obj.children.length > 0) {
+                obj.children.forEach((child: PIXI.DisplayObjectContainer) => {
+                    this.recursiveUpdateText(child);
+                });
+            }
         }
     }
 }

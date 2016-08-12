@@ -181,7 +181,7 @@ Then the font files themselves should be place in
 WebFonts require a definition in css, apart from any woff/ttf/eot files, thats why fonts are located into folders.
 Ideally every font has woff, eot, svg AND ttf files to make sure it works in every major browser.
 
-Once that's done you can add the font to the fontloader, which is located in app.ts
+Once that's done you can add the font to the fontloader, which is located in app.ts.
 
 ```typescript
 //Load the fonts
@@ -195,6 +195,9 @@ WebFont.load(<WebFont.Config>{
 });
 ```
 In the above example there is only one font specified, but this can be extended with an infinite amount of fonts.
+
+The WebFont.load will be implemented along with update function which will check if fonts have been loaded.
+ And if so, the function will update the text to use the loaded fonts.
 
 
 ### Atlasses

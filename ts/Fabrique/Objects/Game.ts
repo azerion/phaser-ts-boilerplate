@@ -2,7 +2,8 @@ module Fabrique {
     export interface IBackendGame {
         gameover: boolean;
         score: number;
-        success: boolean;        
+        success: boolean;
+        config?: {};
     }
 
     export class BackendGame implements Fabrique.IBackendGame {

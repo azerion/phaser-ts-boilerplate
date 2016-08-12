@@ -15,8 +15,10 @@ module BoilerPlate {
         }
 
         /**
-         * Loader, here we load the assets we need in order to show the loader
-         */
+         * Init, this is where game and google analytics are set up.
+         * Small tweaks such as limiting input pointers, disabling right click context menu are placed here
+         **/
+
         public init(): void {
             //Setup analytics
             this.game.analytics.game.setup(Constants.GAME_KEY, Constants.SECRET_KEY, version, this.game.analytics.game.createUser());
@@ -28,10 +30,18 @@ module BoilerPlate {
 
             this.game.analytics.google.setup(Constants.GOOGLE_ID, Constants.GOOGLE_APP_NAME, version);
 
+            //Small fixes and tweaks are placed below
+
+            // input pointers limited to 1
+            this.game.input.maxPointers = 1;
+
             //Disable contextual menu
             this.game.canvas.oncontextmenu = function (e: Event): void {
                 e.preventDefault();
             };
+
+            // Game is not paused when losing focus from window/tab
+            this.stage.disableVisibilityChange = true;
 
             //Enable scaling
             if (this.game.device.desktop) {
@@ -68,12 +78,16 @@ module BoilerPlate {
             this.checkOrientation();
         }
 
+        /**
+         * Preload, loads all the assets before starting the game
+         * First load cachebuster before running Splashscreen preloader
+         * The preloader will load all the assets while displaying portal specific splashscreen
+         **/
+
+
         public preload(): void {
             this.game.load.cacheBuster = (typeof version === 'undefined') ? null : version;
-        }
 
-        public create(): void {
-            super.create();
             this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
                 nextState: Menu.Name,
                 preloadTexts: [
