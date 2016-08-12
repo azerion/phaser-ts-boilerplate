@@ -1,8 +1,10 @@
 module BoilerPlate {
-    export class Boot extends Fabrique.State {
+    export class Boot extends Phaser.State implements Fabrique.IState {
         public static Name: string = 'booter';
 
         public name: string = Boot.Name;
+
+        public game: Fabrique.IGame;
 
         private orientationTracked: boolean = false;
 
@@ -71,6 +73,7 @@ module BoilerPlate {
         }
 
         public create(): void {
+            super.create();
             this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
                 nextState: Menu.Name,
                 preloadTexts: [
