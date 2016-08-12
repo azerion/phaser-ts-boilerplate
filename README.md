@@ -151,7 +151,7 @@ game.add.image(
     100,                // y position
     Images.Background   // Loaded image reference
 );
-
+```
 
 ### Sound
 
