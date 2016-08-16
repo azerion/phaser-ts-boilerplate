@@ -1,14 +1,15 @@
 module Fabrique {
+    /**
+     * Add any other OG plugins here after loading them in app.ts
+     * e.g. phaser-nineslice
+     */
     export interface IGame extends Phaser.Game {
         events: Fabrique.Plugins.IPortalEvents;
         analytics: {
             google: Fabrique.Plugins.GoogleAnalytics,
             game: Fabrique.Plugins.GameAnalytics,
         };
-        add: Fabrique.Plugins.ResponsiveObjectFactory
-            & Fabrique.Plugins.SpineObjectFactory;
-
-        make: Fabrique.Plugins.ResponsiveObjectCreator;
+        add: Fabrique.Plugins.SpineObjectFactory;
 
         load: Fabrique.Plugins.CacheBustedLoader
             & Fabrique.Plugins.SpineLoader;

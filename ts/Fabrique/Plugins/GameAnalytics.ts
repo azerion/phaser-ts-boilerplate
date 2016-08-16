@@ -13,7 +13,7 @@ module Fabrique {
 
             private ga: GA.GameAnalytics;
 
-            constructor(game: IGameAnalyticsGame, parent: PIXI.DisplayObject) {
+            constructor(game: IGameAnalyticsGame, parent: Phaser.PluginManager) {
                 super(game, parent);
 
                 this.ga = GA.getInstance();

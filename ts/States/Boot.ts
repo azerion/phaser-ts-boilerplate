@@ -1,8 +1,10 @@
 module BoilerPlate {
-    export class Boot extends Fabrique.State {
+    export class Boot extends Phaser.State implements Fabrique.IState {
         public static Name: string = 'booter';
 
         public name: string = Boot.Name;
+
+        public game: Fabrique.IGame;
 
         private orientationTracked: boolean = false;
 
@@ -13,8 +15,10 @@ module BoilerPlate {
         }
 
         /**
-         * Loader, here we load the assets we need in order to show the loader
+         * Init, this is where game and google analytics are set up.
+         * Small tweaks such as limiting input pointers, disabling right click context menu are placed here
          */
+
         public init(): void {
             //Setup analytics
             this.game.analytics.game.setup(Constants.GAME_KEY, Constants.SECRET_KEY, version, this.game.analytics.game.createUser());
@@ -26,13 +30,21 @@ module BoilerPlate {
 
             this.game.analytics.google.setup(Constants.GOOGLE_ID, Constants.GOOGLE_APP_NAME, version);
 
+            //Small fixes and tweaks are placed below
+
+            // input pointers limited to 1
+            this.game.input.maxPointers = 1;
+
             //Disable contextual menu
             this.game.canvas.oncontextmenu = function (e: Event): void {
                 e.preventDefault();
             };
 
+            // Game is not paused when losing focus from window/tab
+            this.stage.disableVisibilityChange = true;
+
             //Enable scaling
-            if (this.game.device.desktop) {
+            if ( this.game.device.desktop ) {
                 this.stage.disableVisibilityChange = true;
                 this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                 this.scale.pageAlignHorizontally = true;
@@ -53,12 +65,12 @@ module BoilerPlate {
 
         public mobileResizeCallback(manager: Phaser.ScaleManager): void {
             let userRatio: number = 1;
-            if (this.game.device.pixelRatio > 1) {
+            if ( this.game.device.pixelRatio > 1 ) {
                 //If you are finding you game is lagging on high density displays then change the value to a low number (0.75 for example)
                 userRatio = this.game.device.pixelRatio * 0.2;
             }
             userRatio /= Math.round(window.innerWidth / Constants.GAME_WIDTH * 10) / 10;
-            if (manager.width !== window.innerWidth * userRatio || manager.height !== window.innerHeight * userRatio) {
+            if ( manager.width !== window.innerWidth * userRatio || manager.height !== window.innerHeight * userRatio ) {
                 manager.setGameSize(window.innerWidth * userRatio, window.innerHeight * userRatio);
                 manager.setUserScale(1 / userRatio, 1 / userRatio);
             }
@@ -66,13 +78,16 @@ module BoilerPlate {
             this.checkOrientation();
         }
 
+        /**
+         * Preload, loads all the assets before starting the game
+         * First load cachebuster before running Splashscreen preloader
+         * The preloader will load all the assets while displaying portal specific splashscreen
+         */
+
         public preload(): void {
             this.game.load.cacheBuster = (typeof version === 'undefined') ? null : version;
-        }
 
-        public create(): void {
             this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
-                link: Fabrique.Branding.getCampaignLink(Constants.GAME_TITLE, Fabrique.UtmTargets.splashscreen),
                 nextState: Menu.Name,
                 preloadTexts: [
                     'Calculating puzzles',
@@ -81,15 +96,6 @@ module BoilerPlate {
                 ],
                 preloadHandler: (): void => {
                     let i: number;
-                    for (i = 1; i < 7; i++) {
-                        // let userRatio: number = 1;
-                        // if (this.game.device.pixelRatio > 1) {
-                        //     //If you are finding you game is lagging on high density displays then change the value to a low number (0.75 for example)
-                        //     userRatio = this.game.device.pixelRatio * 0.2;
-                        // }
-                        // userRatio /= Math.round(window.innerWidth / Constants.GAME_WIDTH * 10) / 10;
-                        this.game.load.spritesheet('popp' + i, 'assets/images/pop' + i + '.png', 86, 84, 4);
-                    }
                     for (i = 0; i < Images.preloadList.length; i++) {
                         this.game.load.image(Images.preloadList[i], 'assets/images/' + Images.preloadList[i] + '.png');
                     }
@@ -109,11 +115,15 @@ module BoilerPlate {
             });
         }
 
+        /**
+         * Checks orientation, if game is being played on a mobile device, checks if it is portrati or landscape mode         *
+         */
+
         private checkOrientation(): void {
             let w: number = document.getElementById('dummy').getBoundingClientRect().left;
             let h: number = document.getElementById('dummy').getBoundingClientRect().top;
 
-            if (w > h && h < 300) {
+            if ( w > h && h < 300 ) {
                 this.enterIncorrectOrientation();
             } else {
                 this.leaveIncorrectOrientation();
@@ -122,8 +132,14 @@ module BoilerPlate {
             this.trackOrientation(h > w);
         }
 
+        /**
+         * Checks orientation changes
+         * Send google analytics to track number of times user switches between landscape and portrait
+         * @param isPortrait
+         */
+
         private trackOrientation(isPortrait: boolean): void {
-            if (this.orientationTracked) {
+            if ( this.orientationTracked ) {
                 let orientation: string = isPortrait ? 'toPortrait' : 'toLandscape';
                 this.orientationSwitchCounter++;
 
@@ -136,10 +152,18 @@ module BoilerPlate {
             }
         }
 
+        /**
+         * Hides game and shows an image asking to rotate device to landscape mode
+         */
+
         private enterIncorrectOrientation(): void {
             document.getElementById('orientation').style.display = 'block';
             document.getElementById('content').style.display = 'none';
         }
+
+        /**
+         * Hides rotate deivce image and shows game
+         */
 
         private leaveIncorrectOrientation(): void {
             document.getElementById('orientation').style.display = 'none';

@@ -1,13 +1,10 @@
 module Fabrique {
-    export class State extends Phaser.State {
-        public static Name: string = 'default';
+    /**
+     * The interface ensures all states have variables for game and state name
+     */
+    export interface IState {
+        game: Fabrique.IGame;
 
-        public game: Fabrique.IGame;
-
-        public name: string = State.Name;
-
-        public create(): void {
-            this.game.analytics.google.sendScreenView(this.name);
-        }
+        name: string;
     }
 }

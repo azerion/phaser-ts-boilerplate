@@ -1,7 +1,7 @@
-Gembly Game Boilerplate
+HTML5 Game Boilerplate
 =======================
 
-This is a boilerplate for Gembly HTML5 games, it can be used to develop new games or prototypes. Simply make a copy of this in gitlab to start working!
+This is a boilerplate for HTML5 games, it can be used to develop new games or prototypes. Simply make a copy of this in gitlab to start working!
 
 Getting Started
 ---------------
@@ -17,70 +17,155 @@ You'll want to give the repo URL of this boilerplate repo, which is:
 
 And you're done! At least for the gitlab part :P
 
-### Local Machine
-
-Now you can move on to create a fresh checkout, so check out the repo you just created in a place where you'd like to see it.
+### Development
+During development itself you only need to run 1 command, namely:
 ```
-zale@Zelda:~/your/path/to/games$ git clone git@gitlab.ds.orangegames.com:team-toast/my-awesome-new-game.git
-```
-
-Now I'm gonna assume you've got Node, NPM and Grunt running, if not you probably don't work at Orange Games and don't give a shit.
-
-Go into your fresh directory, run npm install and start working in your favorite IDE with the **grunt dev** job running!
-
-```
-zale@Zelda:~/your/path/to/games$ cd my-awesome-new-game/
-zale@Zelda:~/your/path/to/games/my-awesome-new-game$ grunt dev
-Running "typescript:dev" (typescript) task
-File _build/dev/game.min.js created.
-js: 1 file, map: 0 files, declaration: 1 file (2156ms)
-
-Running "connect:server" (connect) task
-Started connect web server on http://localhost:8080
-
-Running "watch" task
-Waiting...
-
+PC@OG:~/Projects/GameName$ grunt dev
 ```
 
-point your browser to the given URL and start testing!
+First it will run typescript, then start a server and open the watch task.
+This will make sure that every time a Typescript and/or Asset file has changed, it wil update the development directory (_build/dev).
 
-Files and Folders
------------------
+A webserver is also started on your local machine on port 8080. You can point your browser to http://localhost:8080, check out your game, and grunt will refresh your browser every time a change has been made.
 
-### Code
+### Production
+For production builds there are two commands, one that compiles and minifies all the code and assets, and one for writing a version number. This is used for cachebusting.
+```
+PC@OG:~/Projects/GameName$ grunt dist
+Running "clean:dist" (clean) task
+>> 4 paths cleaned.
 
-Game states go into
+Running "copy:dist" (copy) task
+Created 1 directories, copied 21 files
+
+Running "typescript:dist" (typescript) task
+File /home/person/Projects/GameName/_build/dist/gameName-1.0.2.js created.
+js: 1 file, map: 0 files, declaration: 0 files (2300ms)
+
+Running "uglify:dist" (uglify) task
+>> 1 file created.
+
+Running "clean:temp" (clean) task
+>> 1 path cleaned.
+
+Running "htmlbuild:dist" (htmlbuild) task
+>> File _build/dist/index.html created !
+
+Done, without errors.
+PC@OG:~/Projects/GameName$ grunt writeVersion --buildNumber=test
+Running "writeVersion" task
+
+Done, without errors.
+```
+
+
+## Development
+
+
+It's time to start developing!
+Keep the following guidelines in mind when developing a game.
+
+
+Code
+====
+
+### Game logic
+
+In the ts/Backend folder goes all the logic of the game. This is logic without any front-end or animations linked to it. The idea is that this logic can be copied 1 on 1 to the backend server so that when the game is on the portal, this backend server knows exactly whats going on in the game.
+This makes online integration a lot easier for the game.
+```
+./ts/Backend
+```
+
+
+### Game States
+
+Any class that extends a Phaser.State should be located in the ts/States folder, also don't forget to register the new state in app.ts :)
+```javascript
+//Here we load all the states, but they shouldn't start automaticly
+this.state.add(Boot.Name, Boot, false);
+this.state.add(Fabrique.PreSplash.Name, Fabrique.PreSplash, false);
+this.state.add(Fabrique.FunnyGamesSplash.Name, Fabrique.FunnyGamesSplash, false);
+this.state.add(GamePlay.Name, GamePlay, false);
+```
+All these files are placed here.
 
 ```
 ./ts/States
 ```
 
-backend logic should end up in
-```
-./ts/Backend
-```
+### Data
 
 Translations, configs, asset names etc. go into
 ```
 ./ts/Data
 ```
 
-Anything else you come up with comes in
+### Objects
+
+Sometimes, in-game objects are a bit bigger than just a Phaser.Sprite or Phaser.Image.
+In those cases, we create separate classes for them that extend any of the default Phaser objects (like Phaser.Sprite or Phaser.Button) and place them in the ts/Objecst folder.
 ```
 ./ts/Data/Objects
 ```
 
-### Assets
-Images should go into
+### Fabrique
+
+The ts/Fabrique contains a set of files, that will mostly be re-used utils for other games like RandomInRange function or a FadeToColor state, and stuff that is needed in order for the TypeScript compiler to find all the references.
+Like Fabrique.State or Fabrique.Game
+
+
+
+Assets
+======
+
+### Images
+First, add the images to this folder:
+
 ```
 ./assets/images
 ```
+Then implement them in code as so:
 
-audio should be located in
+```javascript
+class Images {
+ //All the separate images needed in the game
+ public static Background: string = 'background';
+}
 ```
-./assets/audio
+
+Next you need to add the static image reference to the preloadList as well, so the game knows this image has to be loaded.
+```javascript
+class Images {
+//All the seperate images needed in the game
+public static Background: string = 'background';
+
+public static preloadList: string[] = [
+    Images.Background,
+];
+}
 ```
+
+Now the game will automatically load the background image, and all you have to do is use the static reference to add it to the game:
+```javascript
+game.add.image(
+    100,                // x position
+    100,                // y position
+    Images.Background   // Loaded image reference
+);
+```
+
+### Sound
+
+This should be located in
+```
+./assets/sound
+```
+
+The adding and handling of sound is the same as those of images, but the added requirement for audio is that every audio file needs an mp3, ogg and m4a version. This is due to cross-browser support.
+
+
+### Fonts
 
 Fonts require files to be in 2 places. 
 First of all we need a css file that defines a font-face in the css folder
@@ -88,7 +173,56 @@ First of all we need a css file that defines a font-face in the css folder
 ./assets/css/yourFontFace.css
 ```
 
-Then the font files themselfs should be place in
+Then the font files themselves should be place in
 ```
 ./assets/fonts
 ```
+
+WebFonts require a definition in css, apart from any woff/ttf/eot files, thats why fonts are located into folders.
+Ideally every font has woff, eot, svg AND ttf files to make sure it works in every major browser.
+
+Once that's done you can add the font to the fontloader, which is located in app.ts.
+
+```typescript
+//Load the fonts
+WebFont.load(<WebFont.Config>{
+ custom: <WebFont.Custom>{
+     families: ['Century Gothic'],
+     urls: [
+         'assets/css/CenturyGothic.css'
+     ]
+ }
+});
+```
+In the above example there is only one font specified, but this can be extended with an infinite amount of fonts.
+
+The WebFont.load will be implemented along with update function which will check if fonts have been loaded.
+ And if so, the function will update the text to use the loaded fonts.
+
+
+### Atlasses
+
+This should be located in
+```
+./assets/atlas
+```
+Atlases are images that contain multiple assets in a game. Every atlas image has a corresponding JSON file that tells the Phaser framework where in the atlas each image is located, and what the image's original size should be.
+
+Our atlases are generated with TexturePacker, and we store the .tps config file also in assets/atlas folder.
+
+Other than that atlases are treated and loaded the same as images and audio.
+
+
+
+Handy Sources / Links
+=====================
+Here you find a list of libraries used by the games in general. They link to the lib's respective docs
+
+- [phaser-cachebuster](https://github.com/orange-games/phaser-cachebuster) A Phaser plugin that allows for assets to be cachebusted by queryparameters
+- [phaser-super-storage](https://github.com/orange-games/phaser-super-storage) A cross platform pluggable storage plugin for Phaser.
+- [phaser-multires](https://github.com/orange-games/phaser-multires) Special version of [Phaser](http://phaser.io) that allows multi resolution textures
+- [quartz-socket](https://github.com/gembly/quartz-socket) Library used for settings up a WebSocket connection
+- [webfontloader](https://github.com/typekit/webfontloader) A library that allows for 'good' loading of multiple fonts
+- [phaser-nineslice](https://github.com/orange-games/phaser-nineslice) A plugin that adds 9 slice scaling support
+- [phaser-input](https://github.com/orange-games/phaser-input) An input library that works on canvas and WebGL. Also has mobile support.
+- [phaser-advanced-debug](https://github.com/orange-games/phaser-advanced-debug) A library that is built on phaser-debug(https://github.com/englercj/phaser-debug) plugin.
