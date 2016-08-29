@@ -21,14 +21,14 @@ module BoilerPlate {
 
         public init(): void {
             //Setup analytics
-            this.game.analytics.game.setup(Constants.GAME_KEY, Constants.SECRET_KEY, version, this.game.analytics.game.createUser());
+           /* this.game.analytics.game.setup(Constants.GAME_KEY, Constants.SECRET_KEY, version, this.game.analytics.game.createUser());
             let sessionTime: number = Date.now();
             window.addEventListener('beforeunload', () => {
                 this.game.analytics.game.addEvent(new GA.Events.SessionEnd((Date.now() - sessionTime) / 1000));
                 this.game.analytics.game.sendEvents();
             });
 
-            this.game.analytics.google.setup(Constants.GOOGLE_ID, Constants.GOOGLE_APP_NAME, version);
+            this.game.analytics.google.setup(Constants.GOOGLE_ID, Constants.GOOGLE_APP_NAME, version);*/
 
             //Small fixes and tweaks are placed below
 

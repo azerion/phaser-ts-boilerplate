@@ -92,7 +92,6 @@ module.exports = function (grunt) {
                 files: {
                     '_build/dist/<%= game.name %>.min.js': [
                         'node_modules/phaser/build/phaser.min.js',
-                        'node_modules/phaser-multires/build/custom/phaser-tiny.min.js',
                         'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js',
                         'node_modules/phaser-spine/build/phaser-spine.min.js',
                         'node_modules/phaser-cachebuster/build/phaser-cachebuster.min.js',
