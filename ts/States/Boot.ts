@@ -1,6 +1,6 @@
 module BoilerPlate {
     export class Boot extends Phaser.State implements Fabrique.IState {
-        public static Name: string = 'booter';
+        public static Name: string = 'boot';
 
         public name: string = Boot.Name;
 
@@ -30,7 +30,8 @@ module BoilerPlate {
 
             this.game.analytics.google.setup(Constants.GOOGLE_ID, Constants.GOOGLE_APP_NAME, version);*/
 
-            //Small fixes and tweaks are placed below
+            //Tell google we're watching this state
+            this.game.analytics.google.sendScreenView('boot');
 
             // input pointers limited to 1
             this.game.input.maxPointers = 1;
@@ -40,12 +41,15 @@ module BoilerPlate {
                 e.preventDefault();
             };
 
-            // Game is not paused when losing focus from window/tab
-            this.stage.disableVisibilityChange = true;
+            //Set up ads
+            this.game.ads.setAdProvider(new Fabrique.AdProvider.Ima3(
+                this.game,
+                'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/2392211/fbrq_ingame&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1'
+            ));
 
             //Enable scaling
             if ( this.game.device.desktop ) {
-                this.stage.disableVisibilityChange = true;
+                //For desktop we keep aspect ratio because it looks nicer
                 this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                 this.scale.pageAlignHorizontally = true;
                 this.game.scale.windowConstraints.bottom = 'visual';
@@ -64,15 +68,35 @@ module BoilerPlate {
         }
 
         public mobileResizeCallback(manager: Phaser.ScaleManager): void {
-            let userRatio: number = 1;
-            if ( this.game.device.pixelRatio > 1 ) {
-                //If you are finding you game is lagging on high density displays then change the value to a low number (0.75 for example)
-                userRatio = this.game.device.pixelRatio * 0.2;
+            let width: number = window.innerWidth;
+            let height: number = window.innerHeight;
+
+            let scaleFactor: number = 1;
+
+            //So first we check if the game is beeing played in landscape
+            if (width > height) {
+                //Now we'll check if the current aspect ratio is higher or lower than the game's original aspect ratio
+                if (width / height < Constants.GAME_WIDTH / Constants.GAME_HEIGHT) {
+                    //If the aspect ratio is smaller than what we expect, we scale the game based on it's width
+                    scaleFactor /= width / Constants.GAME_WIDTH;
+                } else {
+                    //But if the aspect ratio is higher, than scaling will happen on height, making sure the game will always correctly fit
+                    scaleFactor /= height / Constants.GAME_HEIGHT;
+                }
+            } else {
+                //And now we do the same for portrait, but we inverse with/height, because p[ortrait =)
+                if (height / width < Constants.GAME_WIDTH / Constants.GAME_HEIGHT) {
+                    //If the aspect ratio is smaller than what we expect, we scale the game based on it's width
+                    scaleFactor /= width / Constants.GAME_HEIGHT;
+                } else {
+                    //But if the aspect ratio is higher, than scaling will happen on height, making sure the game will always correctly fit
+                    scaleFactor /= height / Constants.GAME_WIDTH;
+                }
             }
-            userRatio /= Math.round(window.innerWidth / Constants.GAME_WIDTH * 10) / 10;
-            if ( manager.width !== window.innerWidth * userRatio || manager.height !== window.innerHeight * userRatio ) {
-                manager.setGameSize(window.innerWidth * userRatio, window.innerHeight * userRatio);
-                manager.setUserScale(1 / userRatio, 1 / userRatio);
+
+            if (manager.width !== width * scaleFactor || manager.height !== height * scaleFactor) {
+                manager.setGameSize(width * scaleFactor, height * scaleFactor);
+                manager.setUserScale(1 / scaleFactor, 1 / scaleFactor);
             }
 
             this.checkOrientation();
@@ -86,16 +110,43 @@ module BoilerPlate {
 
         public preload(): void {
             this.game.load.cacheBuster = (typeof version === 'undefined') ? null : version;
+        }
 
+        public create(): void {
             this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
                 nextState: Menu.Name,
-                preloadTexts: [
-                    'Calculating puzzles',
-                    'Drawing fields',
-                    'Setting up numbers'
-                ],
+                mobilePlayClickhandler: (): void => {
+                    this.game.ads.onContentPaused.addOnce((): void => {
+                        //Tell google we're watching an ad
+                        this.game.analytics.google.sendScreenView('advertisement');
+                    });
+
+                    this.game.ads.onContentResumed.addOnce((): void => {
+                        this.game.state.start(Menu.Name);
+                    });
+
+                    this.game.ads.showAd({
+                        internal: (Fabrique.Branding.isInternal(this.game)) ? 'YES' : 'NO',
+                        gameID: 999, //change this to gameid
+                        pub: Fabrique.Utils.getSourceSite(),
+                        ad: 'preroll'
+                    });
+                },
+
                 preloadHandler: (): void => {
+                    //Tell google we're watching the splash screen
+                    this.game.analytics.google.sendScreenView('splash');
+
                     let i: number;
+
+                    //We can disable visability change here, because the click listener was added to catch the faulty websites
+                    this.game.stage.disableVisibilityChange = false;
+                    this.game.sound.muteOnPause = true;
+
+                    //Preload branding logo and moregames menu
+                    Fabrique.Branding.preloadImages(this.game);
+                    Fabrique.MoreGames.Menu.preloadImages(this.game);
+
                     for (i = 0; i < Images.preloadList.length; i++) {
                         this.game.load.image(Images.preloadList[i], 'assets/images/' + Images.preloadList[i] + '.png');
                     }
@@ -109,8 +160,6 @@ module BoilerPlate {
                         }
                         this.game.load.audio(assetName, ['assets/sound/' + assetName + '.ogg', 'assets/sound/' + assetName + '.mp3']);
                     });
-
-                    Fabrique.Branding.preloadImages(this.game);
                 }
             });
         }
@@ -143,10 +192,10 @@ module BoilerPlate {
                 let orientation: string = isPortrait ? 'toPortrait' : 'toLandscape';
                 this.orientationSwitchCounter++;
 
-                ga('send', 'event', 'Game Orientation Switched', orientation, 'Times Switched: ' + this.orientationSwitchCounter.toString());
+                this.game.analytics.google.sendGenericEvent('Game Orientation Switched', orientation, 'Times Switched: ' + this.orientationSwitchCounter.toString());
             } else {
                 let orientation: string = isPortrait ? 'Portrait' : 'Landscape';
-                ga('send', 'event', 'Game Orientation', orientation);
+                this.game.analytics.google.sendGenericEvent('Game Orientation', orientation);
 
                 this.orientationTracked = true;
             }
