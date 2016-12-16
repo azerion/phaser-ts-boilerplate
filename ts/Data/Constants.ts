@@ -3,8 +3,8 @@
  * All the global variables which will be used throughout the game
  */
 class Constants {
-    public static GAME_WIDTH: number = 750;
-    public static GAME_HEIGHT: number = 550;
+    public static GAME_WIDTH: number = 1280;
+    public static GAME_HEIGHT: number = 720;
 
     //Game Analytics
     public static GAME_KEY: string              = '';
