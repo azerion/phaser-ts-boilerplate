@@ -2,9 +2,13 @@ module BoilerPlate {
     export class Menu extends Phaser.State implements Fabrique.IState  {
         public static Name: string = 'menu';
 
+        public name: string = Menu.Name;
         public game: Fabrique.IGame;
 
-        public name: string = Menu.Name;
+        private background: Phaser.Image;
+        private logo: Phaser.Image;
+        private testImgBtn: LabeledButton;
+        private testGrBtn: LabeledButton;
 
         constructor() {
             super();
@@ -14,28 +18,70 @@ module BoilerPlate {
             this.game.world.removeAll();
         }
 
-        /**
-         * Loader, here we load the assets we need in order to show the loader
-         */
-        public preload(): void {
-            Images.preloadList.forEach((assetName: string) => {
-                this.game.load.image(assetName, 'assets/images/' + assetName + '.png');
-            });
-        }
-
         public create(): void {
-            //we send a screenview to google here, to track different states
-            // this.game.analytics.google.sendScreenView(this.name);
             super.create();
 
-            //this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            let logo: Phaser.Image = this.game.add.image(Constants.GAME_WIDTH / 2, Constants.GAME_HEIGHT / 2, Images.Logo);
-            logo.anchor.set(0.5);
+            //Send a screen view to Google to track different states
+            // this.game.analytics.google.sendScreenView(this.name);
 
-            let button: Phaser.Button = this.game.add.button(Constants.GAME_WIDTH / 2, Constants.GAME_HEIGHT - 50, Images.BtnBlue, ():  void => {
-                //Start the game state
-            });
-            button.anchor.set(0.5);
+            this.background = this.game.add.image(0, 0, Images.BgMenu);
+
+            this.logo = this.game.add.image(0, 0, Atlases.Interface, Constants.SPLASH_IMAGE + '.png');
+            this.logo.anchor.set(0.5);
+
+            let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
+
+            //This button uses images for textures, just like normal Phaser.Buttons
+            this.testImgBtn = new LabeledButton(this.game, 0, 0, 'LONG TEXT FITS IN BUTTON', textStyle, this.startGame, this);
+            this.testImgBtn.setFrames('btn_orange.png', 'btn_orange.png', 'btn_orange_onpress.png', 'btn_orange.png');
+
+            //This button is made by generating the texture with graphics
+            this.testGrBtn = new LabeledButton(this.game, 0, 0, 'PLAY', textStyle, this.startGame, this, 300 * Constants.GAME_SCALE, 100 * Constants.GAME_SCALE);
+            this.testGrBtn.createTexture(0xf98f25);
+
+            this.resize();
+        }
+
+        /**
+         * Start the gameplay state
+         */
+        private startGame(): void {
+            this.game.state.add(Gameplay.Name, Gameplay, true);
+        }
+
+        /**
+         * Called every time the rotation or game size has changed.
+         * Rescales and repositions the objects.
+         */
+        public resize(): void {
+            this.background.width = this.game.width;
+            this.background.height = this.game.height;
+
+            //Reset logo scaling because we're gonna use its size to recalculate the assets scaling
+            this.logo.scale.set(1);
+
+            //Calculate new scaling based on the logo size
+            let assetsScaling: number = 1;
+            if (this.game.width > this.game.height) {
+                assetsScaling = this.game.width / (this.logo.width * 1.5);
+            } else {
+                assetsScaling = this.game.width / this.logo.width;
+            }
+            //Check that the scaling is not bigger than 1 to prevent unnecessary blurriness
+            assetsScaling = assetsScaling > 1 ? 1 : assetsScaling;
+
+            //Set the new scaling and reposition the logo
+            this.logo.scale.set(assetsScaling);
+            this.logo.alignIn(this.world.bounds, Phaser.CENTER, 0, -60 * Constants.GAME_SCALE);
+
+            //Do the same for the the buttons
+            this.testImgBtn.scale.set(assetsScaling);
+            this.testImgBtn.x = this.logo.x / 2;
+            this.testImgBtn.y = this.logo.y + this.logo.height * 0.65;
+
+            this.testGrBtn.scale.set(assetsScaling);
+            this.testGrBtn.x = this.logo.x + this.logo.x / 2;
+            this.testGrBtn.y = this.testImgBtn.y;
         }
     }
 }
