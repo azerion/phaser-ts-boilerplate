@@ -10,8 +10,11 @@ module Fabrique {
             game: Fabrique.Plugins.GameAnalytics,
         };
         add: Fabrique.Plugins.SpineObjectFactory;
+        ads: Fabrique.Plugins.AdManager;
 
         load: Fabrique.Plugins.CacheBustedLoader
             & Fabrique.Plugins.SpineLoader;
+
+        storage: Fabrique.Plugins.SuperStorage;
     }
 }
