@@ -14,22 +14,12 @@ module.exports = function (grunt) {
             }
         },
         //Typescript settings per build
-        typescript: {
+        ts: {
             options: {
                 module: 'amd',
                 target: 'es5',
                 sourceMap: false,
                 declaration: false,
-                references: [
-                    'vendor/*.d.ts',
-                    'node_modules/phaser/typescript/phaser.d.ts',
-                    'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.d.ts',
-                    'node_modules/phaser-spine/build/phaser-spine.d.ts',
-                    'node_modules/phaser-cachebuster/build/phaser-cachebuster.d.ts',
-                    'node_modules/phaser-input/build/phaser-input.d.ts',
-                    'node_modules/quartz-storage/bin/quartz-storage.d.ts',
-                    'node_modules/orange-games-splash/build/orange-games-splash.d.ts'
-                ],
                 noImplicitAny:true
             },
             dev: {
@@ -67,7 +57,7 @@ module.exports = function (grunt) {
             },
             typescript: {
                 files: ['ts/**/*.ts', 'vendor/**/*.d.ts'],
-                tasks: ['typescript:dev']
+                tasks: ['ts:dev']
             },
             assets: {
                 files: ['assets/**/*.*', 'templates/index.html'],
@@ -149,7 +139,7 @@ module.exports = function (grunt) {
         'tslint:dist',
         'clean:dist',
         'copy:dist',
-        'typescript:dist',
+        'ts:dist',
         'uglify:dist',
         'clean:temp',
         'htmlbuild:dist'
@@ -159,7 +149,7 @@ module.exports = function (grunt) {
     grunt.registerTask('dev', [
         'tslint:dist',
         'copy:dev',
-        'typescript:dev',
+        'ts:dev',
         'connect:server',
         'watch'
     ]);
@@ -169,7 +159,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-html-build');
+    grunt.loadNpmTasks('grunt-ts');
     grunt.loadNpmTasks('grunt-tslint');
 };
