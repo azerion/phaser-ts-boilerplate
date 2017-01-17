@@ -42,12 +42,12 @@ module.exports = function (grunt) {
             dist: {
                 files: [
                     {expand: true, cwd: 'node_modules/funny-games-splash/build/assets', dest: '_build/dist/assets', src: ['**/*']},
-                    {expand: true, cwd: 'assets/images', dest: '_build/dist/assets/images', src: ['**/*']},
-                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*', '!**/*.wav']},
                     {expand: true, cwd: 'assets/css', dest: '_build/dist/assets/css', src: ['**/*']},
                     {expand: true, cwd: 'assets/fonts', dest: '_build/dist/assets/fonts', src: ['**/*']},
+                    {expand: true, cwd: 'assets/images', dest: '_build/dist/assets/images', src: ['**/*']},
+                    {expand: true, cwd: 'assets/atlas', dest: '_build/dist/assets/atlas', src: ['**/*']},
                     {expand: true, cwd: 'assets/spine', dest: '_build/dist/assets/spine', src: ['**/*']},
-                    {expand: true, cwd: 'assets/atlas', dest: '_build/dist/assets/atlas', src: ['**/*']}
+                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*', '!**/*.wav']}
                 ]
             }
         },
@@ -159,7 +159,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-ts');
     grunt.loadNpmTasks('grunt-html-build');
+    grunt.loadNpmTasks('grunt-ts');
     grunt.loadNpmTasks('grunt-tslint');
 };

@@ -1,0 +1,60 @@
+{"frames": [
+
+{
+	"filename": "btn_blue.png",
+	"frame": {"x":1,"y":145,"w":150,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":54},
+	"sourceSize": {"w":150,"h":54}
+},
+{
+	"filename": "btn_blue_onpress.png",
+	"frame": {"x":1,"y":201,"w":150,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":54},
+	"sourceSize": {"w":150,"h":54}
+},
+{
+	"filename": "btn_orange.png",
+	"frame": {"x":1,"y":257,"w":150,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":54},
+	"sourceSize": {"w":150,"h":54}
+},
+{
+	"filename": "btn_orange_onpress.png",
+	"frame": {"x":153,"y":291,"w":150,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":54},
+	"sourceSize": {"w":150,"h":54}
+},
+{
+	"filename": "OG_logo_fullcolor.png",
+	"frame": {"x":1,"y":1,"w":370,"h":142},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":14,"w":370,"h":142},
+	"sourceSize": {"w":400,"h":175}
+},
+{
+	"filename": "rotate_portrait.png",
+	"frame": {"x":153,"y":145,"w":141,"h":144},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":141,"h":144},
+	"sourceSize": {"w":141,"h":145}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "interface.png",
+	"format": "RGBA8888",
+	"size": {"w":372,"h":346},
+	"scale": "0.5",
+	"smartupdate": "$TexturePacker:SmartUpdate:b8bfa2a4fe1159141e0f66d2a0d0fde0:32a7640f2c44729a7c8c576f45ba6c0c:8141c0d8370228a8661c55b8bcf20981$"
+}
+}

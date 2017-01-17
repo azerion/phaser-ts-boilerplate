@@ -7,11 +7,11 @@ module BoilerPlate {
             //We use Phaser's config object to create the game, since this is the only way to disable debugging
             super({
                 enableDebug: false,
-                width: Constants.GAME_WIDTH,
-                height: Constants.GAME_HEIGHT,
+                width: Constants.GAME_ORIGINAL_WIDTH,
+                height: Constants.GAME_ORIGINAL_HEIGHT,
                 renderer: Phaser.AUTO,
                 parent: 'content',
-                transparent: true,
+                transparent: false,
                 antialias: true,
                 preserveDrawingBuffer: false,
                 physicsConfig: null,
@@ -23,7 +23,9 @@ module BoilerPlate {
             //Here we load all the states, but they shouldn't start automatically
             this.state.add(Boot.Name, Boot, false);
             this.state.add(Fabrique.SplashScreen.Preloader.Name, Fabrique.SplashScreen.Preloader, false);
+            this.state.add(Preloader.Name, Preloader, false);
             this.state.add(Menu.Name, Menu, false);
+            this.state.add(Gameplay.Name, Gameplay, false);
 
             /**
              * Here we adjust some stuff to the game that we need, before any state is beeing run

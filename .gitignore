@@ -3,5 +3,5 @@
 _build
 atlassian-ide-plugin.xml
 node_modules
-.tscache
+*.tscache
 *.tmp.*
