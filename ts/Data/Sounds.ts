@@ -1,5 +1,3 @@
-/// <reference path="../references.ts" />
-
 class Sounds {
     public static Click: string = 'click';
 

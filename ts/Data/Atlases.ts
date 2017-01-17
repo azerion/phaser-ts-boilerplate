@@ -1,5 +1,3 @@
-/// <reference path="../references.ts" />
-
 class Atlases {
     public static Interface: string = 'interface';
 

@@ -1,5 +1,3 @@
-/// <reference path="../references.ts" />
-
 class Images {
     public static BgPreloader: string = 'bg_preloader';
     public static BgMenu: string = 'bg_menu';

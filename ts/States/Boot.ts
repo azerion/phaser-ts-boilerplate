@@ -1,6 +1,8 @@
 module BoilerPlate {
     export class Boot extends Phaser.State implements Fabrique.IState {
         public static Name: string = 'boot';
+        public static inGame: boolean = false;
+        public static pause: boolean = false;
 
         public name: string = Boot.Name;
         public game: Fabrique.IGame;
@@ -26,8 +28,7 @@ module BoilerPlate {
 
             this.game.analytics.google.setup(Constants.GOOGLE_ID, Constants.GOOGLE_APP_NAME, version);*/
 
-            //Tell google we're watching this state
-            this.game.analytics.google.sendScreenView('boot');
+            //Small fixes and tweaks are placed below
 
             //input pointers limited to 1
             this.game.input.maxPointers = 1;
@@ -44,8 +45,7 @@ module BoilerPlate {
             ));
 
             //Enable scaling
-            if ( this.game.device.desktop ) {
-                //For desktop we keep aspect ratio because it looks nicer
+            if (this.game.device.desktop) {
                 this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                 this.scale.pageAlignHorizontally = true;
                 this.game.scale.windowConstraints.bottom = 'visual';
@@ -81,36 +81,28 @@ module BoilerPlate {
             }
         }
 
-        public mobileResizeCallback(manager: Phaser.ScaleManager): void {
+        /**
+         * Called every time the orientation on mobile device changes.
+         * @param manager
+         */
+        public static mobileResizeCallback(manager: Phaser.ScaleManager): void {
             let width: number = window.innerWidth;
             let height: number = window.innerHeight;
 
+            let usedWidth: number = Constants.GAME_ORIGINAL_WIDTH * Constants.GAME_SCALE;
+            let usedHeight: number = Constants.GAME_ORIGINAL_HEIGHT * Constants.GAME_SCALE;
+
             let scaleFactor: number = 1;
 
-            //So first we check if the game is beeing played in landscape
+            //Check if the game is being played in landscape
             if (width > height) {
-                //Now we'll check if the current aspect ratio is higher or lower than the game's original aspect ratio
-                if (width / height < Constants.GAME_WIDTH / Constants.GAME_HEIGHT) {
-                    //If the aspect ratio is smaller than what we expect, we scale the game based on it's width
-                    scaleFactor /= width / Constants.GAME_WIDTH;
+                if (width / height < 1.5 && Boot.inGame || width / height > 1.8) {
+                    scaleFactor /= height / usedHeight;
                 } else {
-                    //But if the aspect ratio is higher, than scaling will happen on height, making sure the game will always correctly fit
-                    scaleFactor /= height / Constants.GAME_HEIGHT;
+                    scaleFactor /= width / usedWidth;
                 }
             } else {
-                //And now we do the same for portrait, but we inverse with/height, because p[ortrait =)
-                if (height / width < Constants.GAME_WIDTH / Constants.GAME_HEIGHT) {
-                    //If the aspect ratio is smaller than what we expect, we scale the game based on it's width
-                    scaleFactor /= width / Constants.GAME_HEIGHT;
-                } else {
-                    //But if the aspect ratio is higher, than scaling will happen on height, making sure the game will always correctly fit
-                    scaleFactor /= height / Constants.GAME_WIDTH;
-                }
-            }
-
-            if (manager.width !== width * scaleFactor || manager.height !== height * scaleFactor) {
-                manager.setGameSize(width * scaleFactor, height * scaleFactor);
-                manager.setUserScale(1 / scaleFactor, 1 / scaleFactor);
+                scaleFactor /= height / usedHeight;
             }
 
             if (manager.width !== width * scaleFactor || manager.height !== height * scaleFactor) {
@@ -124,64 +116,86 @@ module BoilerPlate {
             }
         }
 
+        public preload(): void {
+            this.game.load.cacheBuster = (typeof version === 'undefined') ? null : version;
+
+            //Load the assets based on the game scale.
+            let scale: string = 'x' + Constants.GAME_SCALE + '/';
+
+            Images.preloadList.forEach((assetName: string) => {
+                this.game.load.image(assetName, 'assets/images/' + scale + assetName + '.png');
+            });
+
+            Atlases.preloadList.forEach((assetName: string) => {
+                this.game.load.atlas(assetName, 'assets/atlases/' + scale + assetName + '.png', 'assets/atlases/' + scale + assetName + '.json');
+            });
+
+            Sounds.preloadList.forEach((assetName: string) => {
+                if (this.game.device.iOS) {
+                    this.game.load.audio(assetName, ['assets/sound/' + assetName + '.m4a']);
+                } else {
+                    this.game.load.audio(assetName, ['assets/sound/' + assetName + '.ogg', 'assets/sound/' + assetName + '.mp3']);
+                }
+            });
+        }
+
         /**
          * Load all the assets needed for the preloader before starting the game.
          * First load cachebuster before running Splash screen preloader.
          * The preloader will load all the assets while displaying portal specific splash screen.
          */
-        public preload(): void {
-            this.game.load.cacheBuster = (typeof version === 'undefined') ? null : version;
-        }
-
         public create(): void {
+            //TODO: If you DO want a custom preloader, uncomment this line
+            //this.game.state.start(Preloader.Name);
+
+            //TODO: If you DON'T want a custom preloader, uncomment this piece and preload the assets lists in the Boot or in the Menu states
             this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
                 nextState: Menu.Name,
                 mobilePlayClickhandler: (): void => {
-                    this.game.ads.onContentPaused.addOnce((): void => {
-                        //Tell google we're watching an ad
+                    (<Fabrique.IGame>this.game).ads.onContentPaused.addOnce((): void => {
                         this.game.analytics.google.sendScreenView('advertisement');
                     });
 
-                    this.game.ads.onContentResumed.addOnce((): void => {
+                    (<Fabrique.IGame>this.game).ads.onContentResumed.addOnce((): void => {
                         this.game.state.start(Menu.Name);
                     });
+                    /*this.parseSceneFiles();
+                     AudioManager.init(this.game);
+                     Saver.getInstance().init(this.game.cache.getXML('levels'));
+                     this.game.state.start(MenuView.Name);*/
 
-                    this.game.ads.showAd({
+                    (<Fabrique.IGame>this.game).ads.showAd({
                         internal: (Fabrique.Branding.isInternal(this.game)) ? 'YES' : 'NO',
-                        gameID: 999, //change this to gameid
+                        gameID: 999, //something
                         pub: Fabrique.Utils.getSourceSite(),
                         ad: 'preroll'
                     });
                 },
-
                 preloadHandler: (): void => {
-                    //Tell google we're watching the splash screen
-                    this.game.analytics.google.sendScreenView('splash');
-
-                    let i: number;
-
                     //We can disable visability change here, because the click listener was added to catch the faulty websites
                     this.game.stage.disableVisibilityChange = false;
                     this.game.sound.muteOnPause = true;
 
-                    //Preload branding logo and moregames menu
-                    Fabrique.Branding.preloadImages(this.game);
-                    Fabrique.MoreGames.Menu.preloadImages(this.game);
+                    //Load the assets based on the game scale.
+                    let scale: string = 'x' + Constants.GAME_SCALE + '/';
 
-                    for (i = 0; i < Images.preloadList.length; i++) {
-                        this.game.load.image(Images.preloadList[i], 'assets/images/' + Images.preloadList[i] + '.png');
-                    }
-                    for (i = 0; i < Atlases.preloadList.length; i++) {
-                        this.game.load.atlas(Atlases.preloadList[i], 'assets/atlases/' + Atlases.preloadList[i] + '.png', 'assets/atlases/' + Atlases.preloadList[i] + '.json');
-                    }
+                    Images.list.forEach((assetName: string) => {
+                        this.game.load.image(assetName, 'assets/images/' + scale + assetName + '.png');
+                    });
 
-                    Sounds.preloadList.forEach((assetName: string) => {
+                    Atlases.list.forEach((assetName: string) => {
+                        this.game.load.atlas(assetName, 'assets/atlases/' + scale + assetName + '.png', 'assets/atlases/' + scale + assetName + '.json');
+                    });
+
+                    Sounds.list.forEach((assetName: string) => {
                         if (this.game.device.iOS) {
                             this.game.load.audio(assetName, ['assets/sound/' + assetName + '.m4a']);
                         } else {
                             this.game.load.audio(assetName, ['assets/sound/' + assetName + '.ogg', 'assets/sound/' + assetName + '.mp3']);
                         }
                     });
+
+                    Fabrique.Branding.preloadImages(this.game);
                 }
             });
         }
@@ -194,43 +208,6 @@ module BoilerPlate {
                 Gameplay.pause = false;
             }
 
-            this.trackOrientation(h > w);
-        }
-
-        /**
-         * Checks orientation changes
-         * Send google analytics to track number of times user switches between landscape and portrait
-         * @param isPortrait
-         */
-
-        private trackOrientation(isPortrait: boolean): void {
-            if ( this.orientationTracked ) {
-                let orientation: string = isPortrait ? 'toPortrait' : 'toLandscape';
-                this.orientationSwitchCounter++;
-
-                this.game.analytics.google.sendGenericEvent('Game Orientation Switched', orientation, 'Times Switched: ' + this.orientationSwitchCounter.toString());
-            } else {
-                let orientation: string = isPortrait ? 'Portrait' : 'Landscape';
-                this.game.analytics.google.sendGenericEvent('Game Orientation', orientation);
-
-                this.orientationTracked = true;
-            }
-        }
-
-        /**
-         * Hides game and shows an image asking to rotate device to landscape mode
-         */
-
-        private enterIncorrectOrientation(): void {
-            document.getElementById('orientation').style.display = 'block';
-            document.getElementById('content').style.display = 'none';
-        }
-
-        /**
-         * Hides rotate deivce image and shows game
-         */
-
-        private leaveIncorrectOrientation(): void {
             document.getElementById('orientation').style.display = 'none';
             document.getElementById('content').style.display = 'block';
         }
@@ -266,7 +243,7 @@ module BoilerPlate {
             let scale: number = 1;
             if (width < 650) {
                 scale = 0.5;
-            } else if (this.game.scale.game.device.iPad) {
+            } else if (width > 1050) {
                 scale = 1;
             } else {
                 scale = 0.75;

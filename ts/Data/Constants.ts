@@ -1,4 +1,3 @@
-/// <reference path="../references.ts" />
 /**
  * All the global variables which will be used throughout the game.
  */
