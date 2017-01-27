@@ -1,8 +1,16 @@
 {"frames": [
 
 {
+	"filename": "bg_preloader.png",
+	"frame": {"x":739,"y":1,"w":47,"h":740},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":740},
+	"sourceSize": {"w":47,"h":740}
+},
+{
 	"filename": "btn_blue.png",
-	"frame": {"x":1,"y":283,"w":300,"h":108},
+	"frame": {"x":285,"y":1,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
@@ -10,7 +18,7 @@
 },
 {
 	"filename": "btn_blue_onpress.png",
-	"frame": {"x":303,"y":283,"w":300,"h":108},
+	"frame": {"x":285,"y":111,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
@@ -18,7 +26,7 @@
 },
 {
 	"filename": "btn_orange.png",
-	"frame": {"x":605,"y":287,"w":300,"h":108},
+	"frame": {"x":1,"y":569,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
@@ -26,7 +34,7 @@
 },
 {
 	"filename": "btn_orange_onpress.png",
-	"frame": {"x":1,"y":393,"w":300,"h":108},
+	"frame": {"x":303,"y":569,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
@@ -34,7 +42,7 @@
 },
 {
 	"filename": "OG_logo_fullcolor.png",
-	"frame": {"x":1,"y":1,"w":736,"h":280},
+	"frame": {"x":1,"y":287,"w":736,"h":280},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":32,"y":30,"w":736,"h":280},
@@ -42,7 +50,7 @@
 },
 {
 	"filename": "rotate_portrait.png",
-	"frame": {"x":739,"y":1,"w":282,"h":284},
+	"frame": {"x":1,"y":1,"w":282,"h":284},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":2,"w":282,"h":284},
@@ -53,8 +61,8 @@
 	"version": "1.0",
 	"image": "interface.png",
 	"format": "RGBA8888",
-	"size": {"w":1022,"h":502},
+	"size": {"w":787,"h":742},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:2d39947e8f928d7f89dd8ed4a3635d03:32a7640f2c44729a7c8c576f45ba6c0c:8141c0d8370228a8661c55b8bcf20981$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1c191be032feefa6ffe8026895240179:93d5c6b66ff25ecacaafe018bd7ed4f3:537f0cea0960b73bc0729089dd5becb4$"
 }
 }
