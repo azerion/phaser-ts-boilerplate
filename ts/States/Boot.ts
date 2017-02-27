@@ -39,7 +39,7 @@ module BoilerPlate {
             };
 
             //Set up ads
-            this.game.ads.setAdProvider(new Fabrique.AdProvider.Ima3(
+            this.game.ads.setAdProvider(new PhaserAds.AdProvider.Ima3(
                 this.game,
                 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/2392211/fbrq_ingame&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1'
             ));
@@ -50,9 +50,6 @@ module BoilerPlate {
                 this.scale.pageAlignHorizontally = true;
                 this.game.scale.windowConstraints.bottom = 'visual';
             } else {
-                //Set assets scaling for mobile devices
-                Constants.GAME_SCALE = this.getScaling();
-
                 this.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
                 this.scale.fullScreenScaleMode = Phaser.ScaleManager.USER_SCALE;
 
@@ -89,30 +86,46 @@ module BoilerPlate {
             let width: number = window.innerWidth;
             let height: number = window.innerHeight;
 
-            let usedWidth: number = Constants.GAME_ORIGINAL_WIDTH * Constants.GAME_SCALE;
-            let usedHeight: number = Constants.GAME_ORIGINAL_HEIGHT * Constants.GAME_SCALE;
+            Boot.setScaling(manager.game);
+
+            let usedWidth: number = Constants.GAME_WIDTH * Constants.GAME_SCALE;
+            let usedHeight: number = Constants.GAME_HEIGHT * Constants.GAME_SCALE;
 
             let scaleFactor: number = 1;
 
-            //Check if the game is being played in landscape
+            //So first we check if the game is beeing played in landscape
             if (width > height) {
-                if (width / height < 1.5 && Boot.inGame || width / height > 1.8) {
-                    scaleFactor /= height / usedHeight;
-                } else {
-                    scaleFactor /= width / usedWidth;
-                }
-            } else {
                 scaleFactor /= height / usedHeight;
+            } else {
+                scaleFactor /= height / usedWidth;
             }
 
-            if (manager.width !== width * scaleFactor || manager.height !== height * scaleFactor) {
-                //Calculate the new size
-                Constants.GAME_WIDTH = Math.ceil(width * scaleFactor);
-                Constants.GAME_HEIGHT = Math.ceil(height * scaleFactor);
+            Constants.CALCULATED_WIDTH = Math.ceil(width * scaleFactor);
+            Constants.CALCULATED_HEIGHT = Math.ceil(height * scaleFactor);
 
-                //Set the new size and scaling factor
-                manager.setGameSize(Constants.GAME_WIDTH, Constants.GAME_HEIGHT);
-                manager.setUserScale(1 / scaleFactor, 1 / scaleFactor);
+            manager.setGameSize(Constants.CALCULATED_WIDTH, Constants.CALCULATED_HEIGHT);
+            manager.setUserScale(1 / scaleFactor, 1 / scaleFactor);
+        }
+
+        /**
+         * Calculates the right scaling based on the inner size of the window.
+         * Only used for mobile devices, because on desktop the default scale is always 1.
+         * @returns {number}
+         */
+        private static setScaling(game: Phaser.Game): void {
+            //Check if the device is in portrait mode, and if so, override the width with the innerHeight.
+            //We want to determine the scaling based on the the biggest side.
+            let width: number = window.innerWidth * game.device.pixelRatio;
+            if (width < window.innerHeight) {
+                width = window.innerHeight * game.device.pixelRatio;
+            }
+
+            if (width < 650) {
+                Constants.GAME_SCALE = 0.5;
+            } else if (width > 1050) {
+                Constants.GAME_SCALE = 1;
+            } else {
+                Constants.GAME_SCALE = 0.75;
             }
         }
 
@@ -224,32 +237,6 @@ module BoilerPlate {
 
             document.getElementById('orientation').style.display = 'block';
             document.getElementById('content').style.display = 'none';
-        }
-
-        /**
-         * Calculates the right scaling based on the inner size of the window.
-         * Only used for mobile devices, because on desktop the default scale is always 1.
-         * @returns {number}
-         */
-        private getScaling(): number {
-            let width: number = window.innerWidth;
-
-            //Check if the device is in portrait mode, and if so, override the width with the innerHeight.
-            //We want to determine the scaling based on the the biggest side.
-            if (width < window.innerHeight) {
-                width = window.innerHeight;
-            }
-
-            let scale: number = 1;
-            if (width < 650) {
-                scale = 0.5;
-            } else if (width > 1050) {
-                scale = 1;
-            } else {
-                scale = 0.75;
-            }
-
-            return scale;
         }
     }
 }

@@ -1,8 +1,16 @@
 {"frames": [
 
 {
+	"filename": "bg_preloader.png",
+	"frame": {"x":1,"y":1,"w":35,"h":555},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":35,"h":555},
+	"sourceSize": {"w":35,"h":555}
+},
+{
 	"filename": "btn_blue.png",
-	"frame": {"x":771,"y":1,"w":225,"h":81},
+	"frame": {"x":38,"y":431,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -10,7 +18,7 @@
 },
 {
 	"filename": "btn_blue_onpress.png",
-	"frame": {"x":771,"y":84,"w":225,"h":81},
+	"frame": {"x":265,"y":215,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -18,7 +26,7 @@
 },
 {
 	"filename": "btn_orange.png",
-	"frame": {"x":998,"y":1,"w":225,"h":81},
+	"frame": {"x":252,"y":298,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -26,7 +34,7 @@
 },
 {
 	"filename": "btn_orange_onpress.png",
-	"frame": {"x":998,"y":84,"w":225,"h":81},
+	"frame": {"x":265,"y":381,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -34,7 +42,7 @@
 },
 {
 	"filename": "OG_logo_fullcolor.png",
-	"frame": {"x":1,"y":1,"w":554,"h":212},
+	"frame": {"x":38,"y":1,"w":554,"h":212},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":23,"y":22,"w":554,"h":212},
@@ -42,7 +50,7 @@
 },
 {
 	"filename": "rotate_portrait.png",
-	"frame": {"x":557,"y":1,"w":212,"h":214},
+	"frame": {"x":38,"y":215,"w":212,"h":214},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":212,"h":214},
@@ -53,8 +61,8 @@
 	"version": "1.0",
 	"image": "interface.png",
 	"format": "RGBA8888",
-	"size": {"w":1224,"h":216},
+	"size": {"w":593,"h":557},
 	"scale": "0.75",
-	"smartupdate": "$TexturePacker:SmartUpdate:e5d4f7241c6dec396e6acacf8a864674:32a7640f2c44729a7c8c576f45ba6c0c:8141c0d8370228a8661c55b8bcf20981$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1c191be032feefa6ffe8026895240179:93d5c6b66ff25ecacaafe018bd7ed4f3:537f0cea0960b73bc0729089dd5becb4$"
 }
 }

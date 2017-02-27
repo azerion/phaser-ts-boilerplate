@@ -9,12 +9,12 @@ module Fabrique {
             google: Fabrique.Plugins.GoogleAnalytics,
             game: Fabrique.Plugins.GameAnalytics,
         };
-        add: Fabrique.Plugins.SpineObjectFactory;
-        ads: Fabrique.Plugins.AdManager;
+        add: PhaserSpine.SpineObjectFactory;
+        ads: PhaserAds.AdManager;
 
-        load: Fabrique.Plugins.CacheBustedLoader
-            & Fabrique.Plugins.SpineLoader;
+        load: PhaserCachebuster.ICacheBustedLoader
+            & PhaserSpine.SpineLoader;
 
-        storage: Fabrique.Plugins.SuperStorage;
+        storage: PhaserSuperStorage.StoragePlugin;
     }
 }

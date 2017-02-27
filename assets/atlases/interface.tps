@@ -4,16 +4,16 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.2.3</string>
+        <string>4.3.1</string>
         <key>fileName</key>
-        <string>D:/dev/boilerplate/assets/atlases/x1/interface.tps</string>
+        <string>/home/zale/dev/fabrique/boilerplate/assets/atlases/interface.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
                 <key>scale</key>
                 <double>1</double>
                 <key>extension</key>
-                <string></string>
+                <string>/x1/</string>
                 <key>spriteFilter</key>
                 <string></string>
                 <key>acceptFractionalValues</key>
@@ -21,9 +21,43 @@
                 <key>maxTextureSize</key>
                 <QSize>
                     <key>width</key>
-                    <int>-1</int>
+                    <int>2048</int>
                     <key>height</key>
-                    <int>-1</int>
+                    <int>2048</int>
+                </QSize>
+            </struct>
+            <struct type="AutoSDSettings">
+                <key>scale</key>
+                <double>0.5</double>
+                <key>extension</key>
+                <string>/x0.5/</string>
+                <key>spriteFilter</key>
+                <string></string>
+                <key>acceptFractionalValues</key>
+                <false/>
+                <key>maxTextureSize</key>
+                <QSize>
+                    <key>width</key>
+                    <int>2048</int>
+                    <key>height</key>
+                    <int>2048</int>
+                </QSize>
+            </struct>
+            <struct type="AutoSDSettings">
+                <key>scale</key>
+                <double>0.75</double>
+                <key>extension</key>
+                <string>/x0.75/</string>
+                <key>spriteFilter</key>
+                <string></string>
+                <key>acceptFractionalValues</key>
+                <false/>
+                <key>maxTextureSize</key>
+                <QSize>
+                    <key>width</key>
+                    <int>2048</int>
+                    <key>height</key>
+                    <int>2048</int>
                 </QSize>
             </struct>
         </array>
@@ -47,6 +81,8 @@
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
         <enum type="SettingsBase::Etc1CompressionQuality">ETC1_QUALITY_LOW_PERCEPTUAL</enum>
+        <key>etc2CompressionQuality</key>
+        <enum type="SettingsBase::Etc2CompressionQuality">ETC2_QUALITY_LOW_PERCEPTUAL</enum>
         <key>dxtCompressionMode</key>
         <enum type="SettingsBase::DxtCompressionMode">DXT_PERCEPTUAL</enum>
         <key>jxrColorFormat</key>
@@ -78,6 +114,8 @@
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
+        <string></string>
+        <key>atfFormats</key>
         <string></string>
         <key>textureFormat</key>
         <enum type="SettingsBase::TextureFormat">png</enum>
@@ -119,6 +157,11 @@
                 <key>order</key>
                 <enum type="AlgorithmBasicSettings::Order">Ascending</enum>
             </struct>
+            <key>polygon</key>
+            <struct type="AlgorithmPolygonSettings">
+                <key>alignToGrid</key>
+                <uint>1</uint>
+            </struct>
         </struct>
         <key>andEngine</key>
         <struct type="AndEngine">
@@ -141,7 +184,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>interface.json</filename>
+                <filename>../atlases{v}interface.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -188,25 +231,65 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../source_assets/OG_logo_fullcolor.png</key>
-            <key type="filename">../../source_assets/btn_blue.png</key>
-            <key type="filename">../../source_assets/btn_blue_onpress.png</key>
-            <key type="filename">../../source_assets/btn_orange.png</key>
-            <key type="filename">../../source_assets/btn_orange_onpress.png</key>
-            <key type="filename">../../source_assets/rotate_portrait.png</key>
+            <key type="filename">../source_assets/interface/OG_logo_fullcolor.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>200,88,400,175</rect>
+                <key>scale9Paddings</key>
+                <rect>200,88,400,175</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../source_assets/interface/bg_preloader.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,185,24,370</rect>
+                <key>scale9Paddings</key>
+                <rect>12,185,24,370</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../source_assets/interface/btn_blue.png</key>
+            <key type="filename">../source_assets/interface/btn_blue_onpress.png</key>
+            <key type="filename">../source_assets/interface/btn_orange.png</key>
+            <key type="filename">../source_assets/interface/btn_orange_onpress.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>75,27,150,54</rect>
+                <key>scale9Paddings</key>
+                <rect>75,27,150,54</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">../source_assets/interface/rotate_portrait.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>71,72,141,145</rect>
+                <key>scale9Paddings</key>
+                <rect>71,72,141,145</rect>
+                <key>scale9FromFile</key>
+                <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../source_assets/btn_orange.png</filename>
-            <filename>../../source_assets/btn_orange_onpress.png</filename>
-            <filename>../../source_assets/OG_logo_fullcolor.png</filename>
-            <filename>../../source_assets/rotate_portrait.png</filename>
-            <filename>../../source_assets/btn_blue.png</filename>
-            <filename>../../source_assets/btn_blue_onpress.png</filename>
+            <filename>../source_assets/interface</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
@@ -228,5 +311,7 @@
         <string></string>
         <key>normalMapSheetFileName</key>
         <filename></filename>
+        <key>exporterProperties</key>
+        <map type="ExporterProperties"/>
     </struct>
 </data>
