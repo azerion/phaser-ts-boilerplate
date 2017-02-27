@@ -7,8 +7,8 @@ module BoilerPlate {
             //We use Phaser's config object to create the game, since this is the only way to disable debugging
             super({
                 enableDebug: false,
-                width: Constants.GAME_ORIGINAL_WIDTH,
-                height: Constants.GAME_ORIGINAL_HEIGHT,
+                width: Constants.GAME_WIDTH,
+                height: Constants.GAME_HEIGHT,
                 renderer: Phaser.AUTO,
                 parent: 'content',
                 transparent: false,
@@ -43,10 +43,10 @@ module BoilerPlate {
                 this.plugins.add(Fabrique.Plugins.GameEvents);
                 this.plugins.add(Fabrique.Plugins.GoogleAnalytics);
                 this.plugins.add(Fabrique.Plugins.GameAnalytics);
-                this.plugins.add(Fabrique.Plugins.AdManager);
-                this.plugins.add(<any>Fabrique.Plugins.SuperStorage);
-                this.plugins.add(Fabrique.Plugins.CacheBuster);
-                this.plugins.add(Fabrique.Plugins.Spine);
+                this.plugins.add(PhaserAds.AdManager);
+                this.plugins.add(<any>PhaserSuperStorage.StoragePlugin);
+                this.plugins.add(PhaserCachebuster.CacheBuster);
+                this.plugins.add(PhaserSpine.SpinePlugin);
             });
         }
 

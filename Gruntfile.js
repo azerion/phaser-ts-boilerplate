@@ -1,3 +1,5 @@
+var crypto = require('crypto');
+
 module.exports = function (grunt) {
     'use strict';
 
@@ -9,7 +11,7 @@ module.exports = function (grunt) {
             server: {
                 options: {
                     port: 8080,
-                    base: ['_build/dev', 'node_modules', '../../tools/phaser/dist']
+                    base: ['_build/dev', 'node_modules']
                 }
             }
         },
@@ -34,20 +36,18 @@ module.exports = function (grunt) {
         copy: {
             dev: {
                 files: [
-                    {expand: true, cwd: 'node_modules/funny-games-splash/build/assets', dest: '_build/dev/assets', src: ['**/*']},
                     {expand: true, cwd: 'assets', dest: '_build/dev/assets', src: ['**/*']},
                     {expand: true, cwd: 'templates', dest: '_build/dev', src: ['index.html']}
                 ]
             },
             dist: {
                 files: [
-                    {expand: true, cwd: 'node_modules/funny-games-splash/build/assets', dest: '_build/dist/assets', src: ['**/*']},
+                    {expand: true, cwd: 'assets/images', dest: '_build/dist/assets/images', src: ['**/*']},
+                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*', '!**/*.wav']},
                     {expand: true, cwd: 'assets/css', dest: '_build/dist/assets/css', src: ['**/*']},
                     {expand: true, cwd: 'assets/fonts', dest: '_build/dist/assets/fonts', src: ['**/*']},
-                    {expand: true, cwd: 'assets/images', dest: '_build/dist/assets/images', src: ['**/*']},
-                    {expand: true, cwd: 'assets/atlas', dest: '_build/dist/assets/atlas', src: ['**/*', '!**/*.tps']},
                     {expand: true, cwd: 'assets/spine', dest: '_build/dist/assets/spine', src: ['**/*']},
-                    {expand: true, cwd: 'assets/sound', dest: '_build/dist/assets/sound', src: ['**/*', '!**/*.wav']}
+                    {expand: true, cwd: 'assets/atlases', dest: '_build/dist/assets/atlases', src: ['**/*']}
                 ]
             }
         },
@@ -55,7 +55,8 @@ module.exports = function (grunt) {
             options: {
                 livereload: true
             },
-            typescript: {
+
+            ts: {
                 files: ['ts/**/*.ts', 'vendor/**/*.d.ts'],
                 tasks: ['ts:dev']
             },
@@ -81,16 +82,15 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     '_build/dist/<%= game.name %>.min.js': [
+                        'node_modules/es6-promise-polyfill/promise.min.js',
                         'node_modules/phaser/build/phaser.min.js',
-                        'node_modules/ga-javascript-sdk/dist/GaJavaScriptSdk.js',
-                        'node_modules/phaser-spine/build/phaser-spine.min.js',
-                        'node_modules/phaser-cachebuster/build/phaser-cachebuster.min.js',
-                        'node_modules/phaser-input/build/phaser-input.min.js',
+                        'node_modules/@orange-games/phaser-spine/build/phaser-spine.min.js',
+                        'node_modules/@orange-games/phaser-ads/build/phaser-ads.min.js',
+                        'node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.min.js',
+                        'node_modules/@orange-games/phaser-super-storage/build/phaser-super-storage.min.js',
                         'node_modules/webfontloader/webfontloader.js',
-                        'node_modules/quartz-storage/bin/quartz-storage.js',
                         'node_modules/orange-games-splash/build/orange-games-splash.min.js',
                         '_build/dist/<%= game.name %>-<%= game.version %>.js'
-
                     ]
                 }
             }
