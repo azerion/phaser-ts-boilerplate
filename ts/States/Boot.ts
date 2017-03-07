@@ -49,6 +49,14 @@ module BoilerPlate {
                 this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                 this.scale.pageAlignHorizontally = true;
                 this.game.scale.windowConstraints.bottom = 'visual';
+
+                this.stage.disableVisibilityChange = true;
+                this.game.onBlur.add((data: any) => {
+                    this.game.sound.mute = true;
+                });
+                this.game.onFocus.add((data: any) => {
+                    this.game.sound.mute = false;
+                });
             } else {
                 this.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
                 this.scale.fullScreenScaleMode = Phaser.ScaleManager.USER_SCALE;
@@ -75,6 +83,25 @@ module BoilerPlate {
                     this
                 );
                 Boot.mobileResizeCallback(this.game.scale);
+
+                if (Fabrique.Utils.isOnDevice(this.game)) {
+                    this.stage.disableVisibilityChange = true;
+                    //game pause/focus events only go for the game canvas, we need to check if the entire document is paused due to ads
+                    document.addEventListener('pause', () => {
+                        this.game.sound.mute = true;
+                    });
+                    document.addEventListener('resume', () => {
+                        this.game.sound.mute = false;
+                    });
+                } else {
+                    this.stage.disableVisibilityChange = false;
+                    this.game.onPause.add((data: any) => {
+                        this.game.sound.mute = true;
+                    });
+                    this.game.onResume.add((data: any) => {
+                        this.game.sound.mute = false;
+                    });
+                }
             }
         }
 
@@ -185,8 +212,6 @@ module BoilerPlate {
                     });
                 },
                 preloadHandler: (): void => {
-                    //We can disable visability change here, because the click listener was added to catch the faulty websites
-                    this.game.stage.disableVisibilityChange = false;
                     this.game.sound.muteOnPause = true;
 
                     //Load the assets based on the game scale.
