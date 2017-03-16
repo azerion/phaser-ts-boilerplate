@@ -50,7 +50,6 @@ module BoilerPlate {
                 this.scale.pageAlignHorizontally = true;
                 this.game.scale.windowConstraints.bottom = 'visual';
 
-                this.stage.disableVisibilityChange = true;
                 this.game.onBlur.add((data: any) => {
                     this.game.sound.mute = true;
                 });
@@ -85,7 +84,6 @@ module BoilerPlate {
                 Boot.mobileResizeCallback(this.game.scale);
 
                 if (Fabrique.Utils.isOnDevice(this.game)) {
-                    this.stage.disableVisibilityChange = true;
                     //game pause/focus events only go for the game canvas, we need to check if the entire document is paused due to ads
                     document.addEventListener('pause', () => {
                         this.game.sound.mute = true;
