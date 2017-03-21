@@ -140,10 +140,8 @@ module BoilerPlate {
         private static setScaling(game: Phaser.Game): void {
             //Check if the device is in portrait mode, and if so, override the width with the innerHeight.
             //We want to determine the scaling based on the the biggest side.
-            let width: number = window.innerWidth * game.device.pixelRatio;
-            if (width < window.innerHeight) {
-                width = window.innerHeight * game.device.pixelRatio;
-            }
+            let width: number = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
+            width *= game.device.pixelRatio;
 
             if (width < 650) {
                 Constants.GAME_SCALE = 0.5;
