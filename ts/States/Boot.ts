@@ -168,9 +168,9 @@ module BoilerPlate {
 
             Sounds.preloadList.forEach((assetName: string) => {
                 if (this.game.device.iOS) {
-                    this.game.load.audio(assetName, ['assets/sound/' + assetName + '.m4a']);
+                    this.game.load.audio(assetName, ['assets/sounds/' + assetName + '.m4a']);
                 } else {
-                    this.game.load.audio(assetName, ['assets/sound/' + assetName + '.ogg', 'assets/sound/' + assetName + '.mp3']);
+                    this.game.load.audio(assetName, ['assets/sounds/' + assetName + '.ogg', 'assets/sounds/' + assetName + '.mp3']);
                 }
             });
         }
