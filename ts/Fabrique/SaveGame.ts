@@ -22,9 +22,9 @@ module BoilerPlate {
                 this.callback = callback;
                 this.callbackContext = callbackContext;
 
+                //Check if data was saved before for this game
                 this.game.storage.getItem('sg').then((storedItem: any) => {
-                    if (storedItem === null || storedItem === undefined) {
-
+                    if (storedItem === null || storedItem === undefined) {   //No save data found. Make the first save.
                         //Put music and sound effects on the first time
                         this.sfxOn = true;
                         this.musicOn = true;

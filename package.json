@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/es6-promise": "0.0.32",
     "@types/webfontloader": "^1.6.27",
-    "grunt": "1.0.x",
+    "grunt": "0.4.x",
     "grunt-contrib-clean": "0.6.0",
     "grunt-contrib-connect": "0.10.0",
     "grunt-contrib-copy": "0.7.0",

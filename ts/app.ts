@@ -47,6 +47,8 @@ module BoilerPlate {
                 this.plugins.add(<any>PhaserSuperStorage.StoragePlugin);
                 this.plugins.add(PhaserCachebuster.CacheBuster);
                 this.plugins.add(PhaserSpine.SpinePlugin);
+
+                (<any>this).storage.forcePromises = true;
             });
         }
 

@@ -16,6 +16,9 @@ module BoilerPlate {
 
         public init(): void {
             this.game.world.removeAll();
+
+            Save.Game.getInstance(this.game);
+            SoundManager.getInstance(this.game);
         }
 
         public create(): void {
@@ -46,6 +49,8 @@ module BoilerPlate {
          * Start the gameplay state
          */
         private startGame(): void {
+            SoundManager.getInstance().play(Sounds.Click);
+
             this.game.state.add(Gameplay.Name, Gameplay, true);
         }
 
