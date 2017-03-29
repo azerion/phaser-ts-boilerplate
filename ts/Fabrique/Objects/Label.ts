@@ -9,8 +9,6 @@ module BoilerPlate {
             this.maxWidth = maxWidth;
             this.maxHeight = maxHeight;
 
-            this.makeFontFit();
-
             this.game.add.existing(this);
         }
 
@@ -27,6 +25,11 @@ module BoilerPlate {
             }
 
             return this;
+        }
+
+        public setMaxSize(maxWidth: number, maxHeight: number): void {
+            this.maxWidth = maxWidth;
+            this.maxHeight = maxHeight;
         }
 
         /**

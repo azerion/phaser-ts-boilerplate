@@ -14,7 +14,7 @@ module BoilerPlate {
             this.maxWidth = maxWidth ? maxWidth : this.width;
             this.maxHeight = maxHeight ? maxHeight : this.height;
 
-            this.label = new Label(this.game, 0, 2 * Constants.GAME_SCALE, text, textStyle, this.maxWidth - 24 * Constants.GAME_SCALE, this.maxHeight);
+            this.label = new Label(this.game, 0, 2 * Constants.GAME_SCALE, text, textStyle, this.maxWidth, this.maxHeight);
             this.label.anchor.set(0.5);
             this.addChild(this.label);
 
@@ -29,7 +29,7 @@ module BoilerPlate {
             //Create a texture with shadow and use it as the texture of the button.
             let graphics: Phaser.Graphics = this.game.make.graphics(0, 0);
             graphics.beginFill(0x000000, 0.3)
-                .drawRoundedRect(5, 5 * Constants.GAME_SCALE, this.maxWidth - 10, this.maxHeight, 15 * Constants.GAME_SCALE)
+                .drawRoundedRect(5, 5 * Constants.GAME_SCALE, this.maxWidth - 10 * Constants.GAME_SCALE, this.maxHeight, 15 * Constants.GAME_SCALE)
                 .beginFill(bgColor)
                 .drawRoundedRect(0, 0, this.maxWidth, this.maxHeight, 15 * Constants.GAME_SCALE)
                 .lineStyle(3, 0xffffff)
@@ -49,6 +49,8 @@ module BoilerPlate {
 
         public updateScaling(scale: number): void {
             this.scale.set(scale);
+
+            this.label.setMaxSize(this.width * 0.90, this.height * 0.98);
             this.label.setText(this.label.text);
         }
 

@@ -36,7 +36,7 @@ module BoilerPlate {
             this.testImgBtn.setFrames('btn_orange.png', 'btn_orange.png', 'btn_orange_onpress.png', 'btn_orange.png');
 
             //This button is made by generating the texture with graphics
-            this.testGrBtn = new LabeledButton(this.game, 0, 0, 'PLAY', textStyle, this.startGame, this, 300 * Constants.GAME_SCALE, 100 * Constants.GAME_SCALE);
+            this.testGrBtn = new LabeledButton(this.game, 0, 0, 'PLAY', textStyle, this.startGame, this, 300, 100);
             this.testGrBtn.createTexture(0xf98f25);
 
             this.resize();
@@ -75,11 +75,11 @@ module BoilerPlate {
             this.logo.alignIn(this.world.bounds, Phaser.CENTER, 0, -60 * Constants.GAME_SCALE);
 
             //Do the same for the the buttons
-            this.testImgBtn.scale.set(assetsScaling);
+            this.testImgBtn.updateScaling(assetsScaling);
             this.testImgBtn.x = this.logo.x / 2;
             this.testImgBtn.y = this.logo.y + this.logo.height * 0.65;
 
-            this.testGrBtn.scale.set(assetsScaling);
+            this.testGrBtn.updateScaling(assetsScaling);
             this.testGrBtn.x = this.logo.x + this.logo.x / 2;
             this.testGrBtn.y = this.testImgBtn.y;
         }
