@@ -62,7 +62,6 @@ module BoilerPlate {
             //Here we load all the states, but they shouldn't start automatically
             this.state.add(Boot.Name, Boot, false);
             this.state.add(Fabrique.SplashScreen.Preloader.Name, Fabrique.SplashScreen.Preloader, false);
-            this.state.add(Preloader.Name, Preloader, false);
             this.state.add(Menu.Name, Menu, false);
             this.state.add(Gameplay.Name, Gameplay, false);
 

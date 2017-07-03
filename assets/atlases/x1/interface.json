@@ -1,15 +1,23 @@
 {"frames": [
 
 {
-	"filename": "bg_preloader.png",
-	"frame": {"x":739,"y":1,"w":47,"h":740},
+	"filename": "bg_gameplay",
+	"frame": {"x":739,"y":1,"w":5,"h":720},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":740},
-	"sourceSize": {"w":47,"h":740}
+	"spriteSourceSize": {"x":0,"y":0,"w":5,"h":720},
+	"sourceSize": {"w":5,"h":720}
 },
 {
-	"filename": "btn_blue.png",
+	"filename": "bg_menu",
+	"frame": {"x":746,"y":1,"w":5,"h":720},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":5,"h":720},
+	"sourceSize": {"w":5,"h":720}
+},
+{
+	"filename": "btn_blue",
 	"frame": {"x":1,"y":283,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +25,7 @@
 	"sourceSize": {"w":300,"h":108}
 },
 {
-	"filename": "btn_blue_onpress.png",
+	"filename": "btn_blue_onpress",
 	"frame": {"x":1,"y":393,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +33,7 @@
 	"sourceSize": {"w":300,"h":108}
 },
 {
-	"filename": "btn_orange.png",
+	"filename": "btn_orange",
 	"frame": {"x":1,"y":503,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
@@ -33,7 +41,7 @@
 	"sourceSize": {"w":300,"h":108}
 },
 {
-	"filename": "btn_orange_onpress.png",
+	"filename": "btn_orange_onpress",
 	"frame": {"x":1,"y":613,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
@@ -41,7 +49,7 @@
 	"sourceSize": {"w":300,"h":108}
 },
 {
-	"filename": "OG_logo_fullcolor.png",
+	"filename": "OG_logo_fullcolor",
 	"frame": {"x":1,"y":1,"w":736,"h":280},
 	"rotated": false,
 	"trimmed": true,
@@ -53,8 +61,8 @@
 	"version": "1.0",
 	"image": "interface.png",
 	"format": "RGBA8888",
-	"size": {"w":787,"h":742},
+	"size": {"w":752,"h":722},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:36893bc175558cf1fcdf67c8cb87edc1:b80db2c6d30ef5e90143f21764885c84:537f0cea0960b73bc0729089dd5becb4$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a7dc78e72cb7e394429827332f01a867:f55ede634f688082c42935fdafa32d76:537f0cea0960b73bc0729089dd5becb4$"
 }
 }

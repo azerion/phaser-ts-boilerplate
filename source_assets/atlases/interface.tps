@@ -194,7 +194,7 @@
         <key>autoAliasEnabled</key>
         <true/>
         <key>trimSpriteNames</key>
-        <false/>
+        <true/>
         <key>prependSmartFolderName</key>
         <false/>
         <key>globalSpriteSettings</key>
@@ -223,7 +223,8 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">interface/OG_logo_fullcolor.png</key>
-            <key type="filename">interface/bg_preloader.png</key>
+            <key type="filename">interface/bg_gameplay.png</key>
+            <key type="filename">interface/bg_menu.png</key>
             <key type="filename">interface/btn_blue.png</key>
             <key type="filename">interface/btn_blue_onpress.png</key>
             <key type="filename">interface/btn_orange.png</key>

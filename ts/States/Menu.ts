@@ -27,16 +27,16 @@ module BoilerPlate {
             //Send a screen view to Google to track different states
             // this.game.analytics.google.sendScreenView(this.name);
 
-            this.background = this.game.add.image(0, 0, Images.BgMenu);
+            this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_menu');
 
-            this.logo = this.game.add.image(0, 0, Atlases.Interface, 'OG_logo_fullcolor.png');
+            this.logo = this.game.add.image(0, 0, Atlases.Interface, 'OG_logo_fullcolor');
             this.logo.anchor.set(0.5);
 
             let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
 
             //This button uses images for textures, just like normal Phaser.Buttons
             this.testImgBtn = new LabeledButton(this.game, 0, 0, 'LONG TEXT FITS IN BUTTON', textStyle, this.startGame, this);
-            this.testImgBtn.setFrames('btn_orange.png', 'btn_orange.png', 'btn_orange_onpress.png', 'btn_orange.png');
+            this.testImgBtn.setFrames('btn_orange', 'btn_orange', 'btn_orange_onpress', 'btn_orange');
 
             //This button is made by generating the texture with graphics
             this.testGrBtn = new LabeledButton(this.game, 0, 0, 'PLAY', textStyle, this.startGame, this, 300, 100);
