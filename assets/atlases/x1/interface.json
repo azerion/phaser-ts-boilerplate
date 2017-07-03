@@ -1,68 +1,68 @@
 {"frames": [
 
 {
-	"filename": "bg_preloader.png",
-	"frame": {"x":739,"y":1,"w":47,"h":740},
+	"filename": "bg_gameplay",
+	"frame": {"x":739,"y":1,"w":5,"h":720},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":740},
-	"sourceSize": {"w":47,"h":740}
+	"spriteSourceSize": {"x":0,"y":0,"w":5,"h":720},
+	"sourceSize": {"w":5,"h":720}
 },
 {
-	"filename": "btn_blue.png",
-	"frame": {"x":285,"y":1,"w":300,"h":108},
+	"filename": "bg_menu",
+	"frame": {"x":746,"y":1,"w":5,"h":720},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
-	"sourceSize": {"w":300,"h":108}
+	"spriteSourceSize": {"x":0,"y":0,"w":5,"h":720},
+	"sourceSize": {"w":5,"h":720}
 },
 {
-	"filename": "btn_blue_onpress.png",
-	"frame": {"x":285,"y":111,"w":300,"h":108},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
-	"sourceSize": {"w":300,"h":108}
-},
-{
-	"filename": "btn_orange.png",
-	"frame": {"x":1,"y":569,"w":300,"h":108},
+	"filename": "btn_blue",
+	"frame": {"x":1,"y":283,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
 	"sourceSize": {"w":300,"h":108}
 },
 {
-	"filename": "btn_orange_onpress.png",
-	"frame": {"x":303,"y":569,"w":300,"h":108},
+	"filename": "btn_blue_onpress",
+	"frame": {"x":1,"y":393,"w":300,"h":108},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
 	"sourceSize": {"w":300,"h":108}
 },
 {
-	"filename": "OG_logo_fullcolor.png",
-	"frame": {"x":1,"y":287,"w":736,"h":280},
+	"filename": "btn_orange",
+	"frame": {"x":1,"y":503,"w":300,"h":108},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
+	"sourceSize": {"w":300,"h":108}
+},
+{
+	"filename": "btn_orange_onpress",
+	"frame": {"x":1,"y":613,"w":300,"h":108},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":300,"h":108},
+	"sourceSize": {"w":300,"h":108}
+},
+{
+	"filename": "OG_logo_fullcolor",
+	"frame": {"x":1,"y":1,"w":736,"h":280},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":32,"y":30,"w":736,"h":280},
 	"sourceSize": {"w":800,"h":350}
-},
-{
-	"filename": "rotate_portrait.png",
-	"frame": {"x":1,"y":1,"w":282,"h":284},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":2,"w":282,"h":284},
-	"sourceSize": {"w":282,"h":289}
 }],
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "interface.png",
 	"format": "RGBA8888",
-	"size": {"w":787,"h":742},
+	"size": {"w":752,"h":722},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1c191be032feefa6ffe8026895240179:93d5c6b66ff25ecacaafe018bd7ed4f3:537f0cea0960b73bc0729089dd5becb4$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a7dc78e72cb7e394429827332f01a867:f55ede634f688082c42935fdafa32d76:537f0cea0960b73bc0729089dd5becb4$"
 }
 }

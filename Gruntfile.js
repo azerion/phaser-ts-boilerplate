@@ -126,12 +126,41 @@ module.exports = function (grunt) {
         }
     });
 
+    function getPkgInfo(){
+        console.log('running get pkg info');
+
+        var pkgObj = grunt.config.get('game.dependencies');
+        var ogMarker = '@orange-games/';
+        var newPkgList = [];
+        for(var key in pkgObj){
+            if(pkgObj.hasOwnProperty(key)){
+                if(key.indexOf(ogMarker) !== -1){
+                    var index = key.indexOf(ogMarker) + ogMarker.length;
+                    var newKey = key.slice(index, key.length);
+                    var newValue = null;
+                    if (pkgObj[key].indexOf('git') !== -1){
+                        newValue = pkgObj[key].slice(-5, -2);
+                    } else {
+                        newValue = pkgObj[key].slice(1, 4);
+                    }
+                    newPkgList.push(createURL(newKey, newValue));
+                }
+            }
+        }
+        return 'https://cdn.jsdelivr.net/combine/' + newPkgList.join(',');
+    }
+
     var buildNumber = grunt.option("buildNumber");
     grunt.registerTask('writeVersion', 'Creates a version file specifying the game version for cache busting', function() {
         if (undefined === buildNumber) {
             grunt.fail.warn('Cannot run without build number parameter');
         }
-        grunt.file.write('_build/dist/version.js', 'version="' + buildNumber + '";'  );
+
+        var pkgList = getPkgInfo();
+        var pkgStr = 'libs=["' + pkgList + '"];';
+        var versionStr = 'version="' + buildNumber + '";';
+        grunt.file.write('_build/dist/version.js', versionStr + '\n' +  pkgStr );
+
     });
 
     //production build, we deploy this

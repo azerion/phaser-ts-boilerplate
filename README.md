@@ -1,21 +1,15 @@
-HTML5 Game Boilerplate
-=======================
+Orange Games Boilerplate
+========================
 
-This is a boilerplate for HTML5 games, it can be used to develop new games or prototypes. Simply make a copy of this in gitlab to start working!
+Yet another Phaser Boilerplate, but instead of showing a working toolchain, this is all about fixing bugs, working around browser issues, analytics and advertising. This is the core of every HTML5 Orange Game :)
+
+Due to this boilerplate having no focus on the toolchain, we also asume in this readme that you have some basic knowledge about [grunt](https://gruntjs.com/), [npm](https://www.npmjs.com/) and [TypeScript](https://www.typescriptlang.org/)
 
 Getting Started
 ---------------
 
-First you want to create a new Game repo in gitlab. This should be done in the team-toast group/namespace found [here](https://gitlab.ds.orangegames.com/team-toast/).
-
-If you're too lazy to figure out how, you can go [here](https://gitlab.ds.orangegames.com/projects/new?namespace_id=15#).
-
-Give the project the name you want, and now tell Gitlab you'd like to Import a project from *any repo by url*.
-
-You'll want to give the repo URL of this boilerplate repo, which is:
-* git@gitlab.ds.orangegames.com:quartz/boilerplate.git
-
-And you're done! At least for the gitlab part :P
+So the first thing you'd want to is too clone this game repo and start changing some ID's around in the Constants.ts file.
+We have some base ID's setup for [google analytics](https://accounts.google.com), [game analytics](http://www.gameanalytics.com/) and [GameDistribution ads](http://gamedistribution.com/)
 
 ### Development
 During development itself you only need to run 1 command, namely:
@@ -29,7 +23,7 @@ This will make sure that every time a Typescript and/or Asset file has changed, 
 A webserver is also started on your local machine on port 8080. You can point your browser to http://localhost:8080, check out your game, and grunt will refresh your browser every time a change has been made.
 
 ### Production
-For production builds there are two commands, one that compiles and minifies all the code and assets, and one for writing a version number. This is used for cachebusting.
+For production builds there are two commands, one that compiles and minifies all the code and assets, and one for writing a version number.
 ```
 PC@OG:~/Projects/GameName$ grunt dist
 Running "clean:dist" (clean) task
@@ -52,6 +46,13 @@ Running "htmlbuild:dist" (htmlbuild) task
 >> File _build/dist/index.html created !
 
 Done, without errors.
+```
+
+So here we're gonna create the version of the current build, first and foremost it will help with cachebusting when uploading a new game, but it will also write some external packages to an array that allows us loading them from a cdn.
+Currently it will only add @orange-games namespaced packages to the array, but you can change it in the gruntFile to include any pacakge you want.
+
+For the moment we use jsdelivr to load the packages.
+```
 PC@OG:~/Projects/GameName$ grunt writeVersion --buildNumber=test
 Running "writeVersion" task
 
@@ -61,9 +62,18 @@ Done, without errors.
 
 ## Development
 
-
 It's time to start developing!
 Keep the following guidelines in mind when developing a game.
+
+Configuration
+=============
+
+So in order to set up the correct analytics and ads you need to make some accounts at:
+- [google analytics](https://support.google.com/analytics/answer/1008015?hl=en)
+- [game analytics](http://www.gameanalytics.com/docs/faq)
+- [GameDistribution ads](http://gamedistribution.com/api/)
+
+Then get the id's you're given and you can put them in the Constants.
 
 
 Code
@@ -84,9 +94,9 @@ Any class that extends a Phaser.State should be located in the ts/States folder,
 ```javascript
 //Here we load all the states, but they shouldn't start automaticly
 this.state.add(Boot.Name, Boot, false);
-this.state.add(Fabrique.PreSplash.Name, Fabrique.PreSplash, false);
-this.state.add(Fabrique.FunnyGamesSplash.Name, Fabrique.FunnyGamesSplash, false);
-this.state.add(GamePlay.Name, GamePlay, false);
+this.state.add(Fabrique.SplashScreen.Preloader.Name, Fabrique.SplashScreen.Preloader, false);
+this.state.add(Menu.Name, Menu, false);
+this.state.add(Gameplay.Name, Gameplay, false);
 ```
 All these files are placed here.
 
@@ -96,7 +106,7 @@ All these files are placed here.
 
 ### Data
 
-Translations, configs, asset names etc. go into
+Configs, asset names etc. go into
 ```
 ./ts/Data
 ```
@@ -111,10 +121,8 @@ In those cases, we create separate classes for them that extend any of the defau
 
 ### Fabrique
 
-The ts/Fabrique contains a set of files, that will mostly be re-used utils for other games like RandomInRange function or a FadeToColor state, and stuff that is needed in order for the TypeScript compiler to find all the references.
-Like Fabrique.State or Fabrique.Game
-
-
+The ts/Fabrique contains a set of files, that will mostly be re-used utils for other games like a FadeToColor state, and stuff that is needed in order for the TypeScript compiler to find all the references.
+Like Fabrique.IState or Fabrique.IGame
 
 Assets
 ======
@@ -212,17 +220,35 @@ Our atlases are generated with TexturePacker, and we store the .tps config file 
 
 Other than that atlases are treated and loaded the same as images and audio.
 
+Notable games
+=============
 
+We have over 100 games made with this boilerplate, here are some of our best titles:
+
+[![Game](http://publisher.orangegames.com/images/icons/twisted-city.png)][game1]
+[![Game](http://publisher.orangegames.com/images/icons/olli-ball.png)][game2]
+[![Game](http://publisher.orangegames.com/images/icons/bubble-burst.png)][game3]
+[![Game](http://publisher.orangegames.com/images/icons/fun-game-play-mahjong.png)][game4]
+[![Game](http://publisher.orangegames.com/images/icons/jewel-burst.png)][game5]
+[![Game](http://publisher.orangegames.com/images/icons/euro-football-kick-2016.png)][game6]
 
 Handy Sources / Links
 =====================
 Here you find a list of libraries used by the games in general. They link to the lib's respective docs
 
 - [phaser-cachebuster](https://github.com/orange-games/phaser-cachebuster) A Phaser plugin that allows for assets to be cachebusted by queryparameters
+- [phaser-ads](https://github.com/orange-games/phaser-ads) A Phaser plugin for providing nice ads integration in your phaser.io game
+- [phaser-spine](https://github.com/orange-games/phaser-spine) A plugin for Phaser that adds Spine support
+- [phaser-i18next](https://github.com/orange-games/phaser-i18next) Phaser plugin for translations using i18next
+- [phaser-web-workers](https://github.com/orange-games/phaser-web-workers) A simple Phaser plugin that allows you to easily integrate Web Workers in your game
 - [phaser-super-storage](https://github.com/orange-games/phaser-super-storage) A cross platform pluggable storage plugin for Phaser.
-- [phaser-multires](https://github.com/orange-games/phaser-multires) Special version of [Phaser](http://phaser.io) that allows multi resolution textures
-- [quartz-socket](https://github.com/gembly/quartz-socket) Library used for settings up a WebSocket connection
 - [webfontloader](https://github.com/typekit/webfontloader) A library that allows for 'good' loading of multiple fonts
 - [phaser-nineslice](https://github.com/orange-games/phaser-nineslice) A plugin that adds 9 slice scaling support
 - [phaser-input](https://github.com/orange-games/phaser-input) An input library that works on canvas and WebGL. Also has mobile support.
-- [phaser-advanced-debug](https://github.com/orange-games/phaser-advanced-debug) A library that is built on phaser-debug(https://github.com/englercj/phaser-debug) plugin.
+
+[game1]: http://html5.GameDistribution.com/6984522dd6714dd8b92b5285c6bc0ceb/
+[game2]: http://html5.GameDistribution.com/5720633fecd545a188471d3ce7a7bbeb/
+[game3]: http://html5.GameDistribution.com/405c00612981466cbc5d9dcef4214811/
+[game4]: http://html5.GameDistribution.com/4b4ac998ef6c43958f82bb3a9819d2f3/
+[game5]: http://html5.GameDistribution.com/49258a0e497c42b5b5d87887f24d27a6/
+[game6]: http://html5.GameDistribution.com/b23deb025996424da64cf8f8cf986fd8/

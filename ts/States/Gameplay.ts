@@ -23,9 +23,12 @@ module BoilerPlate {
             //Send a screen view to Google to track different states
             // this.game.analytics.google.sendScreenView(this.name);
 
-            this.background = this.game.add.image(0, 0, Images.BgMenu);
+            this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_gameplay');
 
-            this.text = new Label(this.game, 0, 0, 'This is the GAMEPLAY state.', {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial'});
+            this.text = new Label(this.game, 0, 0, 'This is the GAMEPLAY state.', {
+                font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial',
+                fill: '#ffffff'
+            });
 
             this.resize();
         }

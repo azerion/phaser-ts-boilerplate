@@ -6,6 +6,7 @@
 /// <reference path='../node_modules/@orange-games/phaser-ads/build/phaser-ads.d.ts'/>
 /// <reference path='../node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.d.ts'/>
 /// <reference path='../node_modules/@orange-games/phaser-super-storage/build/phaser-super-storage.d.ts'/>
-/// <reference path='../node_modules/orange-games-splash/build/orange-games-splash.d.ts'/>
+/// <reference path='../node_modules/@orange-games/splash/build/splash.d.ts'/>
 
 declare var version: string;
+declare var libs: string[];
