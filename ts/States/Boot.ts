@@ -19,14 +19,14 @@ module BoilerPlate {
          */
         public init(): void {
             //Setup analytics
-           /* this.game.analytics.game.setup(Constants.GAME_KEY, Constants.SECRET_KEY, version, this.game.analytics.game.createUser());
+            this.game.analytics.game.setup(Constants.GAME_KEY, Constants.SECRET_KEY, version, this.game.analytics.game.createUser());
             let sessionTime: number = Date.now();
             window.addEventListener('beforeunload', () => {
                 this.game.analytics.game.addEvent(new GA.Events.SessionEnd((Date.now() - sessionTime) / 1000));
                 this.game.analytics.game.sendEvents();
             });
 
-            this.game.analytics.google.setup(Constants.GOOGLE_ID, Constants.GOOGLE_APP_NAME, version);*/
+            this.game.analytics.google.setup(Constants.GOOGLE_ID, Constants.GOOGLE_APP_NAME, version);
 
             //Small fixes and tweaks are placed below
 
@@ -39,9 +39,10 @@ module BoilerPlate {
             };
 
             //Set up ads
-            this.game.ads.setAdProvider(new PhaserAds.AdProvider.Ima3(
+            this.game.ads.setAdProvider(new PhaserAds.AdProvider.GameDistributionAds(
                 this.game,
-                'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/2392211/fbrq_ingame&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1'
+                Constants.GAMEDISTRIBUTION_ID,
+                Constants.GAMEDISTRIBUTION_USER
             ));
 
             //Enable scaling
@@ -181,6 +182,7 @@ module BoilerPlate {
          * The preloader will load all the assets while displaying portal specific splash screen.
          */
         public create(): void {
+            Fabrique.LoaderHelper.hide();
             //TODO: If you DO want a custom preloader, uncomment this line
             //this.game.state.start(Preloader.Name);
 
@@ -188,24 +190,18 @@ module BoilerPlate {
             this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
                 nextState: Menu.Name,
                 mobilePlayClickhandler: (): void => {
-                    (<Fabrique.IGame>this.game).ads.onContentPaused.addOnce((): void => {
+                    Fabrique.LoaderHelper.show();
+                    this.game.ads.onContentPaused.addOnce((): void => {
+                        Fabrique.LoaderHelper.hide();
                         this.game.analytics.google.sendScreenView('advertisement');
                     });
 
-                    (<Fabrique.IGame>this.game).ads.onContentResumed.addOnce((): void => {
+                    this.game.ads.onContentResumed.addOnce((): void => {
+                        Fabrique.LoaderHelper.hide();
                         this.game.state.start(Menu.Name);
                     });
-                    /*this.parseSceneFiles();
-                     AudioManager.init(this.game);
-                     Saver.getInstance().init(this.game.cache.getXML('levels'));
-                     this.game.state.start(MenuView.Name);*/
 
-                    (<Fabrique.IGame>this.game).ads.showAd({
-                        internal: (Fabrique.Branding.isInternal(this.game)) ? 'YES' : 'NO',
-                        gameID: 999, //something
-                        pub: Fabrique.Utils.getSourceSite(),
-                        ad: 'preroll'
-                    });
+                    this.game.ads.showAd();
                 },
                 preloadHandler: (): void => {
                     this.game.sound.muteOnPause = true;

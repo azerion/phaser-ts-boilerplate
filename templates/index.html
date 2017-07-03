@@ -4,20 +4,12 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
-
-    <title>Boilerplate</title>
-
-    <script type="text/javascript" src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+    <title>Orange Games Boilerplate</title>
 
     <link rel="stylesheet" href="assets/css/app.css" type="text/css" />
 
     <script src="phaser/build/phaser.js"></script>
     <script src="webfontloader/webfontloader.js"></script>
-    <script src="@orange-games/phaser-cachebuster/build/phaser-cachebuster.min.js"></script>
-    <script src="@orange-games/phaser-spine/build/phaser-spine.min.js"></script>
-    <script src="@orange-games/phaser-ads/build/phaser-ads.min.js"></script>
-    <script src="@orange-games/phaser-super-storage/build/phaser-super-storage.min.js"></script>
-    <script src="orange-games-splash/build/orange-games-splash.js"></script>
     <script src="og-fabrique-boilerplate.js"></script>
 
     <script type="text/javascript">
@@ -41,36 +33,23 @@
 
     <script type="text/javascript">
         /**
-         * Here we create the game
-         */
-        var game = new BoilerPlate.Game.getInstance()
-            version = 'dev';
-
-        /**
-         * Below here are all the events that are fired by the game.\
-         * Use these events to show ads or implement highscore
+         * Here we create the game and define the user for game analytics, this has to be done/implemented by every portal!
          *
-         * The events can only be added when the document is done loading (ready), so we have to wait for this
+         * @type {GA.User}
          */
-        game.device.whenReady(function () {
-            game.events.onGameStart.add(function () {
-                //Fired when the game starts
-            });
-            game.events.onGameEnd.add(function (score) {
-                //Fired when the game ends
-            });
-            game.events.onLevelStart.add(function () {
-                //Fired when the game starts
-            });
-            game.events.onLevelEnd.add(function () {
-                //Fired when the game starts
-            });
-        });
+        var version = 'dev',
+            libs = [
+                '@orange-games/phaser-cachebuster/build/phaser-cachebuster.js',
+                '@orange-games/phaser-spine/build/phaser-spine.js',
+                '@orange-games/phaser-ads/build/phaser-ads.min.js',
+                '@orange-games/phaser-super-storage/build/phaser-super-storage.min.js',
+                '@orange-games/splash/build/splash.js'
+            ];
+       var game = new BoilerPlate.Game();
     </script>
 </head>
-<body onload="javascript:game.start();">
+<body>
     <div id="content"></div>
-    <div id="dummy" style="position:fixed;right:0;bottom:0"></div>
-    <div id="orientation"></div>
+    <div id="loader">Loading ...</div>
 </body>
 </html>

@@ -9,15 +9,11 @@
     <title><%= title %></title>
     <!-- /build -->
 
-    <script type="text/javascript" src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-
     <link rel="stylesheet" href="assets/css/app.css" type="text/css"/>
 </head>
 <body>
 <div id="content"></div>
-<div id="dummy" style="position:fixed;right:0;bottom:0"></div>
-<div id="orientation"></div>
-
+<div id="loader">Loading ...</div>
 <script type="text/javascript">
     <!-- build:process -->
     var gameName = "<%= gameName %>.min.js";
@@ -38,29 +34,7 @@
             /**
              * Here we create the game
              */
-            var game = new BoilerPlate.Game.getInstance();
-
-            /**
-             * Below here are all the events that are fired by the game.\
-             * Use these events to show ads or implement highscore
-             *
-             * The events can only be added when the document is done loading (ready), so we have to wait for this
-             */
-            game.device.whenReady(function () {
-                game.events.onGameStart.add(function () {
-                    //Fired when the game starts
-                });
-                game.events.onGameEnd.add(function (score) {
-                    //Fired when the game ends
-                });
-                game.events.onLevelStart.add(function () {
-                    //Fired when the game starts
-                });
-                game.events.onLevelEnd.add(function () {
-                    //Fired when the game starts
-                });
-            });
-            game.start();
+            new BoilerPlate.Game();
         })
     })
 </script>
