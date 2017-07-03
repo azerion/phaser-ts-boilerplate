@@ -19,6 +19,7 @@ class Constants {
     public static GOOGLE_ID: string             = 'UA-78960661-2';
     public static GOOGLE_APP_NAME: string       = 'Boilerplate';
 
+    //Game distribution
     public static GAMEDISTRIBUTION_ID: string   = 'e84461aa105140b6b628d151e26c86cd';
     public static GAMEDISTRIBUTION_USER: string = 'ABD36C6C-E74B-4BA7-BE87-0AB01F98D30D-s1';
 }
