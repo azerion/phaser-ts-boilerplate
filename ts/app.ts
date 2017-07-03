@@ -21,9 +21,7 @@ module BoilerPlate {
 
             this.clearBeforeRender = false;
 
-            /**
-             * Here we adjust some stuff to the game that we need, before any state is beeing run
-             */
+            //Here we adjust some stuff to the game that we need, before any state is being run
             Phaser.Device.whenReady(() => {
                 //Fix for mobile portals and IE
                 this.stage.disableVisibilityChange = true; //This will make sure the game runs out-of-focus
@@ -47,8 +45,7 @@ module BoilerPlate {
         }
 
         private stateCreator(): void {
-
-            //Here we load all the states, but they shouldn't start automatically
+            //Here we load all the plugins
             this.plugins.add(Fabrique.Plugins.GameEvents);
             this.plugins.add(Fabrique.Plugins.GoogleAnalytics);
             this.plugins.add(Fabrique.Plugins.GameAnalytics);
