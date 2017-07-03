@@ -226,7 +226,7 @@ Notable games
 We have over 100 games made with this boilerplate, here are some of our best titles:
 
 [![Game](http://publisher.orangegames.com/images/icons/twisted-city.png)][game1]
-[![Game](http://publisher.orangegames.com/images/icons/olli-ball.png][game2]
+[![Game](http://publisher.orangegames.com/images/icons/olli-ball.png)][game2]
 [![Game](http://publisher.orangegames.com/images/icons/bubble-burst.png)][game3]
 [![Game](http://publisher.orangegames.com/images/icons/fun-game-play-mahjong.png)][game4]
 [![Game](http://publisher.orangegames.com/images/icons/jewel-burst.png)][game5]
