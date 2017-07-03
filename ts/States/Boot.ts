@@ -199,6 +199,8 @@ module BoilerPlate {
                     this.game.ads.onContentResumed.addOnce((): void => {
                         Fabrique.LoaderHelper.hide();
                         this.game.state.start(Menu.Name);
+                        this.game.ads.onContentPaused.removeAll();
+                        this.game.ads.onContentResumed.removeAll();
                     });
 
                     this.game.ads.showAd();
