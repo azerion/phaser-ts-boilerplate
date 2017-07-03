@@ -84,12 +84,7 @@ module.exports = function (grunt) {
                     '_build/dist/<%= game.name %>.min.js': [
                         'node_modules/es6-promise-polyfill/promise.min.js',
                         'node_modules/phaser/build/phaser.min.js',
-                        'node_modules/@orange-games/phaser-spine/build/phaser-spine.min.js',
-                        'node_modules/@orange-games/phaser-ads/build/phaser-ads.min.js',
-                        'node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.min.js',
-                        'node_modules/@orange-games/phaser-super-storage/build/phaser-super-storage.min.js',
                         'node_modules/webfontloader/webfontloader.js',
-                        'node_modules/orange-games-splash/build/orange-games-splash.min.js',
                         '_build/dist/<%= game.name %>-<%= game.version %>.js'
                     ]
                 }
