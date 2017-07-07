@@ -121,6 +121,16 @@ module.exports = function (grunt) {
         }
     });
 
+    function createURL(key, value){
+        return 'npm/@orange-games/' +
+            key +
+            '@' +
+            value +
+            '/build/' +
+            key +
+            '.min.js'
+    }
+
     function getPkgInfo(){
         console.log('running get pkg info');
 

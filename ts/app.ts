@@ -10,7 +10,7 @@ module BoilerPlate {
                 height: Constants.GAME_HEIGHT,
                 renderer: Phaser.AUTO,
                 parent: 'content',
-                transparent: false,
+                transparent: true,
                 antialias: true,
                 preserveDrawingBuffer: false,
                 physicsConfig: null,
@@ -18,7 +18,6 @@ module BoilerPlate {
                 state: null,
                 forceSetTimeOut: false
             });
-
             this.clearBeforeRender = false;
 
             //Here we adjust some stuff to the game that we need, before any state is being run

@@ -1,8 +1,6 @@
 module BoilerPlate {
     export class Boot extends Phaser.State implements Fabrique.IState {
         public static Name: string = 'boot';
-        public static inGame: boolean = false;
-        public static pause: boolean = false;
 
         public name: string = Boot.Name;
         public game: Fabrique.IGame;
