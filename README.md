@@ -232,6 +232,10 @@ We have over 100 games made with this boilerplate, here are some of our best tit
 [![Game](http://publisher.orangegames.com/images/icons/jewel-burst.png)][game5]
 [![Game](http://publisher.orangegames.com/images/icons/euro-football-kick-2016.png)][game6]
 
+Credits
+=======
+[CSS loader](https://projects.lukehaas.me/css-loaders/) by [@lukehaas](https://twitter.com/lukehaas)
+
 Handy Sources / Links
 =====================
 Here you find a list of libraries used by the games in general. They link to the lib's respective docs
