@@ -48,6 +48,7 @@
     "@orange-games/splash": "^3.5.x",
     "es6-promise-polyfill": "^1.2.0",
     "phaser": "^2.6.2",
+    "phaser-ce": "^2.8.3",
     "webfontloader": "^1.6.28"
   }
 }

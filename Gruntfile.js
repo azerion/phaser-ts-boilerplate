@@ -165,7 +165,6 @@ module.exports = function (grunt) {
         var pkgStr = 'libs=' + JSON.stringify(pkgList) + ';';
         var versionStr = 'version="' + buildNumber + '";';
         grunt.file.write('_build/dist/version.js', versionStr + '\n' +  pkgStr );
-
     });
 
     //production build, we deploy this
