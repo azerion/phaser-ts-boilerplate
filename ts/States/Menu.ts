@@ -35,7 +35,7 @@ module BoilerPlate {
             let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
 
             //This button uses images for textures, just like normal Phaser.Buttons
-            this.testImgBtn = new LabeledButton(this.game, 0, 0, 'LONG TEXT FITS IN BUTTON', textStyle, this.startGame, this);
+            this.testImgBtn = new LabeledButton(this.game, 0, 0, 'LONG TEXT FITS IN BUTTON', textStyle, this.buttonClick, this);
             this.testImgBtn.setFrames('btn_orange', 'btn_orange', 'btn_orange_onpress', 'btn_orange');
 
             //This button is made by generating the texture with graphics
@@ -43,6 +43,10 @@ module BoilerPlate {
             this.testGrBtn.createTexture(0xf98f25);
 
             this.resize();
+        }
+
+        private buttonClick(): void {
+            SoundManager.getInstance().play(Sounds.Click);
         }
 
         /**

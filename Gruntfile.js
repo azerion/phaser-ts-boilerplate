@@ -121,13 +121,13 @@ module.exports = function (grunt) {
         }
     });
 
-    function createURL(key, value){
-        return 'npm/@orange-games/' +
-            key +
+    function createURL(name, version){
+        return 'https://cdn.jsdelivr.net/npm/@orange-games/' +
+            name +
             '@' +
-            value +
+            version +
             '/build/' +
-            key +
+            name +
             '.min.js'
     }
 
@@ -152,7 +152,7 @@ module.exports = function (grunt) {
                 }
             }
         }
-        return 'https://cdn.jsdelivr.net/combine/' + newPkgList.join(',');
+        return newPkgList;
     }
 
     var buildNumber = grunt.option("buildNumber");
@@ -162,10 +162,9 @@ module.exports = function (grunt) {
         }
 
         var pkgList = getPkgInfo();
-        var pkgStr = 'libs=["' + pkgList + '"];';
+        var pkgStr = 'libs=' + JSON.stringify(pkgList) + ';';
         var versionStr = 'version="' + buildNumber + '";';
         grunt.file.write('_build/dist/version.js', versionStr + '\n' +  pkgStr );
-
     });
 
     //production build, we deploy this

@@ -1,6 +1,7 @@
 {
   "name": "og-fabrique-boilerplate",
   "author": "OrangeGames",
+  "gameId": "e84461aa105140b6b628d151e26c86cd",
   "title": "OrangeGames Fabrique Boilerplate",
   "version": "1.2.0",
   "description": "This is a boiler plate version for OrangeGames HTML5 games, use it at your discression to make awesome games :D",
@@ -47,6 +48,7 @@
     "@orange-games/splash": "^3.5.x",
     "es6-promise-polyfill": "^1.2.0",
     "phaser": "^2.6.2",
+    "phaser-ce": "^2.8.3",
     "webfontloader": "^1.6.28"
   }
 }
