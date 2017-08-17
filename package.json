@@ -20,9 +20,15 @@
       "name": "Nico"
     }
   ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/orange-games/phaser-ads/raw/master/LICENSE"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "https://gitlab.ds.orangegames.com/fabrique/boilerplate.git"
+    "url": "git@github.com:orange-games/phaser-ts-boilerplate.git"
   },
   "private": true,
   "devDependencies": {
