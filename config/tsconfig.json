@@ -4,6 +4,12 @@
         "target": "es5",
         "sourceMap": false,
         "declaration": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "noImplicitAny":true
-    }
+    },
+    "files": [
+        "../ts/app.ts",
+        "../node_modules/phaser/typescript/phaser.comments.d.ts"
+    ]
 }

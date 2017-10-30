@@ -31,24 +31,28 @@
     "url": "git@github.com:orange-games/phaser-ts-boilerplate.git"
   },
   "scripts": {
-    "dev": "grunt dev",
-    "dist": "grunt dist"
+    "webpack:dev": "webpack --config ./config/webpack.dev.config.js --progress --colors",
+    "webpack:dist": "webpack --config ./config/webpack.dist.config.js --progress --colors",
+    "server:dev": "webpack-dev-server --config ./config/webpack.dev.config.js --open",
+    "server:dist": "webpack-dev-server --config ./config/webpack.dist.config.js --open",
+    "dev": "npm run server:dev",
+    "dist": "npm run webpack:dist"
   },
   "private": true,
   "devDependencies": {
     "@types/es6-promise": "0.0.32",
     "@types/webfontloader": "^1.6.27",
-    "grunt": "^1.0.1",
-    "grunt-contrib-clean": "1.1.x",
-    "grunt-contrib-connect": "1.0.x",
-    "grunt-contrib-copy": "1.0.x",
-    "grunt-contrib-uglify": "3.0.x",
-    "grunt-contrib-watch": "1.0.x",
-    "grunt-html-build": "0.7.x",
-    "grunt-ts": "^6.0.0-beta.16",
-    "grunt-tslint": "^3.0.3",
-    "tslint": "^3.6.0",
-    "typescript": "2.4.x"
+    "clean-webpack-plugin": "^0.1.17",
+    "copy-webpack-plugin": "^4.2.0",
+    "expose-loader": "^0.7.3",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "ts-loader": "^3.1.1",
+    "tslint": "^5.8.0",
+    "tslint-loader": "^3.5.3",
+    "typescript": "2.4.x",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3"
   },
   "dependencies": {
     "@orange-games/phaser-ads": "^2.2.x",
