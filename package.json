@@ -30,6 +30,10 @@
     "type": "git",
     "url": "git@github.com:orange-games/phaser-ts-boilerplate.git"
   },
+  "scripts": {
+    "dev": "grunt dev",
+    "dist": "grunt dist"
+  },
   "private": true,
   "devDependencies": {
     "@types/es6-promise": "0.0.32",
