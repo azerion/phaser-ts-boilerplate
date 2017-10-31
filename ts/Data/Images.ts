@@ -1,4 +1,4 @@
-class Images {
+export default class Images {
 
     /**
      * A list of all images we need to show the preloader itself.

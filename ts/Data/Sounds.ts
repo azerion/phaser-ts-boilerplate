@@ -1,4 +1,4 @@
-class Sounds {
+export default class Sounds {
     public static Click: string = 'click';
 
     /**

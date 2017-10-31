@@ -1,7 +1,7 @@
 /**
  * All the global variables which will be used throughout the game.
  */
-class Constants {
+export default class Constants {
     //Size and scale
     public static GAME_SCALE: number = 1;
     public static CALCULATED_WIDTH: number = 0;
