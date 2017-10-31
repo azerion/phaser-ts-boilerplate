@@ -31,21 +31,22 @@
     "url": "git@github.com:orange-games/phaser-ts-boilerplate.git"
   },
   "scripts": {
-    "webpack:dev": "webpack --config ./config/webpack.dev.config.js --progress --colors",
     "webpack:dist": "webpack --config ./config/webpack.dist.config.js --progress --colors",
-    "server:dev": "webpack-dev-server --config ./config/webpack.dev.config.js --open",
     "server:dist": "webpack-dev-server --config ./config/webpack.dist.config.js --open",
-    "dev": "npm run server:dev",
+    "dev": "webpack-dev-server --config ./config/webpack.dev.config.js",
     "dist": "npm run webpack:dist"
   },
   "private": true,
   "devDependencies": {
     "@types/es6-promise": "0.0.32",
     "@types/webfontloader": "^1.6.27",
+    "browser-sync": "^2.18.13",
+    "browser-sync-webpack-plugin": "^1.2.0",
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.2.0",
     "expose-loader": "^0.7.3",
     "file-loader": "^1.1.5",
+    "fork-ts-checker-webpack-plugin": "^0.2.8",
     "html-webpack-plugin": "^2.30.1",
     "ts-loader": "^3.1.1",
     "tslint": "^5.8.0",

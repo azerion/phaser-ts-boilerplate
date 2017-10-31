@@ -2,12 +2,15 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+
 const basePath = path.join(__dirname, '../');
 
 module.exports = {
     entry: path.join(basePath, 'ts/app.ts'),
     output: {
-        path: path.join(basePath),
+        path: path.join(basePath), //, '_build/dev'),
         filename: 'game.js'
     },
     resolve: {
@@ -44,30 +47,33 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'DEV MODE: Phaser NPM Webpack TypeScript Starter Project!',
             template: path.join(basePath, 'templates/index.ejs')
+        }),
+        new BrowserSyncPlugin({
+            host: process.env.IP || 'localhost',
+            port: process.env.PORT || 3000,
+            proxy: 'http://localhost:8080'
+            // server: {
+            //     baseDir: ['./', './_build/dev']
+            // }
+        }),
+        new ForkTsCheckerWebpackPlugin({
+            tslint: path.join(__dirname, 'tslint.json'),
+            tsconfig: path.join(__dirname, 'tsconfig.json'),
+            checkSyntacticErrors: true
         })
     ],
-    devServer: {
-        contentBase: path.join(basePath),
-        compress: true,
-        port: 9000,
-        inline: true,
-        watchOptions: {
-            aggregateTimeout: 300,
-            poll: true,
-            ignored: /node_modules/
-        }
-    },
     module: {
         rules: [
-            { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' , options: {
-                configFile: path.join(__dirname, 'tslint.json')
-            }},
+            // { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' , options: {
+            //     configFile: path.join(__dirname, 'tslint.json')
+            // }},
             { test: /assets(\/|\\)/, loader: 'file-loader?name=assets/[hash].[ext]' },
             { test: /pixi\.js$/, loader: 'expose-loader?PIXI' },
             { test: /phaser-split\.js$/, loader: 'expose-loader?Phaser' },
             { test: /p2\.js$/, loader: 'expose-loader?p2' },
             { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/', options: {
-                configFile: path.join(__dirname, 'tsconfig.json')
+                configFile: path.join(__dirname, 'tsconfig.json'),
+                transpileOnly: true
             }}
         ]
     },
