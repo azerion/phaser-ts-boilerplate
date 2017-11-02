@@ -162,7 +162,7 @@ export default class Boot extends Phaser.State {
     }
 
     public preload(): void {
-        this.game.load.cacheBuster = (typeof version === 'undefined') ? null : version;
+        // this.game.load.cacheBuster = (typeof version === 'undefined') ? null : version;
 
         // Load the assets based on the game scale.
         let scale: string = 'x' + Constants.GAME_SCALE + '/';

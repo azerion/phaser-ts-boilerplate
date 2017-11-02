@@ -2,11 +2,13 @@
     "compilerOptions": {
         "module": "amd",
         "target": "es5",
+        "moduleResolution": "node",
         "sourceMap": false,
         "declaration": false,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noImplicitAny":true
+        "noImplicitAny":true,
+        "isolatedModules": true
     },
     "files": [
         "../node_modules/phaser/typescript/pixi.comments.d.ts",
@@ -16,6 +18,7 @@
         "../node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.d.ts",
         "../node_modules/@orange-games/phaser-super-storage/build/phaser-super-storage.d.ts",
         "../node_modules/@orange-games/splash/build/splash.d.ts",
-        "../ts/**/*.ts"
+        "../ts/definitions.d.ts",
+        "../ts/app.ts"
     ]
 }

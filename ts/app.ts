@@ -8,6 +8,9 @@ import Constants from './Data/Constants';
 
 //The states
 import {Boot, Menu, Gameplay} from './States';
+// import Boot from './States/Boot';
+// import Menu from './States/Menu';
+// import Gameplay from './States/Gameplay';
 
 //Module name should equal the game name
 namespace BoilerPlate {
