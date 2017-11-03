@@ -1,5 +1,3 @@
-var crypto = require('crypto');
-
 module.exports = function (grunt) {
     'use strict';
 
@@ -18,11 +16,7 @@ module.exports = function (grunt) {
         //Typescript settings per build
         ts: {
             options: {
-                module: 'amd',
-                target: 'es5',
-                sourceMap: false,
-                declaration: false,
-                noImplicitAny:true
+                tsconfig: './config/tsconfig.json'
             },
             dev: {
                 src: ['ts/**/*.ts'],
@@ -111,7 +105,7 @@ module.exports = function (grunt) {
         tslint: {
             options: {
                 // can be a configuration object or a filepath to tslint.json
-                configuration: "./tslint.json"
+                configuration: "./config/tslint.json"
             },
             dist: {
                 src: [
