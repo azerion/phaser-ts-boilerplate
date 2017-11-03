@@ -1,47 +1,54 @@
-module BoilerPlate {
-    export class Gameplay extends Phaser.State implements Fabrique.IState  {
-        public static Name: string = 'gameplay';
-        public static pause: boolean = false;
+import 'p2';
+import 'pixi';
+import 'phaser';
 
-        public name: string = Gameplay.Name;
-        public game: Fabrique.IGame;
+import IGame from '../Fabrique/IGame';
+import Label from '../Fabrique/Objects/Label';
 
-        private background: Phaser.Image;
-        private text: Label;
+import {Constants, Atlases} from '../Data';
 
-        constructor() {
-            super();
-        }
+export default class Gameplay extends Phaser.State {
+    public static Name: string = 'gameplay';
+    public static pause: boolean = false;
 
-        public init(): void {
-            this.game.world.removeAll();
-        }
+    public name: string = Gameplay.Name;
+    public game: IGame;
 
-        public create(): void {
-            super.create();
+    private background: Phaser.Image;
+    private text: Label;
 
-            //Send a screen view to Google to track different states
-            // this.game.analytics.google.sendScreenView(this.name);
+    constructor() {
+        super();
+    }
 
-            this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_gameplay');
+    public init(): void {
+        this.game.world.removeAll();
+    }
 
-            this.text = new Label(this.game, 0, 0, 'This is the GAMEPLAY state.', {
-                font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial',
-                fill: '#ffffff'
-            });
+    public create(): void {
+        super.create();
 
-            this.resize();
-        }
+        //Send a screen view to Google to track different states
+        // this.game.analytics.google.sendScreenView(this.name);
 
-        /**
-         * Called every time the rotation or game size has changed.
-         * Rescales and repositions the objects.
-         */
-        public resize(): void {
-            this.background.width = this.game.width;
-            this.background.height = this.game.height;
+        this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_gameplay');
 
-            this.text.alignIn(this.world.bounds, Phaser.CENTER);
-        }
+        this.text = new Label(this.game, 0, 0, 'This is the GAMEPLAY state.', {
+            font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial',
+            fill: '#ffffff'
+        });
+
+        this.resize();
+    }
+
+    /**
+     * Called every time the rotation or game size has changed.
+     * Rescales and repositions the objects.
+     */
+    public resize(): void {
+        this.background.width = this.game.width;
+        this.background.height = this.game.height;
+
+        this.text.alignIn(this.world.bounds, Phaser.CENTER);
     }
 }

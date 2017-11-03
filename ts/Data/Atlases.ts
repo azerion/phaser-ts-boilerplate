@@ -1,4 +1,4 @@
-class Atlases {
+export default class Atlases {
     public static Interface: string = 'interface';
 
     /**

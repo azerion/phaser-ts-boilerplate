@@ -1,64 +1,32 @@
 Orange Games Boilerplate
 ========================
-
+![VerNicelyMadeBanner](http://static.orangegames.com/2017/02/OG_header_contact_new.png)
 Yet another Phaser Boilerplate, but instead of showing a working toolchain, this is all about fixing bugs, working around browser issues, analytics and advertising. This is the core of every HTML5 Orange Game :)
 
-Due to this boilerplate having no focus on the toolchain, we also asume in this readme that you have some basic knowledge about [grunt](https://gruntjs.com/), [npm](https://www.npmjs.com/) and [TypeScript](https://www.typescriptlang.org/)
+Due to this boilerplate having no focus on the toolchain, we also assume in this readme that you have some basic knowledge about [webpack](https://http://webpack.github.io/), [npm](https://www.npmjs.com/) and [TypeScript](https://www.typescriptlang.org/)
 
 Getting Started
 ---------------
 
-So the first thing you'd want to is too clone this game repo and start changing some ID's around in the Constants.ts file.
+So the first thing you'd want to is too clone this game repo and start changing some ID's around in the webpack.base.config.js file.
 We have some base ID's setup for [google analytics](https://accounts.google.com), [game analytics](http://www.gameanalytics.com/) and [GameDistribution ads](http://gamedistribution.com/)
 
 ### Development
 During development itself you only need to run 1 command, namely:
 ```
-PC@OG:~/Projects/GameName$ grunt dev
+PC@OG:~/Projects/GameName$ npm run dev
 ```
 
-First it will run typescript, then start a server and open the watch task.
-This will make sure that every time a Typescript and/or Asset file has changed, it wil update the development directory (_build/dev).
+It will starts webpack-dev-server/browsersync and open a browser tab for you.
+This will make sure that every time a Typescript file has changed, it wil update your project.
 
-A webserver is also started on your local machine on port 8080. You can point your browser to http://localhost:8080, check out your game, and grunt will refresh your browser every time a change has been made.
+A webserver is also started on your local machine on port 3000. You can point your browser to http://localhost:3000, check out your game, and browsersync will refresh your browser every time a change has been made. To check out all the features of BrowserSync you can check out http://localhost:3001
 
 ### Production
 For production builds there are two commands, one that compiles and minifies all the code and assets, and one for writing a version number.
 ```
-PC@OG:~/Projects/GameName$ grunt dist
-Running "clean:dist" (clean) task
->> 4 paths cleaned.
-
-Running "copy:dist" (copy) task
-Created 1 directories, copied 21 files
-
-Running "typescript:dist" (typescript) task
-File /home/person/Projects/GameName/_build/dist/gameName-1.0.2.js created.
-js: 1 file, map: 0 files, declaration: 0 files (2300ms)
-
-Running "uglify:dist" (uglify) task
->> 1 file created.
-
-Running "clean:temp" (clean) task
->> 1 path cleaned.
-
-Running "htmlbuild:dist" (htmlbuild) task
->> File _build/dist/index.html created !
-
-Done, without errors.
+PC@OG:~/Projects/GameName$ npm run dist
 ```
-
-So here we're gonna create the version of the current build, first and foremost it will help with cachebusting when uploading a new game, but it will also write some external packages to an array that allows us loading them from a cdn.
-Currently it will only add @orange-games namespaced packages to the array, but you can change it in the gruntFile to include any pacakge you want.
-
-For the moment we use jsdelivr to load the packages.
-```
-PC@OG:~/Projects/GameName$ grunt writeVersion --buildNumber=test
-Running "writeVersion" task
-
-Done, without errors.
-```
-
 
 ## Development
 
@@ -235,6 +203,7 @@ We have over 100 games made with this boilerplate, here are some of our best tit
 Credits
 =======
 [CSS loader](https://projects.lukehaas.me/css-loaders/) by [@lukehaas](https://twitter.com/lukehaas)
+[phaser-npm-webpack-typescript-starter-project](https://github.com/rroylance/phaser-npm-webpack-typescript-starter-project) by [@rroylance](http://rroylance.github.io/)
 
 Handy Sources / Links
 =====================
