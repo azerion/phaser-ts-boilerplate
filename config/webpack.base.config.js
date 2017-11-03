@@ -3,16 +3,11 @@
 const webpack = require('webpack');
 const path = require('path');
 const config = require('../package.json');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const basePath = path.join(__dirname, '../');
+
 module.exports = {
     entry: path.join(basePath, 'ts/app.ts'),
-    cache: true,
-    watch: true,
-    output: {
-        path: path.join(basePath), //, '_build/dev'),
-        filename: 'game.js',
-    },
     resolve: {
         extensions: ['.ts', '.js'],
         alias: {
@@ -34,7 +29,12 @@ module.exports = {
             'GOOGLE_ID': JSON.stringify('UA-78960661-2'),
             'GOOGLE_APP_NAME': JSON.stringify('Boilerplate'),
             'GAMEDISTRIBUTION_ID': JSON.stringify(config.gameId),
-            'GAMEDISTRIBUTION_USER': JSON.stringify('ABD36C6C-E74B-4BA7-BE87-0AB01F98D30D-s1')
+            'GAMEDISTRIBUTION_USER': JSON.stringify('ABD36C6C-E74B-4BA7-BE87-0AB01F98D30D-s1'),
+        }),
+        new HtmlWebpackPlugin({
+            title: config.title,
+            hash: true,
+            template: path.join(basePath, 'templates/index.ejs'),
         }),
     ],
     module: {

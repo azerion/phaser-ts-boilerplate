@@ -3,7 +3,7 @@
   "author": "OrangeGames",
   "gameId": "e84461aa105140b6b628d151e26c86cd",
   "title": "OrangeGames Fabrique Boilerplate",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "This is a boilerplate version for OrangeGames HTML5 games, use it at your discretion to make awesome games :D",
   "contributors": [
     {
@@ -31,10 +31,8 @@
     "url": "git@github.com:orange-games/phaser-ts-boilerplate.git"
   },
   "scripts": {
-    "webpack:dist": "webpack --config ./config/webpack.dist.config.js --progress --colors",
-    "server:dist": "webpack-dev-server --config ./config/webpack.dist.config.js --open",
     "dev": "webpack-dev-server --config ./config/webpack.dev.config.js",
-    "dist": "npm run webpack:dist"
+    "dist": "webpack --config ./config/webpack.dist.config.js --progress --colors"
   },
   "private": true,
   "devDependencies": {

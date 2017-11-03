@@ -1,73 +1,109 @@
-var webpack = require('webpack');
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-const Uglify = require("uglifyjs-webpack-plugin");
+'use strict';
 
-module.exports = {
-    entry: path.join(__dirname, 'src/app.ts'),
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'game.min.js'
-    },
-    resolve: {
-        extensions: ['.ts', '.js'],
-        alias: {
-            pixi: path.join(__dirname, 'node_modules/phaser-ce/build/custom/pixi.js'),
-            phaser: path.join(__dirname, 'node_modules/phaser-ce/build/custom/phaser-split.js'),
-            p2: path.join(__dirname, 'node_modules/phaser-ce/build/custom/p2.js'),
-            assets: path.join(__dirname, 'assets/')
+const webpack = require('webpack');
+const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerNotifierWebpackPlugin = require(
+    'fork-ts-checker-notifier-webpack-plugin');
+const HappyPack = require('happypack');
+const basePath = path.join(__dirname, '../');
+const config = require('../package.json');
+
+let webpackConfig = require('./webpack.base.config.js');
+
+function createURL(name, version){
+    return 'https://cdn.jsdelivr.net/npm/@orange-games/' +
+        name +
+        '@' +
+        version +
+        '/build/' +
+        name +
+        '.min.js'
+}
+
+function getPkgInfo(){
+    console.log('running get pkg info');
+
+    var pkgObj = config.dependencies;
+    var ogMarker = '@orange-games/';
+    var newPkgList = [];
+    for(var key in pkgObj){
+        if(pkgObj.hasOwnProperty(key)){
+            if(key.indexOf(ogMarker) !== -1){
+                var index = key.indexOf(ogMarker) + ogMarker.length;
+                var newKey = key.slice(index, key.length);
+                var newValue = null;
+                if (pkgObj[key].indexOf('git') !== -1){
+                    newValue = pkgObj[key].slice(-5, -2);
+                } else {
+                    newValue = pkgObj[key].slice(1, 4);
+                }
+                newPkgList.push(createURL(newKey, newValue));
+            }
         }
-    },
-    plugins: [
+    }
+    return newPkgList;
+}
+
+module.exports = function(env) {
+    let version = Date.now();
+    if (env !== undefined && env.version) {
+        version = env.version;
+    }
+
+    let myDevConfig = webpackConfig;
+    myDevConfig.devtool = 'inline-source-map';
+    myDevConfig.output = {
+        path: path.join(basePath, '_build/dist'),
+        filename: config.name + '.min.js',
+    };
+    myDevConfig.plugins = myDevConfig.plugins.concat([
         new webpack.DefinePlugin({
             'DEBUG': false,
-
-            // Do not modify these manually, you may break things...
-            'DEFAULT_GAME_WIDTH': /*[[DEFAULT_GAME_WIDTH*/800/*DEFAULT_GAME_WIDTH]]*/,
-            'DEFAULT_GAME_HEIGHT': /*[[DEFAULT_GAME_HEIGHT*/500/*DEFAULT_GAME_HEIGHT]]*/,
-            'MAX_GAME_WIDTH': /*[[MAX_GAME_WIDTH*/888/*MAX_GAME_WIDTH]]*/,
-            'MAX_GAME_HEIGHT': /*[[MAX_GAME_HEIGHT*/600/*MAX_GAME_HEIGHT]]*/,
-            'SCALE_MODE': JSON.stringify(/*[[SCALE_MODE*/'USER_SCALE'/*SCALE_MODE]]*/),
-
-            // The items below most likely the ones you should be modifying
-            'GOOGLE_WEB_FONTS': JSON.stringify([ // Add or remove entries in this array to change which fonts are loaded
-                'Barrio'
-            ]),
-            'SOUND_EXTENSIONS_PREFERENCE': JSON.stringify([ // Re-order the items in this array to change the desired order of checking your audio sources (do not add/remove/modify the entries themselves)
-                'webm', 'ogg', 'm4a', 'mp3', 'aac', 'ac3', 'caf', 'flac', 'mp4', 'wav'
-            ])
+            'version': JSON.stringify(version),
+            'libs': JSON.stringify(getPkgInfo())
         }),
-        new CleanWebpackPlugin([
-            path.join(__dirname, 'dist')
-        ]),
-        new Uglify(),
-        new HtmlWebpackPlugin({
-            title: 'Phaser NPM Webpack TypeScript Starter Project!',
-            template: path.join(__dirname, 'templates/index.ejs')
-        })
-    ],
-    devServer: {
-        contentBase: path.join(__dirname, 'dist'),
-        compress: true,
-        port: 9000,
-        inline: true,
-        watchOptions: {
-            aggregateTimeout: 300,
-            poll: true,
-            ignored: /node_modules/
-        }
-    },
-    module: {
-        rules: [
-            { test: /\.ts$/, enforce: 'pre', loader: 'tslint-loader' },
+        new CleanWebpackPlugin([path.join(basePath, '_build/dist')], {
+            root: basePath
+        }),
+        new CopyWebpackPlugin([{
+            from: path.join(basePath, 'assets'),
+            to: path.join(basePath, '_build/dist/assets'),
+        }]),
+        new HappyPack({
+            id: 'ts',
+            verbose: false,
+            threads: 2,
+            loaders: [
+                'cache-loader',
+                {
+                    path: 'ts-loader',
+                    query: {happyPackMode: true},
+                },
+            ],
+        }),
+        new ForkTsCheckerNotifierWebpackPlugin({alwaysNotify: true}),
+        new ForkTsCheckerWebpackPlugin({
+            checkSyntacticErrors: true,
+            tslint: path.join(__dirname, 'tslint.json'),
+            tsconfig: path.join(__dirname, 'tsconfig.json'),
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                sequences: true,
+                dead_code: true,
+                conditionals: true,
+                booleans: true,
+                unused: true,
+                if_return: true,
+                join_vars: true,
+                drop_console: true,
+            },
+            mangle: true,
+        }),
+    ]);
 
-            { test: /assets(\/|\\)/, loader: 'file-loader?name=assets/[hash].[ext]' },
-            { test: /pixi\.js$/, loader: 'expose-loader?PIXI' },
-            { test: /phaser-split\.js$/, loader: 'expose-loader?Phaser' },
-            { test: /p2\.js$/, loader: 'expose-loader?p2' },
-            { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/' }
-        ]
-    }
+    return myDevConfig;
 };
-

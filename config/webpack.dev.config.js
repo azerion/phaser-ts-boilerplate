@@ -1,30 +1,39 @@
+'use strict';
+
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ForkTsCheckerNotifierWebpackPlugin = require(
     'fork-ts-checker-notifier-webpack-plugin');
 const HappyPack = require('happypack');
+const config = require('../package.json');
+
 let webpackConfig = require('./webpack.base.config.js');
 
 const basePath = path.join(__dirname, '../');
 module.exports = function() {
     let myDevConfig = webpackConfig;
-    myDevConfig.devtool = 'inline-source-map';
 
+    myDevConfig.devtool = 'inline-source-map';
+    myDevConfig.cache = true;
+    myDevConfig.watch = true;
+
+    myDevConfig.output = {
+        path: path.join(basePath), //, '_build/dev'),
+        filename: 'game.js',
+    };
     myDevConfig.plugins = myDevConfig.plugins.concat([
         new webpack.DefinePlugin({
             'DEBUG': true,
             'version': Date.now(),
-        }),
-        new CleanWebpackPlugin([
-            path.join(basePath, '_build/dev'),
-        ]),
-        new HtmlWebpackPlugin({
-            title: 'DEV MODE: Phaser NPM Webpack TypeScript Starter Project!',
-            template: path.join(basePath, 'templates/index.ejs'),
+            'libs': JSON.stringify([
+                'node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.js',
+                'node_modules/@orange-games/phaser-spine/build/phaser-spine.js',
+                'node_modules/@orange-games/phaser-ads/build/phaser-ads.min.js',
+                'node_modules/@orange-games/phaser-super-storage/build/phaser-super-storage.min.js',
+                'node_modules/@orange-games/splash/build/splash.js'
+            ])
         }),
         new BrowserSyncPlugin({
             host: process.env.IP || 'localhost',
