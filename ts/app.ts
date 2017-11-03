@@ -4,13 +4,8 @@ import 'phaser';
 
 import * as WebFont from 'webfontloader';
 
-import Constants from './Data/Constants';
-
 //The states
 import {Boot, Menu, Gameplay} from './States';
-// import Boot from './States/Boot';
-// import Menu from './States/Menu';
-// import Gameplay from './States/Gameplay';
 
 //Module name should equal the game name
 namespace BoilerPlate {
@@ -20,8 +15,8 @@ namespace BoilerPlate {
             //We use Phaser's config object to create the game, since this is the only way to disable debugging
             super(<Phaser.IGameConfig>{
                 enableDebug: false,
-                width: Constants.GAME_WIDTH,
-                height: Constants.GAME_HEIGHT,
+                width: GAME_WIDTH,
+                height: GAME_HEIGHT,
                 renderer: Phaser.AUTO,
                 parent: 'content',
                 transparent: true,
@@ -44,7 +39,6 @@ namespace BoilerPlate {
                     this.gameResumed(e);
                 });
             });
-
             this.state.add('game', {create: this.stateCreator.bind(this), preload: this.statePreloader.bind(this)}, true);
         }
 

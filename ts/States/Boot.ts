@@ -27,14 +27,14 @@ export default class Boot extends Phaser.State {
      */
     public init(): void {
         //Setup analytics
-        this.game.analytics.game.setup(Constants.GAME_KEY, Constants.SECRET_KEY, version, this.game.analytics.game.createUser());
+        this.game.analytics.game.setup(GA_GAME_KEY, GA_SECRET_KEY, version, this.game.analytics.game.createUser());
         let sessionTime: number = Date.now();
         window.addEventListener('beforeunload', () => {
             this.game.analytics.game.addEvent(new GA.Events.SessionEnd((Date.now() - sessionTime) / 1000));
             this.game.analytics.game.sendEvents();
         });
 
-        this.game.analytics.google.setup(Constants.GOOGLE_ID, Constants.GOOGLE_APP_NAME, version);
+        this.game.analytics.google.setup(GOOGLE_ID, GOOGLE_APP_NAME, version);
 
         //Small fixes and tweaks are placed below
 
@@ -49,8 +49,8 @@ export default class Boot extends Phaser.State {
         //Set up ads
         this.game.ads.setAdProvider(new PhaserAds.AdProvider.GameDistributionAds(
             this.game,
-            Constants.GAMEDISTRIBUTION_ID,
-            Constants.GAMEDISTRIBUTION_USER
+            GAMEDISTRIBUTION_ID,
+            GAMEDISTRIBUTION_USER
         ));
 
         //Enable scaling
@@ -122,8 +122,8 @@ export default class Boot extends Phaser.State {
 
         Boot.setScaling(manager.game);
 
-        let usedWidth: number = Constants.GAME_WIDTH * Constants.GAME_SCALE;
-        let usedHeight: number = Constants.GAME_HEIGHT * Constants.GAME_SCALE;
+        let usedWidth: number = GAME_WIDTH * Constants.GAME_SCALE;
+        let usedHeight: number = GAME_HEIGHT * Constants.GAME_SCALE;
 
         let scaleFactor: number = 1;
 
