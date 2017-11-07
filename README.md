@@ -235,6 +235,12 @@ We have over 100 games made with this boilerplate, here are some of our best tit
 Credits
 =======
 [CSS loader](https://projects.lukehaas.me/css-loaders/) by [@lukehaas](https://twitter.com/lukehaas)
+[Music Menu state]  Doobly Doo Kevin MacLeod (incompetech.com)
+                    Licensed under Creative Commons: By Attribution 3.0 License
+                    http://creativecommons.org/licenses/by/3.0/
+[Music Gameplay state]  Overworld Kevin MacLeod (incompetech.com)
+                        Licensed under Creative Commons: By Attribution 3.0 License
+                        http://creativecommons.org/licenses/by/3.0/
 
 Handy Sources / Links
 =====================

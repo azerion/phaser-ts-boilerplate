@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "bg_gameplay",
+	"filename": "bg_blue",
 	"frame": {"x":1,"y":1,"w":4,"h":540},
 	"rotated": false,
 	"trimmed": false,
@@ -9,8 +9,8 @@
 	"sourceSize": {"w":4,"h":540}
 },
 {
-	"filename": "bg_menu",
-	"frame": {"x":7,"y":1,"w":4,"h":540},
+	"filename": "bg_orange",
+	"frame": {"x":563,"y":1,"w":4,"h":540},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":4,"h":540},
@@ -18,7 +18,7 @@
 },
 {
 	"filename": "btn_blue",
-	"frame": {"x":13,"y":215,"w":225,"h":81},
+	"frame": {"x":7,"y":215,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -26,15 +26,31 @@
 },
 {
 	"filename": "btn_blue_onpress",
-	"frame": {"x":240,"y":215,"w":225,"h":81},
+	"frame": {"x":234,"y":215,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
 	"sourceSize": {"w":225,"h":81}
 },
 {
+	"filename": "btn_music_off",
+	"frame": {"x":461,"y":215,"w":79,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":64},
+	"sourceSize": {"w":79,"h":64}
+},
+{
+	"filename": "btn_music_on",
+	"frame": {"x":7,"y":425,"w":47,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":64},
+	"sourceSize": {"w":47,"h":64}
+},
+{
 	"filename": "btn_orange",
-	"frame": {"x":13,"y":298,"w":225,"h":81},
+	"frame": {"x":7,"y":342,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -42,15 +58,31 @@
 },
 {
 	"filename": "btn_orange_onpress",
-	"frame": {"x":13,"y":381,"w":225,"h":81},
+	"frame": {"x":234,"y":298,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
 	"sourceSize": {"w":225,"h":81}
 },
 {
+	"filename": "btn_sfx_off",
+	"frame": {"x":461,"y":281,"w":70,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":59},
+	"sourceSize": {"w":70,"h":59}
+},
+{
+	"filename": "btn_sfx_on",
+	"frame": {"x":461,"y":342,"w":58,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":58,"h":59},
+	"sourceSize": {"w":58,"h":59}
+},
+{
 	"filename": "OG_logo_fullcolor",
-	"frame": {"x":13,"y":1,"w":554,"h":212},
+	"frame": {"x":7,"y":1,"w":554,"h":212},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":23,"y":22,"w":554,"h":212},
@@ -63,6 +95,6 @@
 	"format": "RGBA8888",
 	"size": {"w":568,"h":542},
 	"scale": "0.75",
-	"smartupdate": "$TexturePacker:SmartUpdate:a7dc78e72cb7e394429827332f01a867:f55ede634f688082c42935fdafa32d76:537f0cea0960b73bc0729089dd5becb4$"
+	"smartupdate": "$TexturePacker:SmartUpdate:42cb4270e00c27db6ec48e799dccedba:be6144ced6278f071d473a672897f8ab:537f0cea0960b73bc0729089dd5becb4$"
 }
 }

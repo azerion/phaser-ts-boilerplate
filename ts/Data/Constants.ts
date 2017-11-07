@@ -22,4 +22,7 @@ class Constants {
     //Game distribution
     public static GAMEDISTRIBUTION_ID: string   = 'e84461aa105140b6b628d151e26c86cd';
     public static GAMEDISTRIBUTION_USER: string = 'ABD36C6C-E74B-4BA7-BE87-0AB01F98D30D-s1';
+
+    //Storage key
+    public static STORAGE_KEY: string          = 'bp_sg';
 }

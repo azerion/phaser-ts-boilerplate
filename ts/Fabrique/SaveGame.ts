@@ -10,8 +10,8 @@ module BoilerPlate {
 
             private game: Fabrique.IGame;
 
-            private musicOn: boolean = false;
-            private sfxOn: boolean = false;
+            private musicOn: boolean = true;
+            private sfxOn: boolean = true;
 
             //Use this callback if you need to call something after the saved data has been restored.
             private callback: () => void;
@@ -23,7 +23,7 @@ module BoilerPlate {
                 this.callbackContext = callbackContext;
 
                 //Check if data was saved before for this game
-                this.game.storage.getItem('sg').then((storedItem: any) => {
+                this.game.storage.getItem(Constants.STORAGE_KEY).then((storedItem: any) => {
                     if (storedItem === null || storedItem === undefined) {   //No save data found. Make the first save.
                         //Put music and sound effects on the first time
                         this.sfxOn = true;
@@ -36,6 +36,7 @@ module BoilerPlate {
                             this.callback.call(this.callbackContext);
                         }
                     } else {
+                        //Data has been save previously. Restore it.
                         this.restore();
                     }
                 });
@@ -80,7 +81,7 @@ module BoilerPlate {
                 });
                 let hash: string = this.hash(data);
 
-                this.game.storage.setItem('sg', data);
+                this.game.storage.setItem(Constants.STORAGE_KEY, data);
                 this.game.storage.setItem('h', hash);
             }
 
@@ -89,7 +90,7 @@ module BoilerPlate {
              */
             private restore(): void {
                 //restore the data
-                let storedData: any = this.game.storage.getItem('sg');
+                let storedData: any = this.game.storage.getItem(Constants.STORAGE_KEY);
                 let storedHash: any = this.game.storage.getItem('h');
 
                 let data: string;

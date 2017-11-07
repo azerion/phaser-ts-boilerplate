@@ -5,13 +5,13 @@ class Atlases {
      *  A list of all atlases we need for the preloader.
      */
     public static preloadList: string[] = [
-        Atlases.Interface
+        //Add atlases
     ];
 
     /**
      * A list of all atlases we need after the preloader.
      */
     public static list: string[] = [
-        //Add atlas containing images for the game
+        Atlases.Interface
     ];
 }

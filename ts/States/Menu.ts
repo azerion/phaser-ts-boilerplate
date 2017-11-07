@@ -9,6 +9,8 @@ module BoilerPlate {
         private logo: Phaser.Image;
         private testImgBtn: LabeledButton;
         private testGrBtn: LabeledButton;
+        private sfxBtn: Phaser.Image;
+        private musicBtn: Phaser.Image;
 
         constructor() {
             super();
@@ -17,8 +19,8 @@ module BoilerPlate {
         public init(): void {
             this.game.world.removeAll();
 
-            Save.Game.getInstance(this.game);
-            SoundManager.getInstance(this.game);
+            //Play background music.
+            SoundManager.getInstance(this.game).playMusic(Sounds.MenuMusic);
         }
 
         public create(): void {
@@ -27,7 +29,7 @@ module BoilerPlate {
             //Send a screen view to Google to track different states
             // this.game.analytics.google.sendScreenView(this.name);
 
-            this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_menu');
+            this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_orange');
 
             this.logo = this.game.add.image(0, 0, Atlases.Interface, 'OG_logo_fullcolor');
             this.logo.anchor.set(0.5);
@@ -35,27 +37,53 @@ module BoilerPlate {
             let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
 
             //This button uses images for textures, just like normal Phaser.Buttons
-            this.testImgBtn = new LabeledButton(this.game, 0, 0, 'LONG TEXT FITS IN BUTTON', textStyle, this.buttonClick, this);
+            this.testImgBtn = new LabeledButton(this.game, 0, 0, 'LONG TEXT FITS IN BUTTON', textStyle, this.startGame, this);
             this.testImgBtn.setFrames('btn_orange', 'btn_orange', 'btn_orange_onpress', 'btn_orange');
 
             //This button is made by generating the texture with graphics
             this.testGrBtn = new LabeledButton(this.game, 0, 0, 'PLAY', textStyle, this.startGame, this, 300, 100);
             this.testGrBtn.createTexture(0xf98f25);
 
-            this.resize();
-        }
+            this.sfxBtn = this.game.add.image(0, 0, Atlases.Interface, 'btn_sfx_off');
+            this.sfxBtn.inputEnabled = true;
+            this.sfxBtn.events.onInputUp.add(this.toggleSfx, this);
 
-        private buttonClick(): void {
-            SoundManager.getInstance().play(Sounds.Click);
+            this.musicBtn = this.game.add.image(0, 0, Atlases.Interface, 'btn_music_off');
+            this.musicBtn.inputEnabled = true;
+            this.musicBtn.events.onInputUp.add(this.toggleMusic, this);
+
+            this.resize();
+
+            this.updateSoundButtons();
         }
 
         /**
-         * Start the gameplay state
+         * Start the game play state
          */
         private startGame(): void {
-            SoundManager.getInstance().play(Sounds.Click);
-
             this.game.state.add(Gameplay.Name, Gameplay, true);
+        }
+
+        private toggleSfx(): void {
+            SoundManager.getInstance().toggleSfx();
+            this.updateSoundButtons();
+
+            SoundManager.getInstance().play(Sounds.Click);
+        }
+
+        private toggleMusic(): void {
+            SoundManager.getInstance().toggleMusic();
+            this.updateSoundButtons();
+
+            SoundManager.getInstance().play(Sounds.Click);
+        }
+
+        private updateSoundButtons(): void {
+            let sfxImg: string = Save.Game.getInstance().sfx ? 'btn_sfx_on' : 'btn_sfx_off';
+            this.sfxBtn.loadTexture(Atlases.Interface, sfxImg);
+
+            let musicImg: string = Save.Game.getInstance().music ? 'btn_music_on' : 'btn_music_off';
+            this.musicBtn.loadTexture(Atlases.Interface, musicImg);
         }
 
         /**
@@ -81,7 +109,7 @@ module BoilerPlate {
 
             //Set the new scaling and reposition the logo
             this.logo.scale.set(assetsScaling);
-            this.logo.alignIn(this.world.bounds, Phaser.CENTER, 0, -60 * Constants.GAME_SCALE);
+            this.logo.alignIn(this.world.bounds, Phaser.CENTER, 0, -80 * Constants.GAME_SCALE);
 
             //Do the same for the the buttons
             this.testImgBtn.updateScaling(assetsScaling);
@@ -91,6 +119,25 @@ module BoilerPlate {
             this.testGrBtn.updateScaling(assetsScaling);
             this.testGrBtn.x = this.logo.x + this.logo.x / 2;
             this.testGrBtn.y = this.testImgBtn.y;
+
+            this.musicBtn.scale.set(assetsScaling);
+            this.musicBtn.x = this.game.width - this.musicBtn.width * 1.5;
+            this.musicBtn.y = this.game.height - this.musicBtn.height * 1.1;
+
+            this.sfxBtn.scale.set(assetsScaling);
+            this.sfxBtn.x = this.musicBtn.x - this.sfxBtn.width * 1.5;
+            this.sfxBtn.y = this.musicBtn.y;
+        }
+
+        public shutdown(): void {
+            super.shutdown();
+
+            this.background = null;
+            this.logo = null;
+            this.testImgBtn = null;
+            this.testGrBtn = null;
+            this.sfxBtn = null;
+            this.musicBtn = null;
         }
     }
 }
