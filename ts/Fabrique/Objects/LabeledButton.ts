@@ -18,6 +18,8 @@ module BoilerPlate {
             this.label.anchor.set(0.5);
             this.addChild(this.label);
 
+            this.onInputUp.add(this.playSound, this);
+
             this.game.add.existing(this);
         }
 
@@ -47,6 +49,10 @@ module BoilerPlate {
             this.label.setText(text);
         }
 
+        /**
+         * Updates the scaling until the text fits the given size.
+         * @param {number} scale
+         */
         public updateScaling(scale: number): void {
             this.scale.set(scale);
 
@@ -65,6 +71,14 @@ module BoilerPlate {
             this.label = null;
 
             super.destroy(destroyChildren);
+        }
+
+        /**
+         * Play click sound every time the button is released.
+         * @param destroyChildren
+         */
+        private playSound(): void {
+            SoundManager.getInstance().play(Sounds.Click);
         }
     }
 }

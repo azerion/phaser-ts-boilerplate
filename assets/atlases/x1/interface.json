@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "bg_gameplay",
+	"filename": "bg_blue",
 	"frame": {"x":739,"y":1,"w":5,"h":720},
 	"rotated": false,
 	"trimmed": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":5,"h":720}
 },
 {
-	"filename": "bg_menu",
+	"filename": "bg_orange",
 	"frame": {"x":746,"y":1,"w":5,"h":720},
 	"rotated": false,
 	"trimmed": false,
@@ -33,6 +33,22 @@
 	"sourceSize": {"w":300,"h":108}
 },
 {
+	"filename": "btn_music_off",
+	"frame": {"x":303,"y":283,"w":105,"h":85},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":105,"h":85},
+	"sourceSize": {"w":105,"h":85}
+},
+{
+	"filename": "btn_music_on",
+	"frame": {"x":303,"y":370,"w":62,"h":85},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":62,"h":85},
+	"sourceSize": {"w":62,"h":85}
+},
+{
 	"filename": "btn_orange",
 	"frame": {"x":1,"y":503,"w":300,"h":108},
 	"rotated": false,
@@ -49,6 +65,22 @@
 	"sourceSize": {"w":300,"h":108}
 },
 {
+	"filename": "btn_sfx_off",
+	"frame": {"x":303,"y":457,"w":93,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":93,"h":78},
+	"sourceSize": {"w":93,"h":78}
+},
+{
+	"filename": "btn_sfx_on",
+	"frame": {"x":367,"y":370,"w":77,"h":78},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":77,"h":78},
+	"sourceSize": {"w":77,"h":78}
+},
+{
 	"filename": "OG_logo_fullcolor",
 	"frame": {"x":1,"y":1,"w":736,"h":280},
 	"rotated": false,
@@ -63,6 +95,6 @@
 	"format": "RGBA8888",
 	"size": {"w":752,"h":722},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a7dc78e72cb7e394429827332f01a867:f55ede634f688082c42935fdafa32d76:537f0cea0960b73bc0729089dd5becb4$"
+	"smartupdate": "$TexturePacker:SmartUpdate:42cb4270e00c27db6ec48e799dccedba:be6144ced6278f071d473a672897f8ab:537f0cea0960b73bc0729089dd5becb4$"
 }
 }

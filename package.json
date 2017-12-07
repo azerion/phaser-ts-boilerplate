@@ -23,7 +23,7 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/orange-games/phaser-ads/raw/master/LICENSE"
+      "url": "https://github.com/orange-games/phaser-ts-boilerplate/raw/master/LICENSE"
     }
   ],
   "repository": {
@@ -36,8 +36,9 @@
   },
   "private": true,
   "devDependencies": {
+    "@orange-games/phaser": "^2.6.4",
     "@types/es6-promise": "0.0.32",
-    "@types/webfontloader": "^1.6.27",
+    "@types/webfontloader": "^1.6.29",
     "grunt": "^1.0.1",
     "grunt-contrib-clean": "1.1.x",
     "grunt-contrib-connect": "1.0.x",
@@ -45,20 +46,18 @@
     "grunt-contrib-uglify": "3.0.x",
     "grunt-contrib-watch": "1.0.x",
     "grunt-html-build": "0.7.x",
-    "grunt-ts": "^6.0.0-beta.16",
+    "grunt-ts": "^6.0.0-beta.17",
     "grunt-tslint": "^3.0.3",
     "tslint": "^3.6.0",
-    "typescript": "2.4.x"
+    "typescript": "^2.4.2"
   },
   "dependencies": {
-    "@orange-games/phaser-ads": "^2.2.x",
+    "@orange-games/phaser-ads": "^2.2.4",
     "@orange-games/phaser-cachebuster": "^2.0.x",
-    "@orange-games/phaser-spine": "^3.0.x",
-    "@orange-games/phaser-super-storage": "^1.0.2",
-    "@orange-games/splash": "^3.5.x",
+    "@orange-games/phaser-spine": "^3.0.9",
+    "@orange-games/phaser-super-storage": "^1.0.4",
+    "@orange-games/splash": "^3.5.27",
     "es6-promise-polyfill": "^1.2.0",
-    "phaser": "^2.6.2",
-    "phaser-ce": "^2.8.3",
     "webfontloader": "^1.6.28"
   }
 }
