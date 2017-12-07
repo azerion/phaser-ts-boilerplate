@@ -10,8 +10,8 @@ export default class SaveGame {
 
     private game: IGame;
 
-    private musicOn: boolean = false;
-    private sfxOn: boolean = false;
+            private musicOn: boolean = true;
+            private sfxOn: boolean = true;
 
     //Use this callback if you need to call something after the saved data has been restored.
     private callback: () => void;
@@ -22,24 +22,25 @@ export default class SaveGame {
         this.callback = callback;
         this.callbackContext = callbackContext;
 
-        //Check if data was saved before for this game
-        this.game.storage.getItem('sg').then((storedItem: any) => {
-            if (storedItem === null || storedItem === undefined) {   //No save data found. Make the first save.
-                //Put music and sound effects on the first time
-                this.sfxOn = true;
-                this.musicOn = true;
+                //Check if data was saved before for this game
+                this.game.storage.getItem(Constants.STORAGE_KEY).then((storedItem: any) => {
+                    if (storedItem === null || storedItem === undefined) {   //No save data found. Make the first save.
+                        //Put music and sound effects on the first time
+                        this.sfxOn = true;
+                        this.musicOn = true;
 
                 //Make first save.
                 this.save();
 
-                if (this.callback && this.callbackContext) {
-                    this.callback.call(this.callbackContext);
-                }
-            } else {
-                this.restore();
+                        if (this.callback && this.callbackContext) {
+                            this.callback.call(this.callbackContext);
+                        }
+                    } else {
+                        //Data has been save previously. Restore it.
+                        this.restore();
+                    }
+                });
             }
-        });
-    }
 
     public static getInstance(game?: IGame, callback?: () => void, callbackContext?: any): SaveGame {
         if (!SaveGame.instance) {
@@ -80,17 +81,17 @@ export default class SaveGame {
         });
         let hash: string = this.hash(data);
 
-        this.game.storage.setItem('sg', data);
-        this.game.storage.setItem('h', hash);
-    }
+                this.game.storage.setItem(Constants.STORAGE_KEY, data);
+                this.game.storage.setItem('h', hash);
+            }
 
-    /**
-     * Restores a save game from storage
-     */
-    private restore(): void {
-        //restore the data
-        let storedData: any = this.game.storage.getItem('sg');
-        let storedHash: any = this.game.storage.getItem('h');
+            /**
+             * Restores a save game from storage
+             */
+            private restore(): void {
+                //restore the data
+                let storedData: any = this.game.storage.getItem(Constants.STORAGE_KEY);
+                let storedHash: any = this.game.storage.getItem(Constants.STORAGE_KEY + 'h');
 
         let data: string;
         let hash: string;

@@ -26,6 +26,9 @@ export default class Boot extends Phaser.State {
      * Small tweaks such as limiting input pointers, disabling right click context menu are placed here
      */
     public init(): void {
+        //Setup saved data
+        Save.Game.getInstance(this.game);
+
         //Setup analytics
         this.game.analytics.game.setup(GA_GAME_KEY, GA_SECRET_KEY, version, this.game.analytics.game.createUser());
         let sessionTime: number = Date.now();

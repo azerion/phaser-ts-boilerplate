@@ -46,10 +46,17 @@ export default class SoundManager {
         }
     }
 
-    public playMusic(key: string): void {
-        if (!SaveGame.getInstance().music) {
-            return;
-        }
+        public playMusic(key: string): void {
+            if (!Save.Game.getInstance().music) {
+                //Even though the music is currently turned off, keep track of the last music we wanted to play.
+                //This way, when we turn the music on again, we already know which song to play.
+                this.music = this.sound.play(key, 1, true);
+
+                //Stop the music right away. We just want to keep track of the song.
+                this.music.stop();
+
+                return;
+            }
 
         if (null === this.music || this.music.name !== key) {
             if (null !== this.music && this.music.name !== key) {

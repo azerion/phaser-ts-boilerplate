@@ -8,4 +8,7 @@ export default class Constants {
     public static CALCULATED_HEIGHT: number = 0;
     public static LANDSCAPE_LOCKED: boolean = false;
     public static PORTRAIT_LOCKED: boolean = false;
+
+    //Storage key
+    public static STORAGE_KEY: string          = 'bp_sg';
 }

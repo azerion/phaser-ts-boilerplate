@@ -24,6 +24,8 @@ export default class LabeledButton extends Phaser.Button {
         this.label.anchor.set(0.5);
         this.addChild(this.label);
 
+        this.onInputUp.add(this.playSound, this);
+
         this.game.add.existing(this);
     }
 
@@ -53,6 +55,10 @@ export default class LabeledButton extends Phaser.Button {
         this.label.setText(text);
     }
 
+    /**
+     * Updates the scaling until the text fits the given size.
+     * @param {number} scale
+     */
     public updateScaling(scale: number): void {
         this.scale.set(scale);
 
@@ -70,6 +76,15 @@ export default class LabeledButton extends Phaser.Button {
         this.id = null;
         this.label = null;
 
-        super.destroy(destroyChildren);
+            super.destroy(destroyChildren);
+        }
+
+        /**
+         * Play click sound every time the button is released.
+         * @param destroyChildren
+         */
+        private playSound(): void {
+            SoundManager.getInstance().play(Sounds.Click);
+        }
     }
 }
