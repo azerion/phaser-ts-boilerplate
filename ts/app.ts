@@ -1,13 +1,22 @@
+import 'p2';
+import 'pixi';
+import 'phaser';
+
+import * as WebFont from 'webfontloader';
+
+//The states
+import {Boot, Menu, Gameplay} from './States';
+
 //Module name should equal the game name
-module BoilerPlate {
+namespace BoilerPlate {
     export class Game extends Phaser.Game {
 
         constructor() {
             //We use Phaser's config object to create the game, since this is the only way to disable debugging
             super(<Phaser.IGameConfig>{
                 enableDebug: false,
-                width: Constants.GAME_WIDTH,
-                height: Constants.GAME_HEIGHT,
+                width: GAME_WIDTH,
+                height: GAME_HEIGHT,
                 renderer: Phaser.AUTO,
                 parent: 'content',
                 transparent: true,
@@ -30,7 +39,6 @@ module BoilerPlate {
                     this.gameResumed(e);
                 });
             });
-
             this.state.add('game', {create: this.stateCreator.bind(this), preload: this.statePreloader.bind(this)}, true);
         }
 
@@ -44,7 +52,7 @@ module BoilerPlate {
         }
 
         private stateCreator(): void {
-            //Here we load all the plugins
+            // //Here we load all the plugins
             this.plugins.add(Fabrique.Plugins.GameEvents);
             this.plugins.add(Fabrique.Plugins.GoogleAnalytics);
             this.plugins.add(Fabrique.Plugins.GameAnalytics);
@@ -52,7 +60,7 @@ module BoilerPlate {
             this.plugins.add(<any>PhaserSuperStorage.StoragePlugin);
             this.plugins.add(PhaserCachebuster.CacheBuster);
             this.plugins.add(PhaserSpine.SpinePlugin);
-
+            //
             (<any>this).storage.forcePromises = true;
 
             //Here we load all the states, but they shouldn't start automatically
@@ -100,3 +108,5 @@ module BoilerPlate {
         }
     }
 }
+
+new BoilerPlate.Game();

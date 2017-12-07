@@ -1,68 +1,78 @@
-module BoilerPlate {
-    export class Gameplay extends Phaser.State implements Fabrique.IState  {
-        public static Name: string = 'gameplay';
-        public static pause: boolean = false;
+import 'p2';
+import 'pixi';
+import 'phaser';
 
-        public name: string = Gameplay.Name;
-        public game: Fabrique.IGame;
+import IGame from '../Fabrique/IGame';
+import Label from '../Fabrique/Objects/Label';
+import LabeledButton from '../Fabrique/Objects/LabeledButton';
+import SoundManager from '../Fabrique/Managers/SoundManager';
 
-        private background: Phaser.Image;
-        private text: Label;
-        private backBtn: LabeledButton;
+import {Sounds, Constants, Atlases} from '../Data';
+import {Menu} from './';
 
-        constructor() {
-            super();
-        }
+export default class Gameplay extends Phaser.State {
+    public static Name: string = 'gameplay';
+    public static pause: boolean = false;
 
-        public init(): void {
-            this.game.world.removeAll();
+    public name: string = Gameplay.Name;
+    public game: IGame;
 
-            //Play background music
-            SoundManager.getInstance().playMusic(Sounds.GameMusic);
-        }
+    private background: Phaser.Image;
+    private text: Label;
+    private backBtn: LabeledButton;
 
-        public create(): void {
-            super.create();
+    constructor() {
+        super();
+    }
 
-            //Send a screen view to Google to track different states
-            // this.game.analytics.google.sendScreenView(this.name);
+    public init(): void {
+        this.game.world.removeAll();
 
-            this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_blue');
+        //Play background music
+        SoundManager.getInstance().playMusic(Sounds.GameMusic);
+    }
 
-            let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
+    public create(): void {
+        super.create();
 
-            this.text = new Label(this.game, 0, 0, 'This is the GAMEPLAY state.', textStyle);
+        //Send a screen view to Google to track different states
+        // this.game.analytics.google.sendScreenView(this.name);
 
-            this.backBtn = new LabeledButton(this.game, 0, 0, 'BACK', textStyle, this.startMenu, this, 300, 100);
-            this.backBtn.setFrames('btn_blue', 'btn_blue', 'btn_blue_onpress', 'btn_blue');
+        this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_blue');
 
-            this.resize();
-        }
+        let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
 
-        private startMenu(): void {
-            this.game.state.add(Menu.Name, Menu, true);
-        }
+        this.text = new Label(this.game, 0, 0, 'This is the GAMEPLAY state.', textStyle);
 
-        /**
-         * Called every time the rotation or game size has changed.
-         * Rescales and repositions the objects.
-         */
-        public resize(): void {
-            this.background.width = this.game.width;
-            this.background.height = this.game.height;
+        this.backBtn = new LabeledButton(this.game, 0, 0, 'BACK', textStyle, this.startMenu, this, 300, 100);
+        this.backBtn.setFrames('btn_blue', 'btn_blue', 'btn_blue_onpress', 'btn_blue');
 
-            this.text.alignIn(this.world.bounds, Phaser.CENTER);
+        this.resize();
+    }
 
-            this.backBtn.x = this.game.width / 2;
-            this.backBtn.y = this.text.y + this.text.height + this.backBtn.height;
-        }
+    private startMenu(): void {
+        this.game.state.add(Menu.Name, Menu, true);
+    }
 
-        public shutdown(): void {
-            super.shutdown();
+    /**
+     * Called every time the rotation or game size has changed.
+     * Rescales and repositions the objects.
+     */
+    public resize(): void {
+        this.background.width = this.game.width;
+        this.background.height = this.game.height;
 
-            this.background = null;
-            this.text = null;
-            this.backBtn = null;
-        }
+        this.text.alignIn(this.world.bounds, Phaser.CENTER);
+
+        this.backBtn.x = this.game.width / 2;
+        this.backBtn.y = this.text.y + this.text.height + this.backBtn.height;
+    }
+
+    public shutdown(): void {
+        super.shutdown();
+
+        this.background = null;
+        this.text = null;
+        this.backBtn = null;
     }
 }
