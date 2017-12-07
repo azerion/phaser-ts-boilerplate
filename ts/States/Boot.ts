@@ -4,7 +4,7 @@ import 'phaser';
 
 import IGame from '../Fabrique/IGame';
 import LoaderHelper from '../Fabrique/LoaderHelper';
-
+import SaveGame from '../Fabrique/SaveGame';
 import Menu from './Menu';
 
 import { Constants, Images, Atlases, Sounds } from '../Data';
@@ -27,7 +27,7 @@ export default class Boot extends Phaser.State {
      */
     public init(): void {
         //Setup saved data
-        Save.Game.getInstance(this.game);
+        SaveGame.getInstance(this.game);
 
         //Setup analytics
         this.game.analytics.game.setup(GA_GAME_KEY, GA_SECRET_KEY, version, this.game.analytics.game.createUser());

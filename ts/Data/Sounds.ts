@@ -1,4 +1,4 @@
-class Sounds {
+export default class Sounds {
     //Background music
     public static MenuMusic: string = 'doobly_doo';
     public static GameMusic: string = 'overworld';

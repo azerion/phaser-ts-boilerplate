@@ -11,8 +11,8 @@
         "isolatedModules": true
     },
     "files": [
-        "../node_modules/phaser/typescript/pixi.comments.d.ts",
-        "../node_modules/phaser/typescript/phaser.comments.d.ts",
+        "../node_modules/@orange-games/phaser/typescript/pixi.comments.d.ts",
+        "../node_modules/@orange-games/phaser/typescript/phaser.comments.d.ts",
         "../node_modules/@orange-games/phaser-spine/build/phaser-spine.d.ts",
         "../node_modules/@orange-games/phaser-ads/build/phaser-ads.d.ts",
         "../node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.d.ts",

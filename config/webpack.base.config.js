@@ -12,16 +12,15 @@ module.exports = {
         extensions: ['.ts', '.js'],
         alias: {
             pixi: path.join(basePath,
-                'node_modules/phaser/build/custom/pixi.js'),
+                'node_modules/@orange-games/phaser/build/custom/pixi.js'),
             phaser: path.join(basePath,
-                'node_modules/phaser/build/custom/phaser-split.js'),
-            p2: path.join(basePath, 'node_modules/phaser/build/custom/p2.js'),
+                'node_modules/@orange-games/phaser/build/custom/phaser-split.js'),
+            p2: path.join(basePath, 'node_modules/@orange-games/phaser/build/custom/p2.js'),
             assets: path.join(basePath, 'assets/'),
         },
     },
     plugins: [
         new webpack.DefinePlugin({
-            // Do not modify these manually, you may break things...
             'GAME_WIDTH': 1280,
             'GAME_HEIGHT': 720,
             'GA_GAME_KEY': JSON.stringify('64512ec40a7abc77a9e10de091ac9d6a'),
@@ -30,6 +29,7 @@ module.exports = {
             'GOOGLE_APP_NAME': JSON.stringify('Boilerplate'),
             'GAMEDISTRIBUTION_ID': JSON.stringify(config.gameId),
             'GAMEDISTRIBUTION_USER': JSON.stringify('ABD36C6C-E74B-4BA7-BE87-0AB01F98D30D-s1'),
+            'STORAGE_KEY': JSON.stringify(config.name)
         }),
         new HtmlWebpackPlugin({
             title: config.title,

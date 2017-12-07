@@ -3,7 +3,8 @@ import 'pixi';
 import 'phaser';
 
 import Label from './Label';
-import {Atlases, Constants} from '../../Data';
+import {Sounds, Atlases, Constants} from '../../Data';
+import SoundManager from '../Managers/SoundManager';
 
 export default class LabeledButton extends Phaser.Button {
     protected id: string;
@@ -76,15 +77,14 @@ export default class LabeledButton extends Phaser.Button {
         this.id = null;
         this.label = null;
 
-            super.destroy(destroyChildren);
-        }
+        super.destroy(destroyChildren);
+    }
 
-        /**
-         * Play click sound every time the button is released.
-         * @param destroyChildren
-         */
-        private playSound(): void {
-            SoundManager.getInstance().play(Sounds.Click);
-        }
+    /**
+     * Play click sound every time the button is released.
+     * @param destroyChildren
+     */
+    private playSound(): void {
+        SoundManager.getInstance().play(Sounds.Click);
     }
 }
