@@ -11,11 +11,6 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js'],
         alias: {
-            pixi: path.join(basePath,
-                'node_modules/@orange-games/phaser/build/custom/pixi.js'),
-            phaser: path.join(basePath,
-                'node_modules/@orange-games/phaser/build/custom/phaser-split.js'),
-            p2: path.join(basePath, 'node_modules/@orange-games/phaser/build/custom/p2.js'),
             assets: path.join(basePath, 'assets/'),
         },
     },
@@ -29,7 +24,11 @@ module.exports = {
             'GOOGLE_APP_NAME': JSON.stringify('Boilerplate'),
             'GAMEDISTRIBUTION_ID': JSON.stringify(config.gameId),
             'GAMEDISTRIBUTION_USER': JSON.stringify('ABD36C6C-E74B-4BA7-BE87-0AB01F98D30D-s1'),
-            'STORAGE_KEY': JSON.stringify(config.name)
+            'STORAGE_KEY': JSON.stringify(config.name),
+            'GAME_TITLE': JSON.stringify(config.name),
+            'GAME_VERSION': JSON.stringify(config.version),
+            'CANVAS_RENDERER': JSON.stringify(true),
+            'WEBGL_RENDERER': JSON.stringify(true)
         }),
         new HtmlWebpackPlugin({
             title: config.title,
@@ -42,18 +41,6 @@ module.exports = {
             {
                 test: /assets(\/|\\)/,
                 loader: 'file-loader?name=assets/[hash].[ext]',
-            },
-            {
-                test: /pixi\.js$/,
-                loader: 'expose-loader?PIXI',
-            },
-            {
-                test: /phaser-split\.js$/,
-                loader: 'expose-loader?Phaser',
-            },
-            {
-                test: /p2\.js$/,
-                loader: 'expose-loader?p2',
             },
             {
                 test: /\.ts$/,

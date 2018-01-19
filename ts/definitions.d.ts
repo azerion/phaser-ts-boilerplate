@@ -8,3 +8,5 @@ declare var GOOGLE_ID: string;
 declare var GOOGLE_APP_NAME: string;
 declare var GAMEDISTRIBUTION_ID: string;
 declare var GAMEDISTRIBUTION_USER: string;
+declare var GAME_TITLE: string;
+declare var GAME_VERSION: number;
