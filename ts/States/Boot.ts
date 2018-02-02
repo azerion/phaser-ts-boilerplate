@@ -9,7 +9,7 @@ import Menu from './Menu';
 
 import { Constants, Images, Atlases, Sounds } from '../Data';
 
-export default class Boot extends Phaser.State {
+export default class Boot extends Phaser.Scene {
     public static Name: string = 'boot';
 
     public name: string = Boot.Name;

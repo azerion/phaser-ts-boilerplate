@@ -46,6 +46,10 @@ module.exports = {
                 test: /\.ts$/,
                 loader: 'happypack/loader?id=ts',
                 exclude: '/node_modules/',
+            },
+            {
+                test: [ /\.vert$/, /\.frag$/ ],
+                use: 'raw-loader'
             }
         ],
     },
