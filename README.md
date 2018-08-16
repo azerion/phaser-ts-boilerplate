@@ -1,6 +1,6 @@
 Orange Games Boilerplate
 ========================
-
+![VerNicelyMadeBanner](http://static.orangegames.com/2017/02/OG_header_contact_new.png)
 Yet another Phaser Boilerplate, but instead of showing a working toolchain, this is all about fixing bugs, working around browser issues, analytics and advertising. This is the core of every HTML5 Orange Game :)
 
 Due to this boilerplate having no focus on the toolchain, we also asume in this readme that you have some basic knowledge about [grunt](https://gruntjs.com/), [npm](https://www.npmjs.com/) and [TypeScript](https://www.typescriptlang.org/)
@@ -225,12 +225,14 @@ Notable games
 
 We have over 100 games made with this boilerplate, here are some of our best titles:
 
-[![Game](http://cdn.fbrq.io/games/images/icons/twisted-city.png)][game1]
-[![Game](http://cdn.fbrq.io/games/images/icons/olli-ball.png)][game2]
-[![Game](http://cdn.fbrq.io/games/images/icons/bubble-burst.png)][game3]
-[![Game](http://cdn.fbrq.io/games/images/icons/fun-game-play-mahjong.png)][game4]
-[![Game](http://cdn.fbrq.io/games/images/icons/jewel-burst.png)][game5]
-[![Game](http://cdn.fbrq.io/games/images/icons/euro-football-kick-2016.png)][game6]
+[![Game](https://img.gamedistribution.com/405c00612981466cbc5d9dcef4214811.jpg)][game1]
+[![Game](https://img.gamedistribution.com/070d0680bbe24d5aafa44d8b9b629c2d-512x384.jpeg)][game2]
+[![Game](https://img.gamedistribution.com/f347269e389f432fa5abc257624c8165-512x384.jpeg)][game3]
+[![Game](https://img.gamedistribution.com/a1c4858cc2db451bb97c8e926257b49a-512x384.jpeg)][game4]
+[![Game](https://img.gamedistribution.com/21c1b91ec16c4f1fb6ae5b18ad792f13.jpg)][game5]
+[![Game](https://img.gamedistribution.com/b517c22cc727478aac466e0950fa26e7.jpg)][game6]
+[![Game](https://img.gamedistribution.com/b432cd4fa1bb45d1a072b9eefbcd47dc.jpg)][game7]
+[![Game](https://img.gamedistribution.com/6984522dd6714dd8b92b5285c6bc0ceb.jpg)][game8]
 
 Credits
 =======
@@ -252,9 +254,11 @@ Here you find a list of libraries used by the games in general. They link to the
 - [phaser-nineslice](https://github.com/orange-games/phaser-nineslice) A plugin that adds 9 slice scaling support
 - [phaser-input](https://github.com/orange-games/phaser-input) An input library that works on canvas and WebGL. Also has mobile support.
 
-[game1]: http://html5.GameDistribution.com/6984522dd6714dd8b92b5285c6bc0ceb/
-[game2]: http://html5.GameDistribution.com/5720633fecd545a188471d3ce7a7bbeb/
-[game3]: http://html5.GameDistribution.com/405c00612981466cbc5d9dcef4214811/
-[game4]: http://html5.GameDistribution.com/4b4ac998ef6c43958f82bb3a9819d2f3/
-[game5]: http://html5.GameDistribution.com/49258a0e497c42b5b5d87887f24d27a6/
-[game6]: http://html5.GameDistribution.com/b23deb025996424da64cf8f8cf986fd8/
+[game1]: http://gamedistribution.com/games/bubble-burst
+[game2]: http://gamedistribution.com/games/extreme-bikers
+[game3]: http://gamedistribution.com/games/world-football-kick-2018
+[game4]: http://gamedistribution.com/games/space-blaze-1
+[game5]: http://gamedistribution.com/games/mahjong-dynasty
+[game6]: http://gamedistribution.com/games/moving-up
+[game7]: http://gamedistribution.com/games/christmas-pong
+[game8]: http://gamedistribution.com/games/twisted-city

@@ -7,7 +7,7 @@ module Fabrique {
         events: Fabrique.Plugins.IPortalEvents;
         analytics: {
             google: Fabrique.Plugins.GoogleAnalytics,
-            game: Fabrique.Plugins.GameAnalytics,
+            game: Fabrique.Plugins.GameAnalytics
         };
         add: PhaserSpine.SpineObjectFactory;
         ads: PhaserAds.AdManager;

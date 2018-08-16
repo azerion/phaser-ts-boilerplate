@@ -52,23 +52,23 @@ module BoilerPlate {
 
             public get music(): boolean {
                 return this.musicOn;
-            };
+            }
 
             public set music(value: boolean) {
                 this.musicOn = value;
 
                 this.save();
-            };
+            }
 
             public get sfx(): boolean {
                 return this.sfxOn;
-            };
+            }
 
             public set sfx(value: boolean) {
                 this.sfxOn = value;
 
                 this.save();
-            };
+            }
 
             /**
              * Saves the game's data to storage
