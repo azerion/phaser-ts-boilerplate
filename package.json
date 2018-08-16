@@ -3,66 +3,64 @@
   "author": "OrangeGames",
   "gameId": "e84461aa105140b6b628d151e26c86cd",
   "title": "OrangeGames Fabrique Boilerplate",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "This is a boilerplate version for OrangeGames HTML5 games, use it at your discretion to make awesome games :D",
   "contributors": [
     {
       "name": "Ale Bles",
       "email": "a.bles@orangegames.com"
-    },
-    {
-      "name": "Illona"
-    },
-    {
-      "name": "Amy"
-    },
-    {
-      "name": "Nico"
     }
   ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/orange-games/phaser-ts-boilerplate/raw/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
+  "bugs": "https://github.com/orange-games/phaser-ts-boilerplate/issues",
   "repository": {
     "type": "git",
     "url": "git@github.com:orange-games/phaser-ts-boilerplate.git"
   },
   "scripts": {
-    "dev": "webpack-dev-server --config ./config/webpack.dev.config.js",
-    "dist": "webpack --config ./config/webpack.dist.config.js --progress --colors"
+    "dev": "grunt dev",
+    "dist": "grunt dist"
   },
   "private": true,
   "devDependencies": {
     "@types/es6-promise": "0.0.32",
     "@types/webfontloader": "^1.6.29",
-    "browser-sync": "^2.23.6",
-    "browser-sync-webpack-plugin": "^1.2.0",
-    "cache-loader": "^1.2.0",
-    "clean-webpack-plugin": "^0.1.18",
-    "copy-webpack-plugin": "^4.3.1",
-    "expose-loader": "^0.7.4",
-    "file-loader": "^1.1.6",
-    "fork-ts-checker-notifier-webpack-plugin": "^0.2.0",
-    "fork-ts-checker-webpack-plugin": "^0.2.10",
-    "happypack": "^4.0.1",
-    "html-webpack-plugin": "^2.30.1",
-    "raw-loader": "^0.5.1",
-    "ts-loader": "^3.4.0",
-    "tslint": "^5.9.1",
-    "tslint-loader": "^3.5.3",
-    "typescript": "2.5.x",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
+    "cache-loader": "^1.2.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "expose-loader": "^0.7.5",
+    "file-loader": "^1.1.11",
+    "fork-ts-checker-notifier-webpack-plugin": "^0.4.0",
+    "fork-ts-checker-webpack-plugin": "^0.4.8",
+    "grunt": "^1.0.3",
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-clean": "^1.1.x",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.X",
+    "grunt-contrib-obfuscator": "^2.0.1",
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-html-build": "^0.7.x",
+    "grunt-text-replace": "^0.4.0",
+    "grunt-webpack": "^3.1.2",
+    "happypack": "^5.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "imports-loader": "^0.8.0",
+    "load-grunt-config": "^0.19.2",
+    "script-loader": "^0.7.2",
+    "time-grunt": "^1.4.0",
+    "ts-loader": "^4.4.2",
+    "tslint": "^5.11.0",
+    "tslint-loader": "^3.6.0",
+    "typescript": "3.x.x",
+    "webpack": "^4.16.5"
   },
   "dependencies": {
-    "@orange-games/phaser-ads": "^2.2.4",
+    "@orange-games/phaser-ads": "^2.2.7",
     "@orange-games/phaser-cachebuster": "^2.0.x",
     "@orange-games/phaser-spine": "^3.0.9",
     "@orange-games/phaser-super-storage": "^1.0.4",
-    "@orange-games/splash": "^3.5.31",
+    "@orange-games/splash": "^3.5.42",
     "es6-promise-polyfill": "^1.2.0",
     "phaser": "^3.0.0-beta.20",
     "webfontloader": "^1.6.28"
