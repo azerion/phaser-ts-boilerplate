@@ -5,5 +5,11 @@
         "sourceMap": false,
         "declaration": false,
         "noImplicitAny":true
-    }
+    },
+    "include": [
+        "./ts/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }

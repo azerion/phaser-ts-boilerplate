@@ -1,15 +1,17 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
+
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui, shrink-to-fit=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- build:process -->
     <title><%= title %></title>
     <!-- /build -->
     <link rel="stylesheet" href="assets/css/app.css" type="text/css"/>
-    <!-- build:remove dist,custom -->
+    <!-- build:remove dist,facebook,cordova,custom -->
     <script src="@orange-games/phaser/build/phaser.min.js"></script>
     <script src="webfontloader/webfontloader.js"></script>
     <!-- /build -->
@@ -17,6 +19,7 @@
 <body>
 
 <div id="content"></div>
+<div id="orientation"></div>
 <div id="loader">Loading...</div>
 
 <script type="text/javascript">
@@ -57,25 +60,25 @@
 
     <!-- build:process -->
     <%= codeInjection %>
-    <!-- /build -->
+        <!-- /build -->
 
-    //This all here is for cache busting;
-    function addScript(src, buster, callback) {
-        var s = document.createElement('script');
-        s.setAttribute('src', src + '?v=' + buster);
-        if (typeof callback === 'function') {
-            s.onload = callback;
+        //This all here is for cache busting;
+        function addScript(src, buster, callback) {
+            var s = document.createElement('script');
+            s.setAttribute('src', src + '?v=' + buster);
+            if (typeof callback === 'function') {
+                s.onload = callback;
+            }
+            document.body.appendChild(s);
         }
-        document.body.appendChild(s);
-    }
 
     <!-- build:remove dev,custom -->
     addScript('version.js', Date.now(), function () {
-    <!-- /build -->
+        <!-- /build -->
         addScript(gameName, version, function () {
             new BoilerPlate.Game();
         });
-    <!-- build:remove dev,custom -->
+        <!-- build:remove dev,custom -->
     });
     <!-- /build -->
 </script>

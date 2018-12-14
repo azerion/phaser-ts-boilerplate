@@ -11,6 +11,9 @@ class Constants {
     public static LANDSCAPE_LOCKED: boolean = false;
     public static PORTRAIT_LOCKED: boolean = false;
 
+    //Game name
+    public static GAME_NAME: string             = 'og-fabrique-boilerplate';
+
     //Game Analytics
     public static GAME_KEY: string              = '64512ec40a7abc77a9e10de091ac9d6a';
     public static SECRET_KEY: string            = 'a5a926b1a0f140b149e20f2e206ccd03cdf0179a';
@@ -19,7 +22,7 @@ class Constants {
     public static GOOGLE_ID: string             = 'UA-78960661-2';
     public static GOOGLE_APP_NAME: string       = 'Boilerplate';
 
-    //Game distribution
+    //Game Distribution
     public static GAMEDISTRIBUTION_ID: string   = 'e84461aa105140b6b628d151e26c86cd';
     public static GAMEDISTRIBUTION_USER: string = 'ABD36C6C-E74B-4BA7-BE87-0AB01F98D30D-s1';
 

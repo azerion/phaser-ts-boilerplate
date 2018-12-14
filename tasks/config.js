@@ -24,10 +24,13 @@ module.exports = {
             'node_modules/@orange-games/phaser-spine/build/phaser-spine.min.js',
             'node_modules/@orange-games/phaser-super-storage/build/phaser-super-storage.min.js',
             'node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.min.js',
+            'node_modules/@orange-games/phaser-nineslice/build/phaser-nineslice.min.js',
+            'node_modules/@orange-games/phaser-i18next/build/phaser-i18next.min.js',
             'node_modules/@orange-games/splash/build/splash.min.js'
         ]),
         ads: {
-            pandoraId: ''
+            pandoraId: 'gd_',
+            cheetahId: 'gamekey_orangegame_'
         }
     },
     init: true

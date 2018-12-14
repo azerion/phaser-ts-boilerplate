@@ -10,3 +10,4 @@
 
 declare var version: string;
 declare var libs: string[];
+declare var phaserAdProvider: PhaserAds.AdProvider.IProvider;

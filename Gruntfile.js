@@ -7,7 +7,6 @@ module.exports = function (grunt) {
     require('time-grunt')(grunt);
     require('load-grunt-config')(grunt, config);
 
-
     //production build, we deploy this
     grunt.registerTask('dist', [
         'tslint:dist',
