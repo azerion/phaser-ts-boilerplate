@@ -28,7 +28,7 @@ module.exports = function() {
     myDevConfig.plugins = myDevConfig.plugins.concat([
         new webpack.DefinePlugin({
             'DEBUG': true,
-            'phaserAdProvider': `new PhaserAds.AdProvider.GameDistributionAds(this.game, '${config.gameId}')`
+            'phaserAdProvider': 'new PhaserAds.AdProvider.GameDistributionAds(this.game,\'<%= package.gameId %>\')'
         }),
         new HappyPack({
             id: 'ts',

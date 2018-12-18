@@ -1,8 +1,7 @@
 const buildFiles = [
     'node_modules/@orange-games/phaser/build/phaser.min.js',
-    'node_modules/@orange-games/phaser-i18next/build/phaser-i18next.js',
     'node_modules/webfontloader/webfontloader.js',
-    '_build/dist/<%= package.name %>-<%= package.version %>.js'
+    '_build/dist/<%= package.name %>.min.js'
 ];
 
 module.exports = {
@@ -26,10 +25,12 @@ module.exports = {
             'node_modules/@orange-games/phaser-super-storage/build/phaser-super-storage.min.js',
             'node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.min.js',
             'node_modules/@orange-games/phaser-nineslice/build/phaser-nineslice.min.js',
+            'node_modules/@orange-games/phaser-i18next/build/phaser-i18next.min.js',
             'node_modules/@orange-games/splash/build/splash.min.js'
         ]),
         ads: {
-            pandoraId: ''
+            pandoraId: 'gd_',
+            cheetahId: 'gamekey_orangegame_'
         }
     },
     init: true

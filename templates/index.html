@@ -3,13 +3,14 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui, shrink-to-fit=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- build:process -->
     <title><%= title %></title>
     <!-- /build -->
     <link rel="stylesheet" href="assets/css/app.css" type="text/css"/>
-    <!-- build:remove dist,custom -->
+    <!-- build:remove dist,facebook,cordova,custom -->
     <script src="@orange-games/phaser/build/phaser.min.js"></script>
     <script src="webfontloader/webfontloader.js"></script>
     <!-- /build -->
@@ -17,6 +18,7 @@
 <body>
 
 <div id="content"></div>
+<div id="orientation"></div>
 <div id="loader">Loading...</div>
 
 <script type="text/javascript">

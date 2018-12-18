@@ -19,10 +19,12 @@ module.exports = function(env) {
 
     let myDevConfig = webpackConfig;
     myDevConfig.devtool = 'inline-source-map';
+    myDevConfig.mode = 'production';
     myDevConfig.output = {
         path: path.join(basePath, '_build/dist'),
-        filename: config.name + '-' + config.version + '.js',
+        filename: config.name + '.min.js',
     };
+    myDevConfig.resolve.alias['adProvider'] = path.join(basePath,'node_modules/@orange-games/phaser/build/custom/phaser-split.min.js');
     myDevConfig.plugins = myDevConfig.plugins.concat([
         new webpack.DefinePlugin({
             'DEBUG': false,

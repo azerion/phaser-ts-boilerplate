@@ -49,12 +49,13 @@ export default class Boot extends Phaser.State {
             e.preventDefault();
         };
 
-        //Set up ads
-        this.game.ads.setAdProvider(new PhaserAds.AdProvider.GameDistributionAds(
-            this.game,
-            GAMEDISTRIBUTION_ID,
-            GAMEDISTRIBUTION_USER
-        ));
+        //Set up ads. The next line will be replaced by grunt-text-replace
+        let adProvider: PhaserAds.AdProvider.IProvider = phaserAdProvider;
+        this.game.ads.setAdProvider(adProvider);
+
+        if (window.hasOwnProperty('fbrqSA') && (window as any)['fbrqSA'] === true) {
+            Fabrique.Utils.ASSET_LOCATION = 'assets/';
+        }
 
         //Enable scaling
         if (this.game.device.desktop) {
@@ -200,6 +201,7 @@ export default class Boot extends Phaser.State {
         //TODO: If you DON'T want a custom preloader, uncomment this piece and preload the assets lists in the Boot or in the Menu states
         this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
             nextState: Menu.Name,
+            showPlayButton: (window.hasOwnProperty('playBtn')) ? (window as any)['playBtn'] : true,
             mobilePlayClickhandler: (): void => {
                 LoaderHelper.show();
                 this.game.ads.onContentPaused.addOnce((): void => {
@@ -239,6 +241,9 @@ export default class Boot extends Phaser.State {
                 });
 
                 Fabrique.Branding.preloadImages(this.game);
+                if (Fabrique.Branding.outGoingLinksAllowed()) {
+                    Fabrique.MoreGames.Menu.preloadImages(this.game);
+                }
             }
         });
     }
