@@ -6,5 +6,4 @@ declare var GA_GAME_KEY: string;
 declare var GA_SECRET_KEY: string;
 declare var GOOGLE_ID: string;
 declare var GOOGLE_APP_NAME: string;
-declare var GAMEDISTRIBUTION_ID: string;
-declare var GAMEDISTRIBUTION_USER: string;
+declare var phaserAdProvider: PhaserAds.AdProvider.IProvider;

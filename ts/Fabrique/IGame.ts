@@ -1,5 +1,5 @@
 /**
- * Add any other OG plugins here after loading them in app.ts
+ * Add any other Azerion plugins here after loading them in app.ts
  * e.g. phaser-nineslice
  */
 export default interface IGame extends Phaser.Game {

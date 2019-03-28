@@ -9,6 +9,9 @@ export default class Constants {
     public static LANDSCAPE_LOCKED: boolean = false;
     public static PORTRAIT_LOCKED: boolean = false;
 
+    //Game name
+    public static GAME_NAME: string             = 'og-fabrique-boilerplate';
+
     //Storage key
     public static STORAGE_KEY: string          = 'bp_sg';
 }

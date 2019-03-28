@@ -25,6 +25,10 @@ export default class Menu extends Phaser.State {
     private sfxBtn: Phaser.Image;
     private musicBtn: Phaser.Image;
 
+    private brandingLogo: Phaser.Image;
+    private moreGamesBtn: LabeledButton;
+    private moreGamesMenu: Fabrique.MoreGames.Menu = null;
+
     constructor() {
         super();
     }
@@ -44,7 +48,7 @@ export default class Menu extends Phaser.State {
 
         this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_orange');
 
-        this.logo = this.game.add.image(0, 0, Atlases.Interface, 'OG_logo_fullcolor');
+        this.logo = this.game.add.image(0, 0, Atlases.Interface, 'azerion_logo');
         this.logo.anchor.set(0.5);
 
         let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
@@ -64,6 +68,19 @@ export default class Menu extends Phaser.State {
         this.musicBtn = this.game.add.image(0, 0, Atlases.Interface, 'btn_music_off');
         this.musicBtn.inputEnabled = true;
         this.musicBtn.events.onInputUp.add(this.toggleMusic, this);
+
+        this.brandingLogo = Fabrique.Branding.getLogoWithLink(this.game, Constants.GAME_NAME);
+        this.game.add.existing(this.brandingLogo);
+        this.moreGamesBtn = new LabeledButton(this.game, 0, 0, 'MORE GAMES', textStyle, this.openMoreGamesMenu, this);
+        this.moreGamesBtn.setFrames('btn_orange', 'btn_orange', 'btn_orange_onpress', 'btn_orange');
+        if (Fabrique.Branding.outGoingLinksAllowed()) {
+            this.moreGamesMenu = new Fabrique.MoreGames.Menu(this.game, Constants.GAME_NAME);
+            this.moreGamesMenu.x = this.game.width / 2;
+            this.moreGamesMenu.y = this.game.height / 2;
+            this.game.add.existing(this.moreGamesMenu);
+        } else {
+            this.moreGamesBtn.visible = false;
+        }
 
         this.resize();
 
@@ -97,6 +114,11 @@ export default class Menu extends Phaser.State {
 
         let musicImg: string = SaveGame.getInstance().music ? 'btn_music_on' : 'btn_music_off';
         this.musicBtn.loadTexture(Atlases.Interface, musicImg);
+    }
+
+    private openMoreGamesMenu(): void {
+        this.game.world.bringToTop(this.moreGamesMenu);
+        this.moreGamesMenu.show();
     }
 
     /**
@@ -134,12 +156,17 @@ export default class Menu extends Phaser.State {
         this.testGrBtn.y = this.testImgBtn.y;
 
         this.musicBtn.scale.set(assetsScaling);
-        this.musicBtn.x = this.game.width - this.musicBtn.width * 1.5;
-        this.musicBtn.y = this.game.height - this.musicBtn.height * 1.1;
+        this.musicBtn.x = this.game.width - this.musicBtn.width * 1.25;
+        this.musicBtn.y = this.musicBtn.height * 0.5;
 
         this.sfxBtn.scale.set(assetsScaling);
-        this.sfxBtn.x = this.musicBtn.x - this.sfxBtn.width * 1.5;
+        this.sfxBtn.x = this.musicBtn.x - this.sfxBtn.width * 1.25;
         this.sfxBtn.y = this.musicBtn.y;
+
+        this.brandingLogo.y = this.game.height - this.brandingLogo.height * 1.5;
+        this.moreGamesBtn.updateScaling(assetsScaling * 0.75);
+        this.moreGamesBtn.x = this.game.width - this.moreGamesBtn.width * 0.9;
+        this.moreGamesBtn.y = this.game.height - this.moreGamesBtn.height * 0.75;
     }
 
     public shutdown(): void {

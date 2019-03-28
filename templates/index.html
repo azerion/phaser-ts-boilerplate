@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui, shrink-to-fit=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- build:process -->
+    <title><%= title %></title>
+    <!-- /build -->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css"/>
+    <!-- build:remove dist,facebook,cordova,custom -->
+    <script src="@azerion/phaser/build/phaser.min.js"></script>
+    <script src="webfontloader/webfontloader.js"></script>
+    <!-- /build -->
+</head>
+<body>
+
+<div id="content"></div>
+<div id="orientation"></div>
+<div id="loader">Loading...</div>
+
+<script type="text/javascript">
+    <!-- build:remove dist,custom -->
+    /**
+     * Script used for live reloading on development environments
+     * Not used for production!!!!
+     */
+    if (window.location.host !== 'teamcity.azerdev.com') {
+        (function (d, script) {
+            script = d.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.onload = function () {
+                // remote script has loaded
+            };
+            script.src = '//' + window.location.hostname + ':35729/livereload.js';
+            d.getElementsByTagName('head')[0].appendChild(script);
+        }(document));
+    }
+
+    /**
+     * Here we create the game
+     */
+    var version = 'dev',
+        libs = [
+            '@azerion/phaser-cachebuster/build/phaser-cachebuster.min.js',
+            '@azerion/phaser-spine/build/phaser-spine.min.js',
+            '@azerion/phaser-ads/build/phaser-ads.min.js',
+            '@azerion/phaser-nineslice/build/phaser-nineslice.min.js',
+            '@azerion/phaser-super-storage/build/phaser-super-storage.min.js',
+            '@azerion/splash/build/splash.js'
+        ];
+    <!-- /build -->
+
+    <!-- build:process -->
+    var gameName = "<%= gameName %>.min.js";
+    <!-- /build -->
+
+    <!-- build:process -->
+    <%= codeInjection %>
+    <!-- /build -->
+
+    //This all here is for cache busting;
+    function addScript(src, buster, callback) {
+        var s = document.createElement('script');
+        s.setAttribute('src', src + '?v=' + buster);
+        if (typeof callback === 'function') {
+            s.onload = callback;
+        }
+        document.body.appendChild(s);
+    }
+
+    <!-- build:remove dev,dist,custom -->
+    document.addEventListener("deviceready", function () {
+    <!-- /build -->
+    <!-- build:remove dev,custom -->
+    addScript('version.js', Date.now(), function () {
+    <!-- /build -->
+        addScript(gameName, version, function () {
+        });
+    <!-- build:remove dev,custom -->
+    });
+    <!-- /build -->
+        <!-- build:remove dev,dist,custom -->
+    });
+    <!-- /build -->
+</script>
+</body>
+</html>
