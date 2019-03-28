@@ -1,21 +1,21 @@
 {
-  "name": "og-fabrique-boilerplate",
-  "author": "OrangeGames",
+  "name": "azerion-fabrique-boilerplate",
+  "author": "Azerion",
   "gameId": "e84461aa105140b6b628d151e26c86cd",
-  "title": "OrangeGames Fabrique Boilerplate",
+  "title": "Azerion Phaser Boilerplate",
   "version": "1.3.0",
-  "description": "This is a boilerplate version for OrangeGames HTML5 games. Use it at your discretion to make awesome games :D",
+  "description": "This is a boilerplate version for Azerion HTML5 games. Use it at your discretion to make awesome games :D",
   "contributors": [
     {
       "name": "Ale Bles",
-      "email": "a.bles@orangegames.com"
+      "email": "a.bles@azerion.com"
     }
   ],
   "license": "MIT",
-  "bugs": "https://github.com/orange-games/phaser-ts-boilerplate/issues",
+  "bugs": "https://github.com/azerion/phaser-ts-boilerplate/issues",
   "repository": {
     "type": "git",
-    "url": "git@github.com:orange-games/phaser-ts-boilerplate.git"
+    "url": "git@github.com:azerion/phaser-ts-boilerplate.git"
   },
   "scripts": {
     "dev": "grunt dev",
@@ -24,10 +24,10 @@
   },
   "private": true,
   "devDependencies": {
-    "@orange-games/phaser": "^2.6.13",
+    "@azerion/phaser": "^2.6.13",
     "@types/es6-promise": "0.0.32",
     "@types/webfontloader": "^1.6.29",
-    "grunt": "^1.0.2",
+    "grunt": "^1.0.4",
     "grunt-contrib-clean": "^1.1.x",
     "grunt-contrib-connect": "^1.0.x",
     "grunt-contrib-copy": "^1.0.X",
@@ -37,25 +37,25 @@
     "grunt-html-build": "0.7.1",
     "grunt-http": "^2.3.1",
     "grunt-text-replace": "^0.4.0",
-    "grunt-ts": "^6.0.0-beta.21",
+    "grunt-ts": "^6.0.0-beta.22",
     "grunt-tslint": "^5.0.2",
+    "js-beautify": "1.6.2",
     "load-grunt-config": "^0.19.2",
     "time-grunt": "^1.4.0",
-    "tslint": "^5.0.0",
-    "typescript": "^2.4.x",
-    "js-beautify": "1.6.2"
+    "tslint": "^5.14.0",
+    "typescript": "^2.4.x"
   },
   "dependencies": {
-    "@orange-games/phaser-ads": "^2.2.7",
-    "@orange-games/phaser-cachebuster": "^2.0.0-rc.1",
-    "@orange-games/phaser-spine": "^3.0.9",
-    "@orange-games/phaser-super-storage": "^1.0.4",
-    "@orange-games/splash": "^3.5.43",
+    "@azerion/phaser-ads": "^2.2.7",
+    "@azerion/phaser-cachebuster": "^2.0.0-rc.1",
+    "@azerion/phaser-spine": "^3.0.9",
+    "@azerion/phaser-super-storage": "^1.0.4",
+    "@azerion/splash": "^3.5.43",
     "es6-promise-polyfill": "^1.2.0",
     "webfontloader": "^1.6.28"
   },
   "optionalDependencies": {
-    "@orange-games/phaser-ad-providers": "git+ssh://git@gitlab.orangegames.com:fabrique/phaser-ad-providers.git#v0.1.3",
-    "@orange-games/grunt-custom-build": "git+ssh://git@gitlab.orangegames.com:fabrique/tools/grunt-custom-build.git#v0.5.2"
+    "@azerion/phaser-ad-providers": "git+ssh://git@gitlab.azerdev.com:fabrique/phaser-ad-providers.git#v0.1.3",
+    "@azerion/grunt-custom-build": "git+ssh://git@gitlab.azerdev.com:fabrique/tools/grunt-custom-build.git#v0.5.2"
   }
 }

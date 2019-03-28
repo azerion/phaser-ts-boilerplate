@@ -1,7 +1,7 @@
-Orange Games Boilerplate
-========================
+Azerion Phaser Boilerplate
+==========================
 ![VerNicelyMadeBanner](http://static.orangegames.com/2017/02/OG_header_contact_new.png)
-Yet another Phaser Boilerplate, but instead of showing a working toolchain, this is all about fixing bugs, working around browser issues, analytics and advertising. This is the core of every HTML5 Orange Game :)
+Yet another Phaser Boilerplate, but instead of showing a working toolchain, this is all about fixing bugs, working around browser issues, analytics and advertising. This is the core of every HTML5 Azerion Game :)
 
 Due to this boilerplate having no focus on the toolchain, we also asume in this readme that you have some basic knowledge about [grunt](https://gruntjs.com/), [npm](https://www.npmjs.com/) and [TypeScript](https://www.typescriptlang.org/)
 
@@ -49,7 +49,7 @@ Done, without errors.
 ```
 
 So here we're gonna create the version of the current build, first and foremost it will help with cachebusting when uploading a new game, but it will also write some external packages to an array that allows us loading them from a cdn.
-Currently it will only add @orange-games namespaced packages to the array, but you can change it in the gruntFile to include any pacakge you want.
+Currently it will only add @azerion namespaced packages to the array, but you can change it in the gruntFile to include any pacakge you want.
 
 For the moment we use jsdelivr to load the packages.
 ```
@@ -244,15 +244,15 @@ Handy Sources / Links
 =====================
 Here you find a list of libraries used by the games in general. They link to the lib's respective docs
 
-- [phaser-cachebuster](https://github.com/orange-games/phaser-cachebuster) A Phaser plugin that allows for assets to be cachebusted by queryparameters
-- [phaser-ads](https://github.com/orange-games/phaser-ads) A Phaser plugin for providing nice ads integration in your phaser.io game
-- [phaser-spine](https://github.com/orange-games/phaser-spine) A plugin for Phaser that adds Spine support
-- [phaser-i18next](https://github.com/orange-games/phaser-i18next) Phaser plugin for translations using i18next
-- [phaser-web-workers](https://github.com/orange-games/phaser-web-workers) A simple Phaser plugin that allows you to easily integrate Web Workers in your game
-- [phaser-super-storage](https://github.com/orange-games/phaser-super-storage) A cross platform pluggable storage plugin for Phaser.
+- [phaser-cachebuster](https://github.com/azerion/phaser-cachebuster) A Phaser plugin that allows for assets to be cachebusted by queryparameters
+- [phaser-ads](https://github.com/azerion/phaser-ads) A Phaser plugin for providing nice ads integration in your phaser.io game
+- [phaser-spine](https://github.com/azerion/phaser-spine) A plugin for Phaser that adds Spine support
+- [phaser-i18next](https://github.com/azerion/phaser-i18next) Phaser plugin for translations using i18next
+- [phaser-web-workers](https://github.com/azerion/phaser-web-workers) A simple Phaser plugin that allows you to easily integrate Web Workers in your game
+- [phaser-super-storage](https://github.com/azerion/phaser-super-storage) A cross platform pluggable storage plugin for Phaser.
 - [webfontloader](https://github.com/typekit/webfontloader) A library that allows for 'good' loading of multiple fonts
-- [phaser-nineslice](https://github.com/orange-games/phaser-nineslice) A plugin that adds 9 slice scaling support
-- [phaser-input](https://github.com/orange-games/phaser-input) An input library that works on canvas and WebGL. Also has mobile support.
+- [phaser-nineslice](https://github.com/azerion/phaser-nineslice) A plugin that adds 9 slice scaling support
+- [phaser-input](https://github.com/azerion/phaser-input) An input library that works on canvas and WebGL. Also has mobile support.
 
 [game1]: http://gamedistribution.com/games/bubble-burst
 [game2]: http://gamedistribution.com/games/extreme-bikers

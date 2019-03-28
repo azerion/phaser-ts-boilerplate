@@ -1,8 +1,16 @@
 {"frames": [
 
 {
+	"filename": "azerion_logo",
+	"frame": {"x":1,"y":333,"w":209,"h":178},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":8,"w":209,"h":178},
+	"sourceSize": {"w":225,"h":194}
+},
+{
 	"filename": "bg_blue",
-	"frame": {"x":1,"y":1,"w":4,"h":540},
+	"frame": {"x":228,"y":1,"w":4,"h":540},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":4,"h":540},
@@ -10,7 +18,7 @@
 },
 {
 	"filename": "bg_orange",
-	"frame": {"x":563,"y":1,"w":4,"h":540},
+	"frame": {"x":234,"y":1,"w":4,"h":540},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":4,"h":540},
@@ -18,7 +26,7 @@
 },
 {
 	"filename": "btn_blue",
-	"frame": {"x":7,"y":215,"w":225,"h":81},
+	"frame": {"x":1,"y":1,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -26,7 +34,7 @@
 },
 {
 	"filename": "btn_blue_onpress",
-	"frame": {"x":234,"y":215,"w":225,"h":81},
+	"frame": {"x":1,"y":84,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -34,7 +42,7 @@
 },
 {
 	"filename": "btn_music_off",
-	"frame": {"x":461,"y":215,"w":79,"h":64},
+	"frame": {"x":1,"y":543,"w":79,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":64},
@@ -42,7 +50,7 @@
 },
 {
 	"filename": "btn_music_on",
-	"frame": {"x":7,"y":425,"w":47,"h":64},
+	"frame": {"x":82,"y":543,"w":47,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":64},
@@ -50,7 +58,7 @@
 },
 {
 	"filename": "btn_orange",
-	"frame": {"x":7,"y":342,"w":225,"h":81},
+	"frame": {"x":1,"y":167,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -58,7 +66,7 @@
 },
 {
 	"filename": "btn_orange_onpress",
-	"frame": {"x":234,"y":298,"w":225,"h":81},
+	"frame": {"x":1,"y":250,"w":225,"h":81},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":81},
@@ -66,7 +74,7 @@
 },
 {
 	"filename": "btn_sfx_off",
-	"frame": {"x":461,"y":281,"w":70,"h":59},
+	"frame": {"x":131,"y":513,"w":70,"h":59},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":59},
@@ -74,27 +82,19 @@
 },
 {
 	"filename": "btn_sfx_on",
-	"frame": {"x":461,"y":342,"w":58,"h":59},
+	"frame": {"x":131,"y":574,"w":58,"h":59},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":58,"h":59},
 	"sourceSize": {"w":58,"h":59}
-},
-{
-	"filename": "OG_logo_fullcolor",
-	"frame": {"x":7,"y":1,"w":554,"h":212},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":23,"y":22,"w":554,"h":212},
-	"sourceSize": {"w":600,"h":263}
 }],
 "meta": {
-	"app": "http://www.codeandweb.com/texturepacker",
+	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "interface.png",
 	"format": "RGBA8888",
-	"size": {"w":568,"h":542},
+	"size": {"w":239,"h":634},
 	"scale": "0.75",
-	"smartupdate": "$TexturePacker:SmartUpdate:42cb4270e00c27db6ec48e799dccedba:be6144ced6278f071d473a672897f8ab:537f0cea0960b73bc0729089dd5becb4$"
+	"smartupdate": "$TexturePacker:SmartUpdate:13731c974dfccdad0a53defc2a218a9c:e8ce388b1d4d991844beb6b3105403b1:537f0cea0960b73bc0729089dd5becb4$"
 }
 }

@@ -12,7 +12,7 @@
     <!-- /build -->
     <link rel="stylesheet" href="assets/css/app.css" type="text/css"/>
     <!-- build:remove dist,facebook,cordova,custom -->
-    <script src="@orange-games/phaser/build/phaser.min.js"></script>
+    <script src="@azerion/phaser/build/phaser.min.js"></script>
     <script src="webfontloader/webfontloader.js"></script>
     <!-- /build -->
 </head>
@@ -28,7 +28,7 @@
      * Script used for live reloading on development environments
      * Not used for production!!!!
      */
-    if (window.location.host !== 'generic.tc.ds.orangegames.com') {
+    if (window.location.host !== 'teamcity.azerdev.com') {
         (function (d, script) {
             script = d.createElement('script');
             script.type = 'text/javascript';
@@ -46,11 +46,12 @@
      */
     var version = 'dev',
         libs = [
-            '@orange-games/phaser-cachebuster/build/phaser-cachebuster.min.js',
-            '@orange-games/phaser-spine/build/phaser-spine.min.js',
-            '@orange-games/phaser-ads/build/phaser-ads.min.js',
-            '@orange-games/phaser-super-storage/build/phaser-super-storage.min.js',
-            '@orange-games/splash/build/splash.js'
+            '@azerion/phaser-cachebuster/build/phaser-cachebuster.min.js',
+            '@azerion/phaser-spine/build/phaser-spine.min.js',
+            '@azerion/phaser-ads/build/phaser-ads.min.js',
+            '@azerion/phaser-nineslice/build/phaser-nineslice.min.js',
+            '@azerion/phaser-super-storage/build/phaser-super-storage.min.js',
+            '@azerion/splash/build/splash.js'
         ];
     <!-- /build -->
 

@@ -35,8 +35,8 @@ module BoilerPlate {
 
             this.background = this.game.add.image(0, 0, Atlases.Interface, 'bg_orange');
 
-            this.logo = this.game.add.image(0, 0, Atlases.Interface, 'OG_logo_fullcolor');
-            this.logo.anchor.set(0.5);
+        this.logo = this.game.add.image(0, 0, Atlases.Interface, 'azerion_logo');
+        this.logo.anchor.set(0.5);
 
             let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
 

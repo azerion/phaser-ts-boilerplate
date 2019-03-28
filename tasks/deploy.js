@@ -2,7 +2,7 @@ const config = require('./config');
 
 module.exports = function (grunt) {
     //Setup for OG's deploy scripts (used internally)
-    const deployBuildDir = process.cwd() + '/node_modules/@orange-games/grunt-deploy/tasks';
+    const deployBuildDir = process.cwd() + '/node_modules/@azerion/grunt-deploy/tasks';
 
     if (grunt.file.exists(deployBuildDir)) {
         grunt.loadTasks(deployBuildDir);
