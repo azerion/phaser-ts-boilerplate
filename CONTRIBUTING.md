@@ -53,5 +53,5 @@ That is fine too. While Pull Requests are the best thing in the world for us, th
 
 Thanks to Rich for creating the Phaser Contributing file which we adapted for this plugin.
 
-[0]: https://github.com/orange-games/phaser-ts-boilerplate/issues
+[0]: https://github.com/azerion/phaser-ts-boilerplate/issues
 [3]: http://nodejs.org

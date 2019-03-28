@@ -2,7 +2,7 @@ const getEnvVar = require('./getEnvVar');
 
 module.exports = function (grunt) {
     function createURL(name, version) {
-        return 'https://cdn.jsdelivr.net/npm/@orange-games/' +
+        return 'https://cdn.jsdelivr.net/npm/@azerion/' +
             name +
             '@' +
             version +
@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     function getPkgInfo() {
 
         var pkgObj = grunt.config.get('package.dependencies');
-        var ogMarker = '@orange-games/';
+        var ogMarker = '@azerion/';
         var newPkgList = [];
         for(var key in pkgObj){
             if(pkgObj.hasOwnProperty(key)){

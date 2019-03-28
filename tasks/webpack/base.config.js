@@ -6,9 +6,9 @@ const basePath = path.join(__dirname, '../../');
 
 const config = require(path.join(basePath, 'package.json'));
 
-const Phaser = path.join(basePath,'node_modules/@orange-games/phaser/build/custom/phaser-split.min.js');
-const P2 = path.join(basePath, 'node_modules/@orange-games/phaser/build/custom/p2.js');
-const PIXI = path.join(basePath, 'node_modules/@orange-games/phaser/build/custom/pixi.js');
+const Phaser = path.join(basePath,'node_modules/@azerion/phaser/build/custom/phaser-split.min.js');
+const P2 = path.join(basePath, 'node_modules/@azerion/phaser/build/custom/p2.js');
+const PIXI = path.join(basePath, 'node_modules/@azerion/phaser/build/custom/pixi.js');
 
 module.exports = {
     entry: path.join(basePath, 'ts/app.ts'),

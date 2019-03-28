@@ -2,7 +2,7 @@ const config = require('./config');
 
 module.exports = function (grunt) {
     //Setup for OG's custom build (used internally)
-    const customBuildDir = process.cwd() + '/node_modules/@orange-games/grunt-custom-build/tasks';
+    const customBuildDir = process.cwd() + '/node_modules/@azerion/grunt-custom-build/tasks';
 
     if (grunt.file.exists(customBuildDir)) {
         grunt.loadTasks(customBuildDir);

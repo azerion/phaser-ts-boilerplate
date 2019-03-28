@@ -1,5 +1,5 @@
 const buildFiles = [
-    'node_modules/@orange-games/phaser/build/phaser.min.js',
+    'node_modules/@azerion/phaser/build/phaser.min.js',
     'node_modules/webfontloader/webfontloader.js',
     '_build/dist/<%= package.name %>.min.js'
 ];
@@ -20,13 +20,13 @@ module.exports = {
         //Get some details from the package.json
         partialBuild: buildFiles,
         fullBuild: buildFiles.concat([
-            'node_modules/@orange-games/phaser-ads/build/phaser-ads.min.js',
-            'node_modules/@orange-games/phaser-spine/build/phaser-spine.min.js',
-            'node_modules/@orange-games/phaser-super-storage/build/phaser-super-storage.min.js',
-            'node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.min.js',
-            'node_modules/@orange-games/phaser-nineslice/build/phaser-nineslice.min.js',
-            'node_modules/@orange-games/phaser-i18next/build/phaser-i18next.min.js',
-            'node_modules/@orange-games/splash/build/splash.min.js'
+            'node_modules/@azerion/phaser-ads/build/phaser-ads.min.js',
+            'node_modules/@azerion/phaser-spine/build/phaser-spine.min.js',
+            'node_modules/@azerion/phaser-super-storage/build/phaser-super-storage.min.js',
+            'node_modules/@azerion/phaser-cachebuster/build/phaser-cachebuster.min.js',
+            'node_modules/@azerion/phaser-nineslice/build/phaser-nineslice.min.js',
+            'node_modules/@azerion/phaser-i18next/build/phaser-i18next.min.js',
+            'node_modules/@azerion/splash/build/splash.min.js'
         ]),
         ads: {
             pandoraId: 'gd_',
