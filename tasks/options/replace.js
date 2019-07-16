@@ -8,11 +8,11 @@ module.exports = {
         }]
     },
     gd: {
-        src: ['_build/dist/<%= package.name %>-<%= package.version %>.js'],
+        src: ['_build/dist/<%= package.name %>.min.js'],
         overwrite: true,
         replacements: [{
             from: 'phaserAdProvider',
             to: 'new PhaserAds.AdProvider.GameDistributionAds(this.game,\'<%= package.gameId %>\')'
         }]
     }
-}
+};

@@ -3,9 +3,9 @@ import 'pixi';
 import 'phaser';
 
 import IGame from '../Fabrique/IGame';
-import Label from '../Fabrique/Objects/Label';
-import LabeledButton from '../Fabrique/Objects/LabeledButton';
-import SoundManager from '../Fabrique/Managers/SoundManager';
+import Label from '../Objects/Label';
+import LabeledButton from '../Objects/LabeledButton';
+import SoundManager from '../Managers/SoundManager';
 
 import {Sounds, Constants, Atlases} from '../Data';
 import {Menu} from './';
@@ -42,9 +42,9 @@ export default class Gameplay extends Phaser.State {
 
         let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
 
-        this.text = new Label(this.game, 0, 0, 'This is the GAMEPLAY state.', textStyle);
+        this.text = new Label(this.game, 0, 0, 'time_to_play', textStyle);
 
-        this.backBtn = new LabeledButton(this.game, 0, 0, 'BACK', textStyle, this.startMenu, this, 300, 100);
+        this.backBtn = new LabeledButton(this.game, 0, 0, 'back', textStyle, this.startMenu, this, 300, 100);
         this.backBtn.setFrames('btn_blue', 'btn_blue', 'btn_blue_onpress', 'btn_blue');
 
         this.resize();

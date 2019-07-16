@@ -12,4 +12,4 @@ module.exports = function (grunt) {
             grunt.fail.warn('grunt-custom-build not installed, unable to create custom build');
         });
     }
-}
+};

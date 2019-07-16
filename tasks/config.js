@@ -1,5 +1,6 @@
 const buildFiles = [
     'node_modules/@azerion/phaser/build/phaser.min.js',
+    'node_modules/@azerion/phaser-i18next/build/phaser-i18next.min.js',
     'node_modules/webfontloader/webfontloader.js',
     '_build/dist/<%= package.name %>.min.js'
 ];
@@ -30,7 +31,7 @@ module.exports = {
         ]),
         ads: {
             pandoraId: 'gd_',
-            cheetahId: 'gamekey_orangegame_'
+            cheetahId: 'gamekey_azerion_'
         }
     },
     init: true

@@ -12,4 +12,4 @@ module.exports = function (grunt) {
             grunt.fail.warn('grunt-deploy not installed, unable to deploy game');
         });
     }
-}
+};

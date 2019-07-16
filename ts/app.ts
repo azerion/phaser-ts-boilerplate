@@ -43,7 +43,7 @@ namespace BoilerPlate {
         }
 
         /**
-         * Here we load all the orange games scripts we need
+         * Here we load all the Azerion scripts we need
          */
         private statePreloader(): void {
             libs.forEach((library: string) => {
@@ -60,7 +60,16 @@ namespace BoilerPlate {
             this.plugins.add(<any>PhaserSuperStorage.StoragePlugin);
             this.plugins.add(PhaserCachebuster.CacheBuster);
             this.plugins.add(PhaserSpine.SpinePlugin);
-            //
+            this.plugins.add(PhaserI18n.Plugin, {
+                //Configure the language we fall back to (defaults to 'dev')
+                fallbackLng: 'en',
+                //debug: true,
+                load: 'languageOnly',
+                backend: {
+                    loadPath: 'assets/locales/locale_{{lng}}.json'
+                }
+            });
+
             (<any>this).storage.forcePromises = true;
 
             //Here we load all the states, but they shouldn't start automatically

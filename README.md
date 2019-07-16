@@ -1,6 +1,6 @@
 Azerion Phaser Boilerplate
 ==========================
-![VerNicelyMadeBanner](http://static.orangegames.com/2017/02/OG_header_contact_new.png)
+![VerNicelyMadeBanner](http://static.azerion.com/2017/02/OG_header_contact_new.png)
 Yet another Phaser Boilerplate, but instead of showing a working toolchain, this is all about fixing bugs, working around browser issues, analytics and advertising. This is the core of every HTML5 Azerion Game :)
 
 Due to this boilerplate having no focus on the toolchain, we also assume in this readme that you have some basic knowledge about [webpack](https://http://webpack.github.io/), [npm](https://www.npmjs.com/) and [TypeScript](https://www.typescriptlang.org/)

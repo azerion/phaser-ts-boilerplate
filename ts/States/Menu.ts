@@ -4,13 +4,15 @@ import 'phaser';
 
 import IGame from '../Fabrique/IGame';
 
-import SoundManager from '../Fabrique/Managers/SoundManager';
-import SaveGame from '../Fabrique/SaveGame';
-import LabeledButton from '../Fabrique/Objects/LabeledButton';
+import SoundManager from '../Managers/SoundManager';
+import LabeledButton from '../Objects/LabeledButton';
 
 import {Constants, Atlases, Sounds} from '../Data';
 
 import Gameplay from './Gameplay';
+import LanguageMenu from '../Objects/LanguageMenu';
+import ToggleButton from '../Objects/ToggleButton';
+import SaveDataManager from '../Managers/SaveDataManager';
 
 export default class Menu extends Phaser.State {
     public static Name: string = 'menu';
@@ -22,8 +24,9 @@ export default class Menu extends Phaser.State {
     private logo: Phaser.Image;
     private testImgBtn: LabeledButton;
     private testGrBtn: LabeledButton;
-    private sfxBtn: Phaser.Image;
-    private musicBtn: Phaser.Image;
+    private sfxBtn: ToggleButton;
+    private musicBtn: ToggleButton;
+    private languageMenu: LanguageMenu;
 
     private brandingLogo: Phaser.Image;
     private moreGamesBtn: LabeledButton;
@@ -54,26 +57,26 @@ export default class Menu extends Phaser.State {
         let textStyle: any = {font: 'bold ' + 30 * Constants.GAME_SCALE + 'px Arial', fill: '#FFFFFF'};
 
         //This button uses images for textures, just like normal Phaser.Buttons
-        this.testImgBtn = new LabeledButton(this.game, 0, 0, 'LONG TEXT FITS IN BUTTON', textStyle, this.startGame, this);
+        this.testImgBtn = new LabeledButton(this.game, 0, 0, 'long_text', textStyle, this.startGame, this);
         this.testImgBtn.setFrames('btn_orange', 'btn_orange', 'btn_orange_onpress', 'btn_orange');
 
         //This button is made by generating the texture with graphics
-        this.testGrBtn = new LabeledButton(this.game, 0, 0, 'PLAY', textStyle, this.startGame, this, 300, 100);
+        this.testGrBtn = new LabeledButton(this.game, 0, 0, 'play', textStyle, this.startGame, this, 300, 100);
         this.testGrBtn.createTexture(0xf98f25);
 
-        this.sfxBtn = this.game.add.image(0, 0, Atlases.Interface, 'btn_sfx_off');
-        this.sfxBtn.inputEnabled = true;
-        this.sfxBtn.events.onInputUp.add(this.toggleSfx, this);
+        this.sfxBtn = new ToggleButton(this.game, 0, 0, 'btn_sfx_on', 'btn_sfx_off', this.toggleSfx, this);
 
-        this.musicBtn = this.game.add.image(0, 0, Atlases.Interface, 'btn_music_off');
-        this.musicBtn.inputEnabled = true;
-        this.musicBtn.events.onInputUp.add(this.toggleMusic, this);
+        this.musicBtn = new ToggleButton(this.game, 0, 0, 'btn_music_on', 'btn_music_off', this.toggleMusic, this);
+
+        this.languageMenu = new LanguageMenu(this.game);
+        this.languageMenu.onLanguageChange.add(this.updateText, this);
 
         this.brandingLogo = Fabrique.Branding.getLogoWithLink(this.game, Constants.GAME_NAME);
         this.game.add.existing(this.brandingLogo);
-        this.moreGamesBtn = new LabeledButton(this.game, 0, 0, 'MORE GAMES', textStyle, this.openMoreGamesMenu, this);
+
+        this.moreGamesBtn = new LabeledButton(this.game, 0, 0, 'more_games', textStyle, this.openMoreGamesMenu, this);
         this.moreGamesBtn.setFrames('btn_orange', 'btn_orange', 'btn_orange_onpress', 'btn_orange');
-        if (Fabrique.Branding.outGoingLinksAllowed()) {
+        if (Fabrique.Branding.outGoingLinksAllowed(this.game)) {
             this.moreGamesMenu = new Fabrique.MoreGames.Menu(this.game, Constants.GAME_NAME);
             this.moreGamesMenu.x = this.game.width / 2;
             this.moreGamesMenu.y = this.game.height / 2;
@@ -96,24 +99,32 @@ export default class Menu extends Phaser.State {
 
     private toggleSfx(): void {
         SoundManager.getInstance().toggleSfx();
-        this.updateSoundButtons();
-
         SoundManager.getInstance().play(Sounds.Click);
+
+        this.sfxBtn.toggle();
+        this.updateSoundButtons();
     }
 
     private toggleMusic(): void {
         SoundManager.getInstance().toggleMusic();
-        this.updateSoundButtons();
-
         SoundManager.getInstance().play(Sounds.Click);
+
+        this.musicBtn.toggle();
+        this.updateSoundButtons();
     }
 
     private updateSoundButtons(): void {
-        let sfxImg: string = SaveGame.getInstance().sfx ? 'btn_sfx_on' : 'btn_sfx_off';
+        let sfxImg: string = SaveDataManager.getInstance().sfx ? 'btn_sfx_on' : 'btn_sfx_off';
         this.sfxBtn.loadTexture(Atlases.Interface, sfxImg);
 
-        let musicImg: string = SaveGame.getInstance().music ? 'btn_music_on' : 'btn_music_off';
+        let musicImg: string = SaveDataManager.getInstance().music ? 'btn_music_on' : 'btn_music_off';
         this.musicBtn.loadTexture(Atlases.Interface, musicImg);
+    }
+
+    private updateText(): void {
+        this.testImgBtn.setText('long_text');
+        this.testGrBtn.setText('play');
+        this.moreGamesBtn.setText('more_games');
     }
 
     private openMoreGamesMenu(): void {
@@ -144,24 +155,27 @@ export default class Menu extends Phaser.State {
 
         //Set the new scaling and reposition the logo
         this.logo.scale.set(assetsScaling);
-        this.logo.alignIn(this.world.bounds, Phaser.CENTER, 0, -80 * Constants.GAME_SCALE);
+        this.logo.alignIn(this.world.bounds, Phaser.CENTER, 0, -100 * Constants.GAME_SCALE);
 
         //Do the same for the the buttons
         this.testImgBtn.updateScaling(assetsScaling);
         this.testImgBtn.x = this.logo.x / 2;
-        this.testImgBtn.y = this.logo.y + this.logo.height * 0.65;
+        this.testImgBtn.y = this.logo.y + this.logo.height * 0.9;
 
         this.testGrBtn.updateScaling(assetsScaling);
         this.testGrBtn.x = this.logo.x + this.logo.x / 2;
         this.testGrBtn.y = this.testImgBtn.y;
 
+        let buttonOffset: number = 10 * Constants.GAME_SCALE;
+        this.languageMenu.resize(this.game.width - this.languageMenu.width * 0.5 - buttonOffset, this.musicBtn.height * 0.5 + buttonOffset, assetsScaling);
+
         this.musicBtn.scale.set(assetsScaling);
-        this.musicBtn.x = this.game.width - this.musicBtn.width * 1.25;
-        this.musicBtn.y = this.musicBtn.height * 0.5;
+        this.musicBtn.x = this.languageMenu.x - (this.languageMenu.width + this.musicBtn.width) * 0.5 - buttonOffset;
+        this.musicBtn.y = this.languageMenu.y;
 
         this.sfxBtn.scale.set(assetsScaling);
-        this.sfxBtn.x = this.musicBtn.x - this.sfxBtn.width * 1.25;
-        this.sfxBtn.y = this.musicBtn.y;
+        this.sfxBtn.x = this.musicBtn.x - (this.musicBtn.width + this.sfxBtn.width) * 0.5 - buttonOffset;
+        this.sfxBtn.y = this.languageMenu.y;
 
         this.brandingLogo.y = this.game.height - this.brandingLogo.height * 1.5;
         this.moreGamesBtn.updateScaling(assetsScaling * 0.75);

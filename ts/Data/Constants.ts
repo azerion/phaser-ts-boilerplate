@@ -14,4 +14,6 @@ export default class Constants {
 
     //Storage key
     public static STORAGE_KEY: string          = 'bp_sg';
+
+    public static AVAILABLE_LANGUAGES: string[] = ['en', 'nl', 'es', 'fr', 'it'];
 }

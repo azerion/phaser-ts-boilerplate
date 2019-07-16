@@ -3,7 +3,7 @@ import 'pixi';
 import 'phaser';
 
 import Label from './Label';
-import {Sounds, Atlases, Constants} from '../../Data';
+import {Sounds, Atlases, Constants} from '../Data';
 import SoundManager from '../Managers/SoundManager';
 
 export default class LabeledButton extends Phaser.Button {

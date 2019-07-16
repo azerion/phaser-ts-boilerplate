@@ -1,4 +1,4 @@
-import SaveGame from '../SaveGame';
+import SaveDataManager from './SaveDataManager';
 
 export default class SoundManager {
     private static instance: SoundManager = null;
@@ -28,7 +28,7 @@ export default class SoundManager {
     }
 
     public play(key: string, volume: number = 1, loop: boolean = false): Phaser.Sound {
-        if (!SaveGame.getInstance().sfx) {
+        if (!SaveDataManager.getInstance().sfx) {
             return null;
         }
 
@@ -47,7 +47,7 @@ export default class SoundManager {
     }
 
     public playMusic(key: string): void {
-        if (!SaveGame.getInstance().music) {
+        if (!SaveDataManager.getInstance().music) {
             //Even though the music is currently turned off, keep track of the last music we wanted to play.
             //This way, when we turn the music on again, we already know which song to play.
             this.music = this.sound.play(key, 1, true);
@@ -84,13 +84,13 @@ export default class SoundManager {
     }
 
     public toggleSfx(): void {
-        SaveGame.getInstance().sfx = !SaveGame.getInstance().sfx;
+        SaveDataManager.getInstance().sfx = !SaveDataManager.getInstance().sfx;
     }
 
     public toggleMusic(): void {
-        SaveGame.getInstance().music = !SaveGame.getInstance().music;
+        SaveDataManager.getInstance().music = !SaveDataManager.getInstance().music;
 
-        if (!SaveGame.getInstance().music) {
+        if (!SaveDataManager.getInstance().music) {
             if (this.music && this.music.isPlaying) {
                 this.stopMusic();
             }

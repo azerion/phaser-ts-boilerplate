@@ -10,4 +10,4 @@ module.exports = function (grunt) {
     grunt.registerTask('ts:dist', 'Placeholder for deploy build', () => {
         grunt.task.run('webpack:dist');
     });
-}
+};
