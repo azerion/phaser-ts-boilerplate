@@ -2,7 +2,7 @@
   "name": "og-fabrique-boilerplate",
   "author": "Azerion",
   "gameId": "e84461aa105140b6b628d151e26c86cd",
-  "title": "OrangeGames Fabrique Boilerplate",
+  "title": "Azerion Fabrique Boilerplate",
   "version": "2.1.0",
   "description": "This is a boilerplate version for Azerion HTML5 games. Use it at your discretion to make awesome games :D",
   "contributors": [
@@ -24,7 +24,8 @@
   },
   "private": true,
   "devDependencies": {
-    "@azerion/phaser": "^2.6.13",
+    "@azerion/phaser": "^2.6.15",
+    "@azerion/phaser-i18next": "^1.0.3",
     "@types/es6-promise": "0.0.32",
     "@types/webfontloader": "^1.6.29",
     "cache-loader": "^1.2.5",
@@ -52,11 +53,11 @@
     "script-loader": "^0.7.2",
     "time-grunt": "^1.4.0",
     "ts-loader": "^4.5.0",
-    "tslint": "^5.14.0",
+    "tslint": "^5.18.0",
     "tslint-loader": "^3.6.0",
-    "typescript": "^3.3.4000",
-    "webpack": "^4.29.6",
-    "x2js": "^3.2.6"
+    "typescript": "^3.5.2",
+    "webpack": "^4.35.2",
+    "x2js": "^3.3.0"
   },
   "dependencies": {
     "@azerion/phaser-ads": "^2.2.7",
@@ -64,12 +65,12 @@
     "@azerion/phaser-nineslice": "^2.0.1",
     "@azerion/phaser-spine": "^3.0.9",
     "@azerion/phaser-super-storage": "^1.0.4",
-    "@azerion/splash": "^3.5.44",
+    "@azerion/splash": "^3.6.5",
     "es6-promise-polyfill": "^1.2.0",
     "webfontloader": "^1.6.28"
   },
   "optionalDependencies": {
-    "@azerion/phaser-ad-providers": "git+ssh://git@gitlab.azerdev.com:fabrique/phaser-ad-providers.git#v0.1.3",
-    "@azerion/grunt-custom-build": "git+ssh://git@gitlab.azerdev.com:fabrique/tools/grunt-custom-build.git#v0.5.2"
+    "@azerion/phaser-ad-providers": "git+ssh://git@gitlab.azerdev.com:fabrique/phaser-ad-providers.git#v0.5.x",
+    "@azerion/grunt-custom-build": "git+ssh://git@gitlab.azerdev.com:fabrique/tools/grunt-custom-build.git#v0.7.x"
   }
 }

@@ -38,7 +38,7 @@ module.exports = {
         rules: [
             {
                 test: /assets(\/|\\)/,
-                loader: 'file-loader?name=assets/[hash].[ext]',
+                loader: 'file-loader?name=assets/[hash].[ext]'
             },
             {
                 test: require.resolve(PIXI),
@@ -55,8 +55,8 @@ module.exports = {
             {
                 test: /\.ts$/,
                 loader: 'happypack/loader?id=ts',
-                exclude: '/node_modules/',
+                exclude: '/node_modules/'
             }
-        ],
-    },
+        ]
+    }
 };

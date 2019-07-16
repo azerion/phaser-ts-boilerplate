@@ -22,12 +22,12 @@ module.exports = function(env) {
     myDevConfig.mode = 'production';
     myDevConfig.output = {
         path: path.join(basePath, '_build/dist'),
-        filename: config.name + '.min.js',
+        filename: config.name + '.min.js'
     };
     myDevConfig.resolve.alias['adProvider'] = path.join(basePath,'node_modules/@azerion/phaser/build/custom/phaser-split.min.js');
     myDevConfig.plugins = myDevConfig.plugins.concat([
         new webpack.DefinePlugin({
-            'DEBUG': false,
+            'DEBUG': false
         }),
         new HappyPack({
             id: 'ts',
@@ -35,16 +35,16 @@ module.exports = function(env) {
                 'cache-loader',
                 {
                     path: 'ts-loader',
-                    query: {happyPackMode: true},
-                },
-            ],
+                    query: {happyPackMode: true}
+                }
+            ]
         }),
         new ForkTsCheckerWebpackPlugin({
             checkSyntacticErrors: true,
             tslint: path.join(basePath, 'tslint.json'),
-            tsconfig: path.join(basePath, 'tsconfig.json'),
+            tsconfig: path.join(basePath, 'tsconfig.json')
         }),
-        new ForkTsCheckerNotifierWebpackPlugin({alwaysNotify: true}),
+        new ForkTsCheckerNotifierWebpackPlugin({alwaysNotify: true})
     ]);
 
     return myDevConfig;

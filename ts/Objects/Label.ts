@@ -2,7 +2,7 @@ import 'p2';
 import 'pixi';
 import 'phaser';
 
-export default class Label extends Phaser.Text {
+export default class Label extends PhaserI18n.TranslatedText {
     private maxWidth: number;
     private maxHeight: number;
 

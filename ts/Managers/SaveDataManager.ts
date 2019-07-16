@@ -1,19 +1,19 @@
-import IGame from './IGame';
-import {Constants} from '../Data';
+import IGame from '../Fabrique/IGame';
 
 interface IRecoveredState {
+    l: string;      //Language
     m: boolean;     //Music
     sf: boolean;    //Sound effects
 }
 
-export default class SaveGame {
-    private static instance: SaveGame;
+export default class SaveDataManager {
+    private static instance: SaveDataManager;
 
     private game: IGame;
 
+    private languageStr: string = 'undefined';
     private musicOn: boolean = true;
     private sfxOn: boolean = true;
-
     //Use this callback if you need to call something after the saved data has been restored.
     private callback: () => void;
     private callbackContext: any;
@@ -24,8 +24,10 @@ export default class SaveGame {
         this.callbackContext = callbackContext;
 
         //Check if data was saved before for this game
-        this.game.storage.getItem(Constants.STORAGE_KEY).then((storedItem: any) => {
+        this.game.storage.getItem(STORAGE_KEY).then((storedItem: any) => {
+            console.log('SaveDataManager; constructor; loading save data; storedItem', storedItem);
             if (storedItem === null || storedItem === undefined) {   //No save data found. Make the first save.
+                this.languageStr = 'en';
                 //Put music and sound effects on the first time
                 this.sfxOn = true;
                 this.musicOn = true;
@@ -43,12 +45,23 @@ export default class SaveGame {
         });
     }
 
-    public static getInstance(game?: IGame, callback?: () => void, callbackContext?: any): SaveGame {
-        if (!SaveGame.instance) {
-            SaveGame.instance = new SaveGame(game, callback, callbackContext);
+    public static getInstance(game?: IGame, callback?: () => void, callbackContext?: any): SaveDataManager {
+        if (!SaveDataManager.instance) {
+            SaveDataManager.instance = new SaveDataManager(game, callback, callbackContext);
         }
 
-        return SaveGame.instance;
+        return SaveDataManager.instance;
+    }
+
+    public get language(): string {
+        return this.languageStr;
+    }
+
+    public set language(value: string) {
+        this.languageStr = value;
+        this.save();
+
+        this.game.i18n.setLanguage(this.languageStr);
     }
 
     public get music(): boolean {
@@ -77,13 +90,16 @@ export default class SaveGame {
     private save(): void {
         //Save the data
         let data: string = JSON.stringify(<IRecoveredState>{
+            l: this.languageStr,
             m: this.musicOn,
             sf: this.sfxOn
         });
         let hash: string = this.hash(data);
 
-        this.game.storage.setItem(Constants.STORAGE_KEY, data);
-        this.game.storage.setItem('h', hash);
+        this.game.storage.setItem(STORAGE_KEY, data);
+        this.game.storage.setItem(STORAGE_KEY + 'h', hash);
+
+        // console.log('SaveDataManager; save; storing save data', data);
     }
 
     /**
@@ -91,8 +107,8 @@ export default class SaveGame {
      */
     private restore(): void {
         //restore the data
-        let storedData: any = this.game.storage.getItem(Constants.STORAGE_KEY);
-        let storedHash: any = this.game.storage.getItem(Constants.STORAGE_KEY + 'h');
+        let storedData: any = this.game.storage.getItem(STORAGE_KEY);
+        let storedHash: any = this.game.storage.getItem(STORAGE_KEY + 'h');
 
         let data: string;
         let hash: string;
@@ -106,6 +122,7 @@ export default class SaveGame {
                     return;
                 }
 
+                // console.log('SaveDataManager; restore; hash', hash);
                 if (hash !== this.hash(data)) {
                     console.warn('Incorrect save data.');
                     return;
@@ -115,9 +132,14 @@ export default class SaveGame {
                     try {
                         let save: IRecoveredState = JSON.parse(data);
 
+                        this.language = save.l;
                         this.musicOn = save.m;
                         this.sfxOn = save.sf;
 
+                        this.game.i18n.setLanguage(this.languageStr);
+                        // console.warn('SaveDataManager; restore; data', data);
+
+                        this.save();
                     } catch (e) {
                         console.warn('Unable to parse save game.', e);
                     }

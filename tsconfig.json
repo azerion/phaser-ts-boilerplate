@@ -6,19 +6,21 @@
         "sourceMap": false,
         "declaration": false,
         "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "noUnusedParameters": false,
         "noImplicitAny":true,
         "isolatedModules": true
     },
     "files": [
-        "../node_modules/@orange-games/phaser/typescript/pixi.comments.d.ts",
-        "../node_modules/@orange-games/phaser/typescript/phaser.comments.d.ts",
-        "../node_modules/@orange-games/phaser-spine/build/phaser-spine.d.ts",
-        "../node_modules/@orange-games/phaser-ads/build/phaser-ads.d.ts",
-        "../node_modules/@orange-games/phaser-cachebuster/build/phaser-cachebuster.d.ts",
-        "../node_modules/@orange-games/phaser-super-storage/build/phaser-super-storage.d.ts",
-        "../node_modules/@orange-games/splash/build/splash.d.ts",
-        "../ts/definitions.d.ts",
-        "../ts/app.ts"
+        "node_modules/@azerion/phaser/typescript/pixi.d.ts",
+        "node_modules/@azerion/phaser/typescript/phaser.d.ts",
+        "node_modules/@azerion/phaser-spine/build/phaser-spine.d.ts",
+        "node_modules/@azerion/phaser-ads/build/phaser-ads.d.ts",
+        "node_modules/@azerion/phaser-cachebuster/build/phaser-cachebuster.d.ts",
+        "node_modules/@azerion/phaser-super-storage/build/phaser-super-storage.d.ts",
+        "node_modules/@azerion/splash/build/splash.d.ts",
+        "node_modules/@azerion/phaser-nineslice/build/phaser-nineslice.d.ts",
+        "node_modules/@azerion/phaser-i18next/build/phaser-i18next.d.ts",
+        "ts/definitions.d.ts",
+        "ts/app.ts"
     ]
 }

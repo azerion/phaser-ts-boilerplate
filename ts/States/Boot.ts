@@ -4,10 +4,9 @@ import 'phaser';
 
 import IGame from '../Fabrique/IGame';
 import LoaderHelper from '../Fabrique/LoaderHelper';
-import SaveGame from '../Fabrique/SaveGame';
 import Menu from './Menu';
-
 import { Constants, Images, Atlases, Sounds } from '../Data';
+import SaveDataManager from '../Managers/SaveDataManager';
 
 export default class Boot extends Phaser.State {
     public static Name: string = 'boot';
@@ -27,7 +26,7 @@ export default class Boot extends Phaser.State {
      */
     public init(): void {
         //Setup saved data
-        SaveGame.getInstance(this.game);
+        SaveDataManager.getInstance(this.game);
 
         //Setup analytics
         this.game.analytics.game.setup(GA_GAME_KEY, GA_SECRET_KEY, version, this.game.analytics.game.createUser());
@@ -195,9 +194,9 @@ export default class Boot extends Phaser.State {
      */
     public create(): void {
         LoaderHelper.hide();
-        // //TODO: If you DO want a custom preloader, uncomment this line
-        // //this.game.state.start(Preloader.Name);
-        //
+        //TODO: If you DO want a custom preloader, uncomment this line
+        //this.game.state.start(Preloader.Name);
+
         //TODO: If you DON'T want a custom preloader, uncomment this piece and preload the assets lists in the Boot or in the Menu states
         this.game.state.start(Fabrique.SplashScreen.Preloader.Name, true, false, {
             nextState: Menu.Name,
@@ -221,6 +220,10 @@ export default class Boot extends Phaser.State {
             preloadHandler: (): void => {
                 this.game.sound.muteOnPause = true;
 
+                (<any>this.game.load).locale(
+                    Constants.AVAILABLE_LANGUAGES
+                );
+
                 //Load the assets based on the game scale.
                 let scale: string = 'x' + Constants.GAME_SCALE + '/';
 
@@ -241,7 +244,7 @@ export default class Boot extends Phaser.State {
                 });
 
                 Fabrique.Branding.preloadImages(this.game);
-                if (Fabrique.Branding.outGoingLinksAllowed()) {
+                if (Fabrique.Branding.outGoingLinksAllowed(this.game)) {
                     Fabrique.MoreGames.Menu.preloadImages(this.game);
                 }
             }

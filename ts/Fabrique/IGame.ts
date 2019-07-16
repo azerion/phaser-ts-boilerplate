@@ -8,11 +8,12 @@ export default interface IGame extends Phaser.Game {
         google: Fabrique.Plugins.GoogleAnalytics,
         game: Fabrique.Plugins.GameAnalytics
     };
-    add: PhaserSpine.SpineObjectFactory;
+    add: PhaserSpine.SpineObjectFactory & PhaserI18n.LocaleObjectFactory;
     ads: PhaserAds.AdManager;
 
-    load: PhaserCachebuster.ICacheBustedLoader
-        & PhaserSpine.SpineLoader;
+    i18n: PhaserI18n.Plugin;
+
+    load: PhaserCachebuster.ICacheBustedLoader & PhaserSpine.SpineLoader & PhaserI18n.LocaleLoader;
 
     storage: PhaserSuperStorage.StoragePlugin;
 }

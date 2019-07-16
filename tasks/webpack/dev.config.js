@@ -22,7 +22,7 @@ module.exports = function() {
 
     myDevConfig.output = {
         path: path.join(basePath, '_build/dev'),
-        filename: config.name + '.min.js',
+        filename: config.name + '.min.js'
     };
     myDevConfig.resolve.alias['adProvider'] = path.join(basePath,'node_modules/@azerion/phaser/build/custom/phaser-split.js');
     myDevConfig.plugins = myDevConfig.plugins.concat([
@@ -36,16 +36,16 @@ module.exports = function() {
                 'cache-loader',
                 {
                     path: 'ts-loader',
-                    query: {happyPackMode: true},
-                },
-            ],
+                    query: {happyPackMode: true}
+                }
+            ]
         }),
         new ForkTsCheckerWebpackPlugin({
             checkSyntacticErrors: true,
             tslint: path.join(basePath, 'tslint.json'),
-            tsconfig: path.join(basePath, 'tsconfig.json'),
+            tsconfig: path.join(basePath, 'tsconfig.json')
         }),
-        new ForkTsCheckerNotifierWebpackPlugin({alwaysNotify: true}),
+        new ForkTsCheckerNotifierWebpackPlugin({alwaysNotify: true})
     ]);
 
     return myDevConfig;
